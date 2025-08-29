@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "elements",
+  "homepage": "https://tryelements.dev",
+  "items": [
+    {
+      "name": "waitlist",
+      "type": "registry:block",
+      "title": "Waitlist Element",
+      "description": "An animated waitlist signup form with Clerk integration",
+      "registryDependencies": ["button", "input", "label"],
+      "dependencies": ["motion", "@clerk/backend"],
+      "files": [
+        {
+          "path": "registry/default/elements/waitlist/waitlist.tsx",
+          "type": "registry:component",
+          "target": "components/elements/waitlist.tsx"
+        },
+        {
+          "path": "registry/default/elements/waitlist/actions.ts",
+          "type": "registry:lib",
+          "target": "components/elements/actions.ts"
+        }
+      ],
+      "envVars": {
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "",
+        "CLERK_SECRET_KEY": ""
+      },
+      "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to API Keys in your dashboard\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
+    }
+  ]
+}

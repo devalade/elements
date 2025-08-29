@@ -1,6 +1,8 @@
 import { ScrambleText } from "@/components/scramble-text";
-import { WaitlistElement } from "@/elements/waitlist/waitlist";
 import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
+import { WaitlistElement } from "../../registry/default/elements/waitlist/waitlist";
+import { InstallCommand } from "@/components/install-command";
+import { ShadcnIcon } from "@/components/shadcn-icon";
 
 export default function Home() {
   return (
@@ -18,7 +20,17 @@ export default function Home() {
           </p>
         </div>
 
-        <WaitlistElement />
+        <div className="w-full max-w-md space-y-4">
+          <WaitlistElement />
+          
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <ShadcnIcon className="w-4 h-4" />
+              <span>Install this element with shadcn CLI 3.0</span>
+            </div>
+            <InstallCommand />
+          </div>
+        </div>
       </div>
     </div>
   );

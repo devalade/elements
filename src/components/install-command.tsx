@@ -17,7 +17,7 @@ interface InstallCommandProps {
 }
 
 export function InstallCommand({
-  url = "tryelements.dev/r/waitlist.json",
+  url = "@elements/waitlist",
   className,
 }: InstallCommandProps) {
   const [packageManager, setPackageManager] = useState("bunx");
@@ -25,10 +25,10 @@ export function InstallCommand({
 
   const getCommand = (pm: string) => {
     const commands = {
-      bunx: `bunx shadcn add https://${url}`,
-      npx: `npx shadcn add https://${url}`,
-      pnpm: `pnpm dlx shadcn add https://${url}`,
-      yarn: `yarn dlx shadcn add https://${url}`,
+      bunx: `bunx shadcn add ${url}`,
+      npx: `npx shadcn add ${url}`,
+      pnpm: `pnpm dlx shadcn add ${url}`,
+      yarn: `yarn dlx shadcn add ${url}`,
     };
     return commands[pm as keyof typeof commands];
   };
@@ -56,7 +56,7 @@ export function InstallCommand({
         </Select>
         <Input
           readOnly
-          value={url}
+          value={`shadcn add ${url}`}
           className="-ms-px flex-1 rounded-none border-0 shadow-none font-mono text-xs focus-visible:ring-0"
         />
         <Button
