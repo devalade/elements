@@ -64,9 +64,9 @@ export function WaitlistElement() {
       animate={{
         borderColor: state.success
           ? "rgb(45 212 191)"
-          : "rgb(255 255 255 / 0.5)",
+          : "hsl(var(--foreground) / 0.5)",
         backgroundColor: state.success
-          ? "rgb(19 78 74 / 0.3)"
+          ? "hsl(var(--muted) / 0.3)"
           : "transparent",
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
