@@ -1,5 +1,5 @@
 import { ThemeProvider } from "next-themes";
-import { ThemeSwitcherElement } from "@/components/elements/theme-switcher/theme-switcher";
+import { ThemeSwitcherElement } from "@/components/elements/theme-switcher";
 
 export default function ThemeSwitcherTestPage() {
   return (
@@ -12,11 +12,11 @@ export default function ThemeSwitcherTestPage() {
               Test your theme switcher element with dark/light mode
             </p>
           </div>
-          
+
           <div className="flex justify-center">
             <ThemeSwitcherElement />
           </div>
-          
+
           <div className="text-center">
             <p className="text-xs text-muted-foreground">
               Toggle between light and dark themes

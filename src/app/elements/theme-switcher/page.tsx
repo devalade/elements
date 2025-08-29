@@ -1,5 +1,5 @@
 import { ThemeProvider } from "next-themes";
-import { ThemeSwitcherElement } from "@/components/elements/theme-switcher/theme-switcher";
+import { ThemeSwitcherElement } from "@/components/elements/theme-switcher";
 
 export default function ThemeSwitcherTestPage() {
   return (
