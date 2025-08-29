@@ -1,5 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import { WaitlistElement } from "./waitlist";
+import { WaitlistElement } from "@/components/elements/waitlist/waitlist";
 
 export default function WaitlistTestPage() {
   return (
@@ -12,9 +12,9 @@ export default function WaitlistTestPage() {
               Test your waitlist element with Clerk integration
             </p>
           </div>
-          
+
           <WaitlistElement />
-          
+
           <div className="text-center">
             <p className="text-xs text-muted-foreground">
               Make sure you have configured Clerk with waitlist enabled
