@@ -1,17 +1,17 @@
 import { ScrambleText } from "@/components/scramble-text";
-import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 import { WaitlistElement } from "../../registry/default/elements/waitlist/waitlist";
 import { InstallCommand } from "@/components/install-command";
 import { ShadcnIcon } from "@/components/shadcn-icon";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { ElementWrapper } from "@/components/element-wrapper";
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative">
-      <div className="absolute top-4 right-4">
-        <ThemeSwitcherElement />
-      </div>
-      <div className="min-h-screen flex flex-col justify-center items-center gap-6 sm:gap-8 px-4">
-        <div className="text-center space-y-4">
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <div className="flex-1 w-full max-w-screen-xl border-border border-dotted border-x mx-auto flex flex-col justify-center items-center gap-6 sm:gap-8 px-4">
+        <div className="flex flex-col justify-center items-center text-center w-full space-y-4">
           <h1 className="font-dotted font-black">
             <ScrambleText text="Elements" />
           </h1>
@@ -21,8 +21,10 @@ export default function Home() {
         </div>
 
         <div className="w-full max-w-md space-y-4">
-          <WaitlistElement />
-          
+          <ElementWrapper>
+            <WaitlistElement />
+          </ElementWrapper>
+
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <ShadcnIcon className="w-4 h-4" />
@@ -32,6 +34,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

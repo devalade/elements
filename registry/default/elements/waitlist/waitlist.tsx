@@ -19,7 +19,11 @@ interface SubmitButtonProps {
   children?: React.ReactNode;
 }
 
-function SubmitButton({ isPending, disabled, children = "Join Waitlist" }: SubmitButtonProps) {
+function SubmitButton({
+  isPending,
+  disabled,
+  children = "Join Waitlist",
+}: SubmitButtonProps) {
   return (
     <Button
       type="submit"
@@ -56,18 +60,11 @@ export function WaitlistElement() {
 
   return (
     <motion.div
-      className={`border-2 border-dashed p-4 rounded-md h-[5.5rem] flex items-center justify-center ${
-        state.success
-          ? "border-teal-400 dark:border-teal-400 dark:bg-teal-950/30"
-          : "border-foreground/50"
-      }`}
+      className="rounded-md h-[5.5rem] flex items-center justify-center px-4"
       animate={{
-        borderColor: state.success
-          ? "rgb(45 212 191)"
-          : "hsl(var(--foreground) / 0.5)",
-        backgroundColor: state.success
-          ? "hsl(var(--muted) / 0.3)"
-          : "transparent",
+        backgroundColor: state.success 
+          ? "#14b8a620"  // teal-500 with opacity
+          : "hsl(var(--foreground) / 0.05)",
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
@@ -77,26 +74,26 @@ export function WaitlistElement() {
             className="space-y-3 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
+            transition={{ delay: 0.1, duration: 0.2 }}
           >
             <motion.div
               className="flex justify-center"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{
-                delay: 0.4,
-                duration: 0.6,
+                delay: 0.15,
+                duration: 0.3,
                 type: "spring",
-                stiffness: 200,
+                stiffness: 300,
               }}
             >
-              <PixelatedCheckIcon className="w-8 h-8 text-teal-400" />
+              <PixelatedCheckIcon className="w-8 h-8 text-teal-600" />
             </motion.div>
             <motion.p
-              className="text-sm text-teal-400"
+              className="text-sm text-teal-600"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.3 }}
+              transition={{ delay: 0.25, duration: 0.2 }}
             >
               {state.message || "You're on the list."}
             </motion.p>
@@ -123,10 +120,7 @@ export function WaitlistElement() {
             </form>
 
             {state.error && (
-              <p
-                className="text-sm text-destructive text-center"
-                role="alert"
-              >
+              <p className="text-sm text-destructive text-center" role="alert">
                 {state.error}
               </p>
             )}
