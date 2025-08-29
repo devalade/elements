@@ -1,5 +1,5 @@
 import { ScrambleText } from "@/components/scramble-text";
-import { WaitlistElement } from "@/components/waitlist-element";
+import { WaitlistElement } from "@/elements/waitlist/waitlist";
 import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 
 export default function Home() {

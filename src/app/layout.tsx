@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Figtree, JetBrains_Mono, Doto } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -29,19 +30,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${figtree.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${figtree.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans antialiased`}
         >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
