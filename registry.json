@@ -32,6 +32,27 @@
         "CLERK_SECRET_KEY": ""
       },
       "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to Configure > API Keys\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n6. Go to Configure > Restrictions > Sign-up mode and enable Waitlist\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
+    },
+    {
+      "name": "theme-switcher",
+      "type": "registry:ui",
+      "title": "Theme Switcher",
+      "description": "A theme switcher component with animated sun/moon icons",
+      "registryDependencies": ["switch"],
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "registry/default/elements/theme-switcher/theme-switcher.tsx",
+          "type": "registry:component",
+          "target": "components/elements/theme-switcher/theme-switcher.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/theme-switcher/page.tsx"
+        }
+      ],
+      "docs": "To use this component:\n\n1. Install next-themes: npm install next-themes\n2. Wrap your app with ThemeProvider from next-themes\n3. Set up your CSS variables for light/dark themes\n\nThe theme switcher automatically handles light/dark mode with smooth transitions and animated icons."
     }
   ]
 }
