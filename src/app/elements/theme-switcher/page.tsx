@@ -12,11 +12,11 @@ export default function ThemeSwitcherTestPage() {
               Test your theme switcher element with dark/light mode
             </p>
           </div>
-          
+
           <div className="flex justify-center">
             <ThemeSwitcherElement />
           </div>
-          
+
           <div className="text-center">
             <p className="text-xs text-muted-foreground">
               Toggle between light and dark themes

@@ -44,7 +44,7 @@
         {
           "path": "registry/default/elements/theme-switcher/theme-switcher.tsx",
           "type": "registry:component",
-          "target": "components/elements/theme-switcher/theme-switcher.tsx"
+          "target": "components/elements/theme-switcher.tsx"
         },
         {
           "path": "registry/default/elements/theme-switcher/page.tsx",
