@@ -3,16 +3,22 @@ import { ReactNode } from "react";
 interface ElementWrapperProps {
   children: ReactNode;
   logo?: ReactNode;
+  icon?: ReactNode;
   className?: string;
 }
 
-export function ElementWrapper({ children, logo, className = "" }: ElementWrapperProps) {
+export function ElementWrapper({
+  children,
+  logo,
+  icon,
+  className = "",
+}: ElementWrapperProps) {
   return (
     <div className={`w-full max-w-md space-y-4 ${className}`}>
-      <div className="relative border-2 border-dashed border-foreground/50 p-4 rounded-md">
-        {logo && (
-          <div className="size-8 flex items-center justify-center absolute -top-3 -right-3 bg-card border rounded-full">
-            {logo}
+      <div className="bg-background backdrop-blur-sm relative border-dotted border-2 border-foreground/50 p-6 rounded-lg shadow-sm">
+        {(logo || icon) && (
+          <div className="size-8 flex items-center justify-center absolute -top-3 -right-3 bg-background border border-border/30 rounded-full shadow-sm">
+            {icon || logo}
           </div>
         )}
         {children}
