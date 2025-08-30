@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSignUp, useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import type { OAuthStrategy } from "@clerk/types";
+import type { OAuthStrategy, SignInFirstFactor } from "@clerk/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -47,7 +47,7 @@ export function ClerkSignUpElement() {
   // Clear errors after some time
   useEffect(() => {
     if (state.error) {
-      const timer = setTimeout(() => 
+      const timer = setTimeout(() =>
         setState(prev => ({ ...prev, error: undefined })), 5000
       );
       return () => clearTimeout(timer);
@@ -92,13 +92,13 @@ export function ClerkSignUpElement() {
       setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
     } catch (err: any) {
       const errorMessage = err.errors?.[0]?.message || "Failed to create account";
-      
+
       // Handle rate limiting specifically
       let displayError = errorMessage;
       if (errorMessage.includes("too many requests") || errorMessage.includes("rate limit")) {
         displayError = "Too many attempts. Please wait a moment and try again.";
       }
-      
+
       setState((prev) => ({
         ...prev,
         isLoading: false,
@@ -142,14 +142,14 @@ export function ClerkSignUpElement() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSocialSignUp = async (provider: string) => {
+  const handleSocialSignUp = async (provider: SignInFirstFactor) => {
     if (!isLoaded || !signUp) return;
 
     setState((prev) => ({ ...prev, error: undefined, isLoading: true }));
-    
+
     try {
       await signUp.authenticateWithRedirect({
-        strategy: provider as OAuthStrategy,
+        strategy: provider.strategy as OAuthStrategy,
         redirectUrl: "/elements/clerk/sso-callback",
         redirectUrlComplete: "/elements/clerk/dashboard",
       });
@@ -159,7 +159,7 @@ export function ClerkSignUpElement() {
         isLoading: false,
         error:
           err.errors?.[0]?.message ||
-          `Failed to sign up with ${provider.replace("oauth_", "")}`,
+          `Failed to sign up with ${provider.strategy.replace("oauth_", "")}`,
       }));
     }
   };
@@ -299,16 +299,16 @@ export function ClerkSignUpElement() {
           <div className="space-y-3">
             {socialProviders.map((provider) => (
               <Button
-                key={provider}
+                key={provider.strategy}
                 type="button"
                 variant="outline"
                 className="w-full"
                 onClick={() => handleSocialSignUp(provider)}
                 disabled={state.isLoading}
               >
-                {getSocialIcon(provider)}
+                {getSocialIcon(provider.strategy)}
                 <span className="ml-2">
-                  Continue with {getProviderLabel(provider)}
+                  Continue with {getProviderLabel(provider.strategy)}
                 </span>
               </Button>
             ))}

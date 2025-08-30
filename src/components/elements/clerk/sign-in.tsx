@@ -43,7 +43,12 @@ export function ClerkSignInElement() {
 
   // Initialize signIn to populate supportedFirstFactors (only once)
   useEffect(() => {
-    if (isLoaded && signIn && !signIn.id && !signIn.supportedFirstFactors && !hasInitialized) {
+    if (
+      isLoaded &&
+      signIn &&
+      !signIn.id &&
+      !hasInitialized
+    ) {
       setHasInitialized(true);
       signIn.create({}).catch((err) => {
         console.error("Failed to initialize signIn:", err);
@@ -58,8 +63,7 @@ export function ClerkSignInElement() {
     );
   }, [signIn?.supportedFirstFactors]);
 
-  // Debug info (removed to prevent unnecessary re-renders)
-  // console.log({ supportedFirstFactors: signIn?.supportedFirstFactors });
+  console.log({ socialProviders, support: signIn?.supportedFirstFactors });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,9 +88,13 @@ export function ClerkSignInElement() {
       }
     } catch (err: any) {
       const errorMessage = err.errors?.[0]?.message || "Failed to sign in";
-      
+      console.log({ errorMessage });
+
       // Handle rate limiting specifically
-      if (errorMessage.includes("too many requests") || errorMessage.includes("rate limit")) {
+      if (
+        errorMessage.includes("too many requests") ||
+        errorMessage.includes("rate limit")
+      ) {
         setError("Too many attempts. Please wait a moment and try again.");
       } else {
         setError(errorMessage);
@@ -101,7 +109,7 @@ export function ClerkSignInElement() {
 
     setError("");
     setIsLoading(true);
-    
+
     try {
       await signIn.authenticateWithRedirect({
         strategy: provider as OAuthStrategy,
@@ -111,7 +119,7 @@ export function ClerkSignInElement() {
     } catch (err: any) {
       setError(
         err.errors?.[0]?.message ||
-          `Failed to sign in with ${provider.replace("oauth_", "")}`,
+        `Failed to sign in with ${provider.replace("oauth_", "")}`,
       );
       setIsLoading(false);
     }
