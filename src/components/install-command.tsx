@@ -18,7 +18,7 @@ interface InstallCommandProps {
 }
 
 export function InstallCommand({
-  url = "@elements/waitlist",
+  url = "@elements/clerk-waitlist",
   className,
 }: InstallCommandProps) {
   const [packageManager, setPackageManager] = useState("bunx");

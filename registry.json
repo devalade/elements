@@ -4,34 +4,101 @@
   "homepage": "https://tryelements.dev",
   "items": [
     {
-      "name": "waitlist",
+      "name": "clerk-waitlist",
       "type": "registry:block",
-      "title": "Waitlist Element",
+      "title": "Clerk Waitlist",
       "description": "An animated waitlist signup form with Clerk integration",
       "registryDependencies": ["button", "input", "label"],
       "dependencies": ["motion", "@clerk/backend", "@clerk/nextjs"],
       "files": [
         {
-          "path": "registry/default/elements/waitlist/waitlist.tsx",
+          "path": "registry/default/elements/clerk/waitlist/waitlist.tsx",
           "type": "registry:component",
-          "target": "components/elements/waitlist/waitlist.tsx"
+          "target": "components/elements/clerk/waitlist/waitlist.tsx"
         },
         {
-          "path": "registry/default/elements/waitlist/actions.ts",
+          "path": "registry/default/elements/clerk/waitlist/actions.ts",
           "type": "registry:lib",
-          "target": "components/elements/waitlist/actions.ts"
+          "target": "components/elements/clerk/waitlist/actions.ts"
         },
         {
-          "path": "registry/default/elements/waitlist/page.tsx",
+          "path": "registry/default/elements/clerk/waitlist/page.tsx",
           "type": "registry:page",
-          "target": "app/elements/waitlist/page.tsx"
+          "target": "app/elements/clerk/waitlist/page.tsx"
         }
       ],
       "envVars": {
-        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "",
-        "CLERK_SECRET_KEY": ""
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
+        "CLERK_SECRET_KEY": "sk_test_"
       },
       "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to Configure > API Keys\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n6. Go to Configure > Restrictions > Sign-up mode and enable Waitlist\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
+    },
+    {
+      "name": "clerk-sign-in",
+      "type": "registry:ui",
+      "title": "Clerk Sign In",
+      "description": "Complete sign-in form with Clerk integration",
+      "registryDependencies": [
+        "button",
+        "input",
+        "label",
+        "alert",
+        "card",
+        "avatar"
+      ],
+      "dependencies": ["@clerk/nextjs", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/default/elements/clerk/sign-in.tsx",
+          "type": "registry:component",
+          "target": "components/elements/clerk/sign-in.tsx"
+        },
+        {
+          "path": "registry/default/elements/clerk/sign-in/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/clerk/sign-in/page.tsx"
+        },
+        {
+          "path": "registry/default/elements/clerk/dashboard/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/clerk/dashboard/page.tsx"
+        }
+      ],
+      "envVars": {
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
+        "CLERK_SECRET_KEY": "sk_test_"
+      },
+      "docs": "Production-ready sign-in component with email/password authentication, error handling, and proper validation. Includes password visibility toggle and loading states."
+    },
+    {
+      "name": "clerk-sign-up",
+      "type": "registry:ui",
+      "title": "Clerk Sign Up",
+      "description": "Complete sign-up form with Clerk integration and CAPTCHA support",
+      "registryDependencies": ["button", "input", "label", "alert"],
+      "dependencies": ["@clerk/nextjs", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/default/elements/clerk/sign-up.tsx",
+          "type": "registry:component",
+          "target": "components/elements/clerk/sign-up.tsx"
+        },
+        {
+          "path": "registry/default/elements/clerk/sign-up/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/clerk/sign-up/page.tsx"
+        },
+        {
+          "path": "registry/default/elements/clerk/dashboard/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/clerk/dashboard/page.tsx"
+        }
+      ],
+      "envVars": {
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
+        "CLERK_SECRET_KEY": "sk_test_"
+      },
+      "docs": "Production-ready sign-up component with first name, last name, email, and password fields. Includes email verification flow, CAPTCHA support for bot protection, and comprehensive error handling."
     },
     {
       "name": "theme-switcher",

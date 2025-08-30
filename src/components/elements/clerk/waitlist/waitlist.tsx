@@ -19,14 +19,18 @@ interface SubmitButtonProps {
   children?: React.ReactNode;
 }
 
-function SubmitButton({ isPending, disabled, children = "Join Waitlist" }: SubmitButtonProps) {
+function SubmitButton({
+  isPending,
+  disabled,
+  children = "Join Waitlist",
+}: SubmitButtonProps) {
   return (
     <Button
       type="submit"
       disabled={isPending || disabled}
-      className="px-6 whitespace-nowrap"
+      className="px-4 whitespace-nowrap bg-foreground text-background hover:bg-foreground/90 border-0 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
     >
-      {isPending ? "Joining..." : children}
+      {isPending ? "Requesting..." : children}
     </Button>
   );
 }
@@ -56,13 +60,10 @@ export function WaitlistElement() {
 
   return (
     <motion.div
-      className="border-2 border-dashed p-4 rounded-md h-[5.5rem] flex items-center justify-center border-foreground/50"
+      className="rounded-xl h-[5.5rem] flex items-center justify-center px-4"
       animate={{
-        borderColor: state.success
-          ? "#14b8a6"  // teal-500 - good contrast in both modes
-          : "hsl(var(--foreground) / 0.5)",
-        backgroundColor: state.success 
-          ? "#14b8a620"  // teal-500 with opacity
+        backgroundColor: state.success
+          ? "hsl(var(--foreground) / 0.05)"
           : "transparent",
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -86,15 +87,15 @@ export function WaitlistElement() {
                 stiffness: 300,
               }}
             >
-              <PixelatedCheckIcon className="w-8 h-8 text-teal-600" />
+              <PixelatedCheckIcon className="w-8 h-8 text-foreground/60" />
             </motion.div>
             <motion.p
-              className="text-sm text-teal-600"
+              className="text-sm text-foreground/70"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.25, duration: 0.2 }}
             >
-              {state.message || "You're on the list."}
+              {state.message || "You're in."}
             </motion.p>
           </motion.div>
         ) : (
@@ -111,7 +112,7 @@ export function WaitlistElement() {
                 name="email"
                 type="email"
                 required
-                placeholder="Enter your email"
+                placeholder="you@domain.com"
                 disabled={isPending}
                 autoComplete="email"
               />
@@ -119,10 +120,7 @@ export function WaitlistElement() {
             </form>
 
             {state.error && (
-              <p
-                className="text-sm text-destructive text-center"
-                role="alert"
-              >
+              <p className="text-sm text-destructive text-center" role="alert">
                 {state.error}
               </p>
             )}

@@ -1,5 +1,4 @@
 import { ScrambleText } from "@/components/scramble-text";
-import { WaitlistElement } from "../../registry/default/elements/waitlist/waitlist";
 import { InstallCommand } from "@/components/install-command";
 import { ShadcnIcon } from "@/components/shadcn-icon";
 import { Header } from "@/components/header";
@@ -16,6 +15,7 @@ import { MoneyIcon } from "@/components/icons/money";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
+import { WaitlistElement } from "@registry/default/elements/clerk/waitlist/waitlist";
 
 export default function Home() {
   return (
@@ -100,7 +100,7 @@ export default function Home() {
 
           <div className="w-full relative">
             <div className="relative p-6 border border-dashed border-border/50 transition-all duration-700 bg-primary/5 rounded-lg">
-              <div className="relative rounded-lg overflow-hidden w-full flex flex-col items-center justify-center min-h-[400px] transition-all duration-700 space-y-4">
+              <div className="relative rounded-lg w-full flex flex-col items-center justify-center min-h-[400px] transition-all duration-700 space-y-4">
                 <div className="text-center space-y-2 mb-6">
                   <p className="text-lg font-medium text-foreground max-w-sm">
                     Be first. No noise.

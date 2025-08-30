@@ -10,6 +10,12 @@ interface ThemeAwareBrandProps {
   children?: ReactNode;
 }
 
+interface ThemeAwareButtonProps extends ThemeAwareBrandProps {
+  onClick?: () => void;
+  className?: string;
+  [key: string]: any;
+}
+
 export function ThemeAwareBrandText({ 
   brandColor, 
   darkBrandColor, 
@@ -28,8 +34,11 @@ export function ThemeAwareBrandText({
 export function ThemeAwareButton({ 
   brandColor, 
   darkBrandColor, 
-  children 
-}: ThemeAwareBrandProps) {
+  children,
+  onClick,
+  className,
+  ...props
+}: ThemeAwareButtonProps) {
   const { theme } = useTheme();
   const currentBrandColor = theme === 'dark' && darkBrandColor ? darkBrandColor : brandColor;
 
@@ -39,7 +48,9 @@ export function ThemeAwareButton({
         backgroundColor: currentBrandColor, 
         color: currentBrandColor === "#8DFF53" ? '#000000' : '#FFFFFF'
       }} 
-      className="hover:opacity-90"
+      className={`hover:opacity-90 ${className || ''}`}
+      onClick={onClick}
+      {...props}
     >
       {children}
     </Button>

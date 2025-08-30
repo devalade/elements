@@ -1,8 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "waitlist",
+  "name": "clerk-waitlist",
   "type": "registry:block",
-  "title": "Waitlist Element",
+  "title": "Clerk Waitlist",
   "description": "An animated waitlist signup form with Clerk integration",
   "dependencies": [
     "motion",
