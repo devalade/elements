@@ -1,14 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
+import { useState, useEffect, useMemo } from "react";
+import { useSignUp, useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import type { OAuthStrategy } from "@clerk/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+import { GitHubLogo } from "../logos/github";
+import { GoogleLogo } from "../logos/google";
+import { AppleLogo } from "../logos/apple";
+import { LinearLogo } from "../logos/linear";
+import { MicrosoftLogo } from "../logos/microsoft";
+import { SpotifyLogo } from "../logos/spotify";
+import { SlackLogo } from "../logos/slack";
+import { TwitchLogo } from "../logos/twitch";
+import { TwitterLogo } from "../logos/twitter";
+import { GitLabLogo } from "../logos/gitlab";
+import { DiscordLogo } from "../logos/discord";
+import { NotionLogo } from "../logos/notion";
 
 interface SignUpState {
   isLoading?: boolean;
@@ -18,6 +31,7 @@ interface SignUpState {
 
 export function ClerkSignUpElement() {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const { signIn } = useSignIn();
   const [state, setState] = useState<SignUpState>({ step: "form" });
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,7 +41,35 @@ export function ClerkSignUpElement() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [hasInitialized, setHasInitialized] = useState(false);
   const router = useRouter();
+
+  // Clear errors after some time
+  useEffect(() => {
+    if (state.error) {
+      const timer = setTimeout(() => 
+        setState(prev => ({ ...prev, error: undefined })), 5000
+      );
+      return () => clearTimeout(timer);
+    }
+  }, [state.error]);
+
+  // Initialize signIn to populate supportedFirstFactors (only once)
+  useEffect(() => {
+    if (isLoaded && signIn && !signIn.id && !signIn.supportedFirstFactors && !hasInitialized) {
+      setHasInitialized(true);
+      signIn.create({}).catch((err) => {
+        console.error("Failed to initialize signIn:", err);
+      });
+    }
+  }, [isLoaded, signIn, hasInitialized]);
+
+  const socialProviders = useMemo(() => {
+    if (!signIn?.supportedFirstFactors) return [];
+    return signIn.supportedFirstFactors.filter((factor) =>
+      factor.strategy.startsWith("oauth_"),
+    );
+  }, [signIn?.supportedFirstFactors]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,10 +91,18 @@ export function ClerkSignUpElement() {
 
       setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
     } catch (err: any) {
+      const errorMessage = err.errors?.[0]?.message || "Failed to create account";
+      
+      // Handle rate limiting specifically
+      let displayError = errorMessage;
+      if (errorMessage.includes("too many requests") || errorMessage.includes("rate limit")) {
+        displayError = "Too many attempts. Please wait a moment and try again.";
+      }
+      
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        error: err.errors?.[0]?.message || "Failed to create account",
+        error: displayError,
       }));
     }
   };
@@ -90,6 +140,67 @@ export function ClerkSignUpElement() {
 
   const updateFormData = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSocialSignUp = async (provider: string) => {
+    if (!isLoaded || !signUp) return;
+
+    setState((prev) => ({ ...prev, error: undefined, isLoading: true }));
+    
+    try {
+      await signUp.authenticateWithRedirect({
+        strategy: provider as OAuthStrategy,
+        redirectUrl: "/elements/clerk/sso-callback",
+        redirectUrlComplete: "/elements/clerk/dashboard",
+      });
+    } catch (err: any) {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        error:
+          err.errors?.[0]?.message ||
+          `Failed to sign up with ${provider.replace("oauth_", "")}`,
+      }));
+    }
+  };
+
+  const getSocialIcon = (provider: string) => {
+    switch (provider) {
+      case "oauth_github":
+        return <GitHubLogo className="w-4 h-4" />;
+      case "oauth_google":
+        return <GoogleLogo className="w-4 h-4" />;
+      case "oauth_apple":
+        return <AppleLogo className="w-4 h-4" />;
+      case "oauth_linear":
+        return <LinearLogo className="w-4 h-4" />;
+      case "oauth_microsoft":
+        return <MicrosoftLogo className="w-4 h-4" />;
+      case "oauth_spotify":
+        return <SpotifyLogo className="w-4 h-4" />;
+      case "oauth_slack":
+        return <SlackLogo className="w-4 h-4" />;
+      case "oauth_twitch":
+        return <TwitchLogo className="w-4 h-4" />;
+      case "oauth_twitter":
+      case "oauth_x":
+        return <TwitterLogo className="w-4 h-4" />;
+      case "oauth_gitlab":
+        return <GitLabLogo className="w-4 h-4" />;
+      case "oauth_discord":
+        return <DiscordLogo className="w-4 h-4" />;
+      case "oauth_notion":
+        return <NotionLogo className="w-4 h-4" />;
+      default:
+        return null;
+    }
+  };
+
+  const getProviderLabel = (provider: string) => {
+    return (
+      provider.replace("oauth_", "").charAt(0).toUpperCase() +
+      provider.replace("oauth_", "").slice(1)
+    );
   };
 
   if (!isLoaded) {
@@ -184,7 +295,33 @@ export function ClerkSignUpElement() {
           <h2 className="text-lg font-semibold">Create account</h2>
           <p className="text-sm text-muted-foreground">Get started today</p>
         </div>
-
+        {socialProviders.length > 0 && (
+          <div className="space-y-3">
+            {socialProviders.map((provider) => (
+              <Button
+                key={provider}
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => handleSocialSignUp(provider)}
+                disabled={state.isLoading}
+              >
+                {getSocialIcon(provider)}
+                <span className="ml-2">
+                  Continue with {getProviderLabel(provider)}
+                </span>
+              </Button>
+            ))}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or</span>
+              </div>
+            </div>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-2">

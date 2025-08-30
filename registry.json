@@ -44,9 +44,21 @@
         "label",
         "alert",
         "card",
-        "avatar"
+        "avatar",
+        "@elements/apple-logo",
+        "@elements/linear-logo",
+        "@elements/microsoft-logo",
+        "@elements/github-logo",
+        "@elements/spotify-logo",
+        "@elements/slack-logo",
+        "@elements/twitch-logo",
+        "@elements/twitter-logo",
+        "@elements/gitlab-logo",
+        "@elements/discord-logo",
+        "@elements/notion-logo",
+        "@elements/google-logo"
       ],
-      "dependencies": ["@clerk/nextjs", "lucide-react"],
+      "dependencies": ["@clerk/nextjs", "@clerk/types"],
       "files": [
         {
           "path": "registry/default/elements/clerk/sign-in.tsx",
@@ -62,21 +74,43 @@
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
           "target": "app/elements/clerk/dashboard/page.tsx"
+        },
+        {
+          "path": "registry/default/elements/clerk/sso-callback/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/clerk/sso-callback/page.tsx"
         }
       ],
       "envVars": {
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-in component with email/password authentication, error handling, and proper validation. Includes password visibility toggle and loading states."
+      "docs": "Production-ready sign-in component with email/password authentication, OAuth social providers, error handling, and proper validation. Includes password visibility toggle, loading states, and SSO callback handling for secure OAuth flows."
     },
     {
       "name": "clerk-sign-up",
       "type": "registry:ui",
       "title": "Clerk Sign Up",
       "description": "Complete sign-up form with Clerk integration and CAPTCHA support",
-      "registryDependencies": ["button", "input", "label", "alert"],
-      "dependencies": ["@clerk/nextjs", "lucide-react"],
+      "registryDependencies": [
+        "button", 
+        "input", 
+        "label", 
+        "alert",
+        "@elements/apple-logo",
+        "@elements/linear-logo",
+        "@elements/microsoft-logo",
+        "@elements/github-logo",
+        "@elements/spotify-logo",
+        "@elements/slack-logo",
+        "@elements/twitch-logo",
+        "@elements/twitter-logo",
+        "@elements/gitlab-logo",
+        "@elements/discord-logo",
+        "@elements/notion-logo",
+        "@elements/google-logo"
+      ],
+      "dependencies": ["@clerk/nextjs", "@clerk/types"],
       "files": [
         {
           "path": "registry/default/elements/clerk/sign-up.tsx",
@@ -92,13 +126,18 @@
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
           "target": "app/elements/clerk/dashboard/page.tsx"
+        },
+        {
+          "path": "registry/default/elements/clerk/sso-callback/page.tsx",
+          "type": "registry:page",
+          "target": "app/elements/clerk/sso-callback/page.tsx"
         }
       ],
       "envVars": {
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-up component with first name, last name, email, and password fields. Includes email verification flow, CAPTCHA support for bot protection, and comprehensive error handling."
+      "docs": "Production-ready sign-up component with first name, last name, email, and password fields. Includes OAuth social providers, email verification flow, CAPTCHA support for bot protection, SSO callback handling, and comprehensive error handling."
     },
     {
       "name": "theme-switcher",
@@ -120,6 +159,210 @@
         }
       ],
       "docs": "To use this component:\n\n1. Install next-themes: npm install next-themes\n2. Wrap your app with ThemeProvider from next-themes\n3. Set up your CSS variables for light/dark themes\n\nThe theme switcher automatically handles light/dark mode with smooth transitions and animated icons."
+    },
+    {
+      "name": "apple-logo",
+      "type": "registry:ui",
+      "title": "Apple Logo",
+      "description": "Apple logo component with theme-adaptive colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/apple.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/apple.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Apple logo component that adapts to your theme. Uses currentColor to match your design system."
+    },
+    {
+      "name": "linear-logo",
+      "type": "registry:ui",
+      "title": "Linear Logo",
+      "description": "Linear logo component with brand purple gradient",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/linear.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/linear.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Linear logo component with official brand colors and gradient."
+    },
+    {
+      "name": "microsoft-logo",
+      "type": "registry:ui",
+      "title": "Microsoft Logo",
+      "description": "Microsoft logo component with brand colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/microsoft.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/microsoft.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Microsoft logo component with official four-square brand colors."
+    },
+    {
+      "name": "github-logo",
+      "type": "registry:ui",
+      "title": "GitHub Logo",
+      "description": "GitHub logo component with theme-adaptive colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/github.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/github.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "GitHub logo component that adapts to your theme. Uses currentColor to match your design system."
+    },
+    {
+      "name": "spotify-logo",
+      "type": "registry:ui",
+      "title": "Spotify Logo",
+      "description": "Spotify logo component with brand green",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/spotify.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/spotify.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Spotify logo component with official brand green color."
+    },
+    {
+      "name": "slack-logo",
+      "type": "registry:ui",
+      "title": "Slack Logo",
+      "description": "Slack logo component with brand colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/slack.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/slack.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Slack logo component with official multi-color brand design."
+    },
+    {
+      "name": "twitch-logo",
+      "type": "registry:ui",
+      "title": "Twitch Logo",
+      "description": "Twitch logo component with brand purple",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/twitch.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/twitch.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Twitch logo component with official brand purple and white colors."
+    },
+    {
+      "name": "twitter-logo",
+      "type": "registry:ui",
+      "title": "Twitter/X Logo",
+      "description": "Twitter (X) logo component with theme-adaptive colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/twitter.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/twitter.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Twitter/X logo component that adapts to your theme. Uses currentColor to match your design system."
+    },
+    {
+      "name": "gitlab-logo",
+      "type": "registry:ui",
+      "title": "GitLab Logo",
+      "description": "GitLab logo component with brand colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/gitlab.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/gitlab.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "GitLab logo component with official tanuki mascot brand colors."
+    },
+    {
+      "name": "discord-logo",
+      "type": "registry:ui",
+      "title": "Discord Logo",
+      "description": "Discord logo component with brand purple",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/discord.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/discord.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Discord logo component with official brand blurple color."
+    },
+    {
+      "name": "notion-logo",
+      "type": "registry:ui",
+      "title": "Notion Logo",
+      "description": "Notion logo component with theme-adaptive colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/notion.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/notion.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Notion logo component with white background and theme-adaptive foreground."
+    },
+    {
+      "name": "google-logo",
+      "type": "registry:ui",
+      "title": "Google Logo",
+      "description": "Google logo component with brand colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/elements/logos/google.tsx",
+          "type": "registry:component",
+          "target": "components/elements/logos/google.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Google logo component with official four-color brand design."
     }
   ]
 }

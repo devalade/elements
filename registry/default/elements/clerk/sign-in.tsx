@@ -1,14 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import type { OAuthStrategy } from "@clerk/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+import { GitHubLogo } from "../logos/github";
+import { GoogleLogo } from "../logos/google";
+import { AppleLogo } from "../logos/apple";
+import { LinearLogo } from "../logos/linear";
+import { MicrosoftLogo } from "../logos/microsoft";
+import { SpotifyLogo } from "../logos/spotify";
+import { SlackLogo } from "../logos/slack";
+import { TwitchLogo } from "../logos/twitch";
+import { TwitterLogo } from "../logos/twitter";
+import { GitLabLogo } from "../logos/gitlab";
+import { DiscordLogo } from "../logos/discord";
+import { NotionLogo } from "../logos/notion";
 
 export function ClerkSignInElement() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -17,12 +30,41 @@ export function ClerkSignInElement() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [hasInitialized, setHasInitialized] = useState(false);
   const router = useRouter();
+
+  // Clear errors after some time
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
+  // Initialize signIn to populate supportedFirstFactors (only once)
+  useEffect(() => {
+    if (isLoaded && signIn && !signIn.id && !signIn.supportedFirstFactors && !hasInitialized) {
+      setHasInitialized(true);
+      signIn.create({}).catch((err) => {
+        console.error("Failed to initialize signIn:", err);
+      });
+    }
+  }, [isLoaded, signIn, hasInitialized]);
+
+  const socialProviders = useMemo(() => {
+    if (!signIn?.supportedFirstFactors) return [];
+    return signIn.supportedFirstFactors.filter((factor) =>
+      factor.strategy.startsWith("oauth_"),
+    );
+  }, [signIn?.supportedFirstFactors]);
+
+  // Debug info (removed to prevent unnecessary re-renders)
+  // console.log({ supportedFirstFactors: signIn?.supportedFirstFactors });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isLoaded) return;
+    if (!isLoaded || isLoading) return;
 
     setIsLoading(true);
     setError("");
@@ -41,10 +83,77 @@ export function ClerkSignInElement() {
         setError("Sign-in requires additional verification");
       }
     } catch (err: any) {
-      setError(err.errors?.[0]?.message || "Failed to sign in");
+      const errorMessage = err.errors?.[0]?.message || "Failed to sign in";
+      
+      // Handle rate limiting specifically
+      if (errorMessage.includes("too many requests") || errorMessage.includes("rate limit")) {
+        setError("Too many attempts. Please wait a moment and try again.");
+      } else {
+        setError(errorMessage);
+      }
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSocialSignIn = async (provider: string) => {
+    if (!isLoaded || !signIn) return;
+
+    setError("");
+    setIsLoading(true);
+    
+    try {
+      await signIn.authenticateWithRedirect({
+        strategy: provider as OAuthStrategy,
+        redirectUrl: "/elements/clerk/sso-callback",
+        redirectUrlComplete: "/elements/clerk/dashboard",
+      });
+    } catch (err: any) {
+      setError(
+        err.errors?.[0]?.message ||
+          `Failed to sign in with ${provider.replace("oauth_", "")}`,
+      );
+      setIsLoading(false);
+    }
+  };
+
+  const getSocialIcon = (provider: string) => {
+    switch (provider) {
+      case "oauth_github":
+        return <GitHubLogo className="w-4 h-4" />;
+      case "oauth_google":
+        return <GoogleLogo className="w-4 h-4" />;
+      case "oauth_apple":
+        return <AppleLogo className="w-4 h-4" />;
+      case "oauth_linear":
+        return <LinearLogo className="w-4 h-4" />;
+      case "oauth_microsoft":
+        return <MicrosoftLogo className="w-4 h-4" />;
+      case "oauth_spotify":
+        return <SpotifyLogo className="w-4 h-4" />;
+      case "oauth_slack":
+        return <SlackLogo className="w-4 h-4" />;
+      case "oauth_twitch":
+        return <TwitchLogo className="w-4 h-4" />;
+      case "oauth_twitter":
+      case "oauth_x":
+        return <TwitterLogo className="w-4 h-4" />;
+      case "oauth_gitlab":
+        return <GitLabLogo className="w-4 h-4" />;
+      case "oauth_discord":
+        return <DiscordLogo className="w-4 h-4" />;
+      case "oauth_notion":
+        return <NotionLogo className="w-4 h-4" />;
+      default:
+        return null;
+    }
+  };
+
+  const getProviderLabel = (provider: string) => {
+    return (
+      provider.replace("oauth_", "").charAt(0).toUpperCase() +
+      provider.replace("oauth_", "").slice(1)
+    );
   };
 
   if (!isLoaded) {
@@ -65,6 +174,34 @@ export function ClerkSignInElement() {
           <h2 className="text-lg font-semibold">Sign in</h2>
           <p className="text-sm text-muted-foreground">Welcome back</p>
         </div>
+
+        {socialProviders.length > 0 && (
+          <div className="space-y-3">
+            {socialProviders.map((provider) => (
+              <Button
+                key={provider.strategy}
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => handleSocialSignIn(provider.strategy)}
+                disabled={isLoading}
+              >
+                {getSocialIcon(provider.strategy)}
+                <span className="ml-2">
+                  Continue with {getProviderLabel(provider.strategy)}
+                </span>
+              </Button>
+            ))}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-2">
