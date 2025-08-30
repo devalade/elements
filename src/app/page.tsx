@@ -16,6 +16,7 @@ import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
 import { WaitlistElement } from "@registry/default/elements/clerk/waitlist/waitlist";
+import { GroupIcon } from "@/components/icons/group";
 
 export default function Home() {
   return (
@@ -144,7 +145,7 @@ export default function Home() {
                 category="Auth"
                 brandColor="#654BF6"
                 isEnabled={true}
-                href="/components/clerk"
+                href="/t/clerk"
               />
               <ComponentCard
                 name="Trigger.dev Jobs"
@@ -153,7 +154,7 @@ export default function Home() {
                 category="Jobs"
                 brandColor="#8DFF53"
                 isEnabled={true}
-                href="/components/trigger"
+                href="/t/trigger"
               />
               <ComponentCard
                 name="UploadThing"
@@ -162,7 +163,23 @@ export default function Home() {
                 category="Files"
                 brandColor="#E91515"
                 isEnabled={true}
-                href="/components/uploadthing"
+                href="/t/uploadthing"
+              />
+              <ComponentCard
+                name="Tech Logos"
+                description="Collection of popular tech company logos with shopping cart selection"
+                icon={<GroupIcon className="w-6 h-6" />}
+                category="Brand"
+                isEnabled={true}
+                href="/t/logos"
+              />
+              <ComponentCard
+                name="Theme Switcher"
+                description="Dark/light mode toggle with system preference detection"
+                icon={<MoonIcon className="w-6 h-6" />}
+                category="UI"
+                isEnabled={true}
+                href="/t/theme-switcher"
               />
               <ComponentCard
                 name="Supabase DB"
@@ -175,12 +192,6 @@ export default function Home() {
                 description="Real-time sync and offline-first database components"
                 icon={<BranchIcon className="w-6 h-6" />}
                 category="Database"
-              />
-              <ComponentCard
-                name="Theme Switcher"
-                description="Dark/light mode toggle with system preference detection"
-                icon={<MoonIcon className="w-6 h-6" />}
-                category="UI"
               />
               <ComponentCard
                 name="Auth Guard"

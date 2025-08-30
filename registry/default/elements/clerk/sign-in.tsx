@@ -10,18 +10,18 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
-import { GitHubLogo } from "../logos/github";
-import { GoogleLogo } from "../logos/google";
-import { AppleLogo } from "../logos/apple";
-import { LinearLogo } from "../logos/linear";
-import { MicrosoftLogo } from "../logos/microsoft";
-import { SpotifyLogo } from "../logos/spotify";
-import { SlackLogo } from "../logos/slack";
-import { TwitchLogo } from "../logos/twitch";
-import { TwitterLogo } from "../logos/twitter";
-import { GitLabLogo } from "../logos/gitlab";
-import { DiscordLogo } from "../logos/discord";
-import { NotionLogo } from "../logos/notion";
+import { GitHubLogo } from "@/components/ui/logos/github";
+import { GoogleLogo } from "@/components/ui/logos/google";
+import { AppleLogo } from "@/components/ui/logos/apple";
+import { LinearLogo } from "@/components/ui/logos/linear";
+import { MicrosoftLogo } from "@/components/ui/logos/microsoft";
+import { SpotifyLogo } from "@/components/ui/logos/spotify";
+import { SlackLogo } from "@/components/ui/logos/slack";
+import { TwitchLogo } from "@/components/ui/logos/twitch";
+import { TwitterLogo } from "@/components/ui/logos/twitter";
+import { GitLabLogo } from "@/components/ui/logos/gitlab";
+import { DiscordLogo } from "@/components/ui/logos/discord";
+import { NotionLogo } from "@/components/ui/logos/notion";
 
 export function ClerkSignInElement() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -43,12 +43,7 @@ export function ClerkSignInElement() {
 
   // Initialize signIn to populate supportedFirstFactors (only once)
   useEffect(() => {
-    if (
-      isLoaded &&
-      signIn &&
-      !signIn.id &&
-      !hasInitialized
-    ) {
+    if (isLoaded && signIn && !signIn.id && !hasInitialized) {
       setHasInitialized(true);
       signIn.create({}).catch((err) => {
         console.error("Failed to initialize signIn:", err);
@@ -119,7 +114,7 @@ export function ClerkSignInElement() {
     } catch (err: any) {
       setError(
         err.errors?.[0]?.message ||
-        `Failed to sign in with ${provider.replace("oauth_", "")}`,
+          `Failed to sign in with ${provider.replace("oauth_", "")}`,
       );
       setIsLoading(false);
     }

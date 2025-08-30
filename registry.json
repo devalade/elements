@@ -93,9 +93,9 @@
       "title": "Clerk Sign Up",
       "description": "Complete sign-up form with Clerk integration and CAPTCHA support",
       "registryDependencies": [
-        "button", 
-        "input", 
-        "label", 
+        "button",
+        "input",
+        "label",
         "alert",
         "@elements/apple-logo",
         "@elements/linear-logo",
@@ -169,9 +169,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/apple.tsx",
+          "path": "registry/default/logos/apple.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/apple.tsx"
+          "target": "components/ui/logos/apple.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -186,9 +186,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/linear.tsx",
+          "path": "registry/default/logos/linear.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/linear.tsx"
+          "target": "components/ui/logos/linear.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -203,9 +203,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/microsoft.tsx",
+          "path": "registry/default/logos/microsoft.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/microsoft.tsx"
+          "target": "components/ui/logos/microsoft.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -220,9 +220,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/github.tsx",
+          "path": "registry/default/logos/github.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/github.tsx"
+          "target": "components/ui/logos/github.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -237,9 +237,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/spotify.tsx",
+          "path": "registry/default/logos/spotify.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/spotify.tsx"
+          "target": "components/ui/logos/spotify.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -254,9 +254,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/slack.tsx",
+          "path": "registry/default/logos/slack.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/slack.tsx"
+          "target": "components/ui/logos/slack.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -271,9 +271,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/twitch.tsx",
+          "path": "registry/default/logos/twitch.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/twitch.tsx"
+          "target": "components/ui/logos/twitch.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -288,9 +288,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/twitter.tsx",
+          "path": "registry/default/logos/twitter.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/twitter.tsx"
+          "target": "components/ui/logos/twitter.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -305,9 +305,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/gitlab.tsx",
+          "path": "registry/default/logos/gitlab.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/gitlab.tsx"
+          "target": "components/ui/logos/gitlab.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -322,9 +322,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/discord.tsx",
+          "path": "registry/default/logos/discord.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/discord.tsx"
+          "target": "components/ui/logos/discord.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -339,9 +339,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/notion.tsx",
+          "path": "registry/default/logos/notion.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/notion.tsx"
+          "target": "components/ui/logos/notion.tsx"
         }
       ],
       "categories": ["logo", "brand"],
@@ -356,9 +356,9 @@
       "dependencies": [],
       "files": [
         {
-          "path": "registry/default/elements/logos/google.tsx",
+          "path": "registry/default/logos/google.tsx",
           "type": "registry:component",
-          "target": "components/elements/logos/google.tsx"
+          "target": "components/ui/logos/google.tsx"
         }
       ],
       "categories": ["logo", "brand"],

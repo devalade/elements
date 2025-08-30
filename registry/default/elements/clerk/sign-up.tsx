@@ -10,18 +10,18 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
-import { GitHubLogo } from "../logos/github";
-import { GoogleLogo } from "../logos/google";
-import { AppleLogo } from "../logos/apple";
-import { LinearLogo } from "../logos/linear";
-import { MicrosoftLogo } from "../logos/microsoft";
-import { SpotifyLogo } from "../logos/spotify";
-import { SlackLogo } from "../logos/slack";
-import { TwitchLogo } from "../logos/twitch";
-import { TwitterLogo } from "../logos/twitter";
-import { GitLabLogo } from "../logos/gitlab";
-import { DiscordLogo } from "../logos/discord";
-import { NotionLogo } from "../logos/notion";
+import { GitHubLogo } from "@/components/ui/logos/github";
+import { GoogleLogo } from "@/components/ui/logos/google";
+import { AppleLogo } from "@/components/ui/logos/apple";
+import { LinearLogo } from "@/components/ui/logos/linear";
+import { MicrosoftLogo } from "@/components/ui/logos/microsoft";
+import { SpotifyLogo } from "@/components/ui/logos/spotify";
+import { SlackLogo } from "@/components/ui/logos/slack";
+import { TwitchLogo } from "@/components/ui/logos/twitch";
+import { TwitterLogo } from "@/components/ui/logos/twitter";
+import { GitLabLogo } from "@/components/ui/logos/gitlab";
+import { DiscordLogo } from "@/components/ui/logos/discord";
+import { NotionLogo } from "@/components/ui/logos/notion";
 
 interface SignUpState {
   isLoading?: boolean;
@@ -44,19 +44,24 @@ export function ClerkSignUpElement() {
   const [hasInitialized, setHasInitialized] = useState(false);
   const router = useRouter();
 
-  // Clear errors after some time
   useEffect(() => {
     if (state.error) {
-      const timer = setTimeout(() => 
-        setState(prev => ({ ...prev, error: undefined })), 5000
+      const timer = setTimeout(
+        () => setState((prev) => ({ ...prev, error: undefined })),
+        5000,
       );
       return () => clearTimeout(timer);
     }
   }, [state.error]);
 
-  // Initialize signIn to populate supportedFirstFactors (only once)
   useEffect(() => {
-    if (isLoaded && signIn && !signIn.id && !signIn.supportedFirstFactors && !hasInitialized) {
+    if (
+      isLoaded &&
+      signIn &&
+      !signIn.id &&
+      !signIn.supportedFirstFactors &&
+      !hasInitialized
+    ) {
       setHasInitialized(true);
       signIn.create({}).catch((err) => {
         console.error("Failed to initialize signIn:", err);
@@ -91,14 +96,17 @@ export function ClerkSignUpElement() {
 
       setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
     } catch (err: any) {
-      const errorMessage = err.errors?.[0]?.message || "Failed to create account";
-      
-      // Handle rate limiting specifically
+      const errorMessage =
+        err.errors?.[0]?.message || "Failed to create account";
+
       let displayError = errorMessage;
-      if (errorMessage.includes("too many requests") || errorMessage.includes("rate limit")) {
+      if (
+        errorMessage.includes("too many requests") ||
+        errorMessage.includes("rate limit")
+      ) {
         displayError = "Too many attempts. Please wait a moment and try again.";
       }
-      
+
       setState((prev) => ({
         ...prev,
         isLoading: false,
@@ -146,7 +154,7 @@ export function ClerkSignUpElement() {
     if (!isLoaded || !signUp) return;
 
     setState((prev) => ({ ...prev, error: undefined, isLoading: true }));
-    
+
     try {
       await signUp.authenticateWithRedirect({
         strategy: provider as OAuthStrategy,
