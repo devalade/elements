@@ -1,5 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import { WaitlistElement } from "@/components/elements/waitlist/waitlist";
+import { WaitlistElement } from "@/components/elements/clerk/waitlist/waitlist";
 
 export default function WaitlistTestPage() {
   return (
