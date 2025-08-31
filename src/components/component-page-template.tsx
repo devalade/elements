@@ -29,6 +29,18 @@ interface Feature {
   description: string;
 }
 
+interface TechnicalDetail {
+  icon: ReactNode;
+  title: string;
+  description: string;
+}
+
+interface CodeExample {
+  title: string;
+  code: string;
+  language?: string;
+}
+
 interface ComponentWithLayout {
   component: ReactNode;
   colSpan?: 1 | 2 | 3 | 4 | "full";
@@ -50,7 +62,10 @@ interface ComponentPageTemplateProps {
   description: string;
   icon: ReactNode;
   features: Feature[];
+  technicalDetails: TechnicalDetail[];
   installCommand: string;
+  usageExample: string;
+  additionalExamples?: CodeExample[];
   components?: Record<string, ReactNode | ComponentWithLayout>;
   componentInstallUrls?: Record<string, string>;
   layout?: Layout;
