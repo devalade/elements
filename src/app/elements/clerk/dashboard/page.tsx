@@ -2,7 +2,13 @@
 
 import { useUser, SignOutButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CheckCircleIcon, LogOutIcon } from "lucide-react";
 
@@ -43,14 +49,18 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src={user.imageUrl} alt={user.firstName || "User"} />
+                  <AvatarImage
+                    src={user.imageUrl}
+                    alt={user.firstName || "User"}
+                  />
                   <AvatarFallback>
-                    {user.firstName?.[0]}{user.lastName?.[0]}
+                    {user.firstName?.[0]}
+                    {user.lastName?.[0]}
                   </AvatarFallback>
                 </Avatar>
                 <div>
                   <CardTitle className="text-xl">
-                    Welcome, {user.firstName || "User"}!
+                    Welcome, {user.firstName || user.username || "User"}!
                   </CardTitle>
                   <CardDescription>
                     You successfully signed in with Clerk
@@ -88,27 +98,53 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle>User Information</CardTitle>
-            <CardDescription>
-              Information retrieved from Clerk
-            </CardDescription>
+            <CardDescription>Information retrieved from Clerk</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="font-medium text-muted-foreground">Name:</span>
-                <p>{user.fullName || "Not provided"}</p>
+                <p>
+                  {user.fullName ||
+                    `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
+                    "Not provided"}
+                </p>
               </div>
               <div>
-                <span className="font-medium text-muted-foreground">Email:</span>
-                <p>{user.primaryEmailAddress?.emailAddress || "Not provided"}</p>
+                <span className="font-medium text-muted-foreground">
+                  Username:
+                </span>
+                <p>{user.username || "Not provided"}</p>
               </div>
               <div>
-                <span className="font-medium text-muted-foreground">User ID:</span>
+                <span className="font-medium text-muted-foreground">
+                  Email:
+                </span>
+                <p>
+                  {user.primaryEmailAddress?.emailAddress || "Not provided"}
+                </p>
+              </div>
+              <div>
+                <span className="font-medium text-muted-foreground">
+                  Phone:
+                </span>
+                <p>{user.primaryPhoneNumber?.phoneNumber || "Not provided"}</p>
+              </div>
+              <div>
+                <span className="font-medium text-muted-foreground">
+                  User ID:
+                </span>
                 <p className="font-mono text-xs">{user.id}</p>
               </div>
               <div>
-                <span className="font-medium text-muted-foreground">Created:</span>
-                <p>{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "Unknown"}</p>
+                <span className="font-medium text-muted-foreground">
+                  Created:
+                </span>
+                <p>
+                  {user.createdAt
+                    ? new Date(user.createdAt).toLocaleDateString()
+                    : "Unknown"}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -126,15 +162,24 @@ export default function DashboardPage() {
             <div className="space-y-3 text-sm">
               <div className="flex items-start space-x-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                <p>Customize the sign-in and sign-up components to match your design</p>
+                <p>
+                  Customize the sign-in and sign-up components to match your
+                  design
+                </p>
               </div>
               <div className="flex items-start space-x-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                <p>Update the redirect URLs in your components to point to your actual dashboard</p>
+                <p>
+                  Update the redirect URLs in your components to point to your
+                  actual dashboard
+                </p>
               </div>
               <div className="flex items-start space-x-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                <p>Add additional authentication features like organization management</p>
+                <p>
+                  Add additional authentication features like organization
+                  management
+                </p>
               </div>
               <div className="flex items-start space-x-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>

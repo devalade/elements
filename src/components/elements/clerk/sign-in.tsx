@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import type { OAuthStrategy } from "@clerk/types";
+import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,14 +25,23 @@ import { GitLabLogo } from "@/components/ui/logos/gitlab";
 import { DiscordLogo } from "@/components/ui/logos/discord";
 import { NotionLogo } from "@/components/ui/logos/notion";
 
+interface SignInState {
+  step: "form" | "mfa";
+  mfaFactors?: any[];
+}
+
 export function ClerkSignInElement() {
   const { isLoaded, signIn, setActive } = useSignIn();
-  const [email, setEmail] = useState("");
+  const { isSignedIn } = useUser();
+  const clerk = useClerk();
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [state, setState] = useState<SignInState>({ step: "form" });
+  const [mfaCode, setMfaCode] = useState("");
   const router = useRouter();
 
   // Clear errors after some time
@@ -43,13 +54,16 @@ export function ClerkSignInElement() {
 
   // Initialize signIn to populate supportedFirstFactors (only once)
   useEffect(() => {
-    if (isLoaded && signIn && !signIn.id && !hasInitialized) {
+    if (isLoaded && signIn && !signIn.id && !hasInitialized && !isSignedIn) {
       setHasInitialized(true);
       signIn.create({}).catch((err) => {
-        console.error("Failed to initialize signIn:", err);
+        // Silently handle initialization errors when already signed in
+        if (!err?.errors?.[0]?.message?.includes("already signed in")) {
+          console.error("Failed to initialize signIn:", err);
+        }
       });
     }
-  }, [isLoaded, signIn, hasInitialized]);
+  }, [isLoaded, signIn, hasInitialized, isSignedIn]);
 
   const socialProviders = useMemo(() => {
     if (!signIn?.supportedFirstFactors) return [];
@@ -58,7 +72,89 @@ export function ClerkSignInElement() {
     );
   }, [signIn?.supportedFirstFactors]);
 
-  console.log({ socialProviders, support: signIn?.supportedFirstFactors });
+  const supportedIdentifiers = useMemo(() => {
+    if (!signIn?.supportedIdentifiers) return [];
+    return signIn.supportedIdentifiers;
+  }, [signIn?.supportedIdentifiers]);
+
+  const getIdentifierType = () => {
+    if (supportedIdentifiers.includes('email_address') && supportedIdentifiers.includes('username')) {
+      return 'email_or_username';
+    }
+    if (supportedIdentifiers.includes('email_address')) {
+      return 'email';
+    }
+    if (supportedIdentifiers.includes('username')) {
+      return 'username';
+    }
+    return 'email';
+  };
+
+  const getIdentifierLabel = () => {
+    const type = getIdentifierType();
+    switch (type) {
+      case 'email_or_username':
+        return 'Email or username';
+      case 'username':
+        return 'Username';
+      default:
+        return 'Email';
+    }
+  };
+
+  const getIdentifierPlaceholder = () => {
+    const type = getIdentifierType();
+    switch (type) {
+      case 'email_or_username':
+        return 'you@company.com or username';
+      case 'username':
+        return 'username';
+      default:
+        return 'you@company.com';
+    }
+  };
+
+  const getIdentifierInputType = () => {
+    const type = getIdentifierType();
+    return type === 'email' ? 'email' : 'text';
+  };
+
+  const handleMfaSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isLoaded || !signIn || !mfaCode) return;
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const mfaFactor = state.mfaFactors?.[0];
+      if (!mfaFactor) {
+        setError("No MFA factors available");
+        return;
+      }
+
+      const result = await signIn.attemptSecondFactor({
+        strategy: mfaFactor.strategy,
+        code: mfaCode,
+      });
+
+      if (result.status === "complete") {
+        await setActive({ session: result.createdSessionId });
+        router.push("/elements/clerk/dashboard");
+      } else {
+        setError(`MFA verification incomplete: ${result.status}`);
+      }
+    } catch (err: any) {
+      let displayError = "Invalid MFA code";
+      if (isClerkAPIResponseError(err)) {
+        const clerkError = err.errors[0];
+        displayError = clerkError.longMessage || clerkError.message || "Invalid MFA code";
+      }
+      setError(displayError);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,30 +166,51 @@ export function ClerkSignInElement() {
 
     try {
       const result = await signIn.create({
-        identifier: email,
+        identifier: identifier,
         password,
       });
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
+        
+        // Note: Session tasks should be checked after setActive completes
+        
         router.push("/elements/clerk/dashboard");
+      } else if (result.status === "needs_second_factor") {
+        // Handle multi-factor authentication - show MFA UI
+        setState({ 
+          step: "mfa", 
+          mfaFactors: result.supportedSecondFactors || [] 
+        });
+        setIsLoading(false);
+        return;
       } else {
-        // Handle multi-factor authentication or other cases
-        setError("Sign-in requires additional verification");
+        // Handle other incomplete statuses
+        setError(`Sign-in incomplete: ${result.status}`);
       }
     } catch (err: any) {
-      const errorMessage = err.errors?.[0]?.message || "Failed to sign in";
-      console.log({ errorMessage });
+      let displayError = "Failed to sign in";
 
-      // Handle rate limiting specifically
-      if (
-        errorMessage.includes("too many requests") ||
-        errorMessage.includes("rate limit")
-      ) {
-        setError("Too many attempts. Please wait a moment and try again.");
+      if (isClerkAPIResponseError(err)) {
+        const clerkError = err.errors[0];
+        
+        switch (clerkError.code) {
+          case 'user_locked':
+            const lockoutSeconds = (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
+            const unlockTime = new Date(Date.now() + (lockoutSeconds * 1000));
+            displayError = `Account locked. Try again at ${unlockTime.toLocaleTimeString()}`;
+            break;
+          case 'too_many_requests':
+            displayError = "Too many attempts. Please wait a moment and try again.";
+            break;
+          default:
+            displayError = clerkError.longMessage || clerkError.message || "Failed to sign in";
+        }
       } else {
-        setError(errorMessage);
+        displayError = err.message || "Failed to sign in";
       }
+
+      setError(displayError);
     } finally {
       setIsLoading(false);
     }
@@ -159,11 +276,114 @@ export function ClerkSignInElement() {
     );
   };
 
+  // Show message if already signed in (for showcase purposes)
+  if (isLoaded && isSignedIn) {
+    return (
+      <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
+        <div className="space-y-4">
+          <div className="text-center">
+            <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
+            <h2 className="text-lg font-semibold">Already Signed In</h2>
+            <p className="text-sm text-muted-foreground">
+              You're currently signed in
+            </p>
+          </div>
+          <div className="flex space-x-2">
+            <Button 
+              onClick={() => router.push("/elements/clerk/dashboard")}
+              className="flex-1"
+            >
+              Go to Dashboard
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={async () => {
+                await clerk.signOut();
+                window.location.reload();
+              }}
+              className="flex-1"
+            >
+              Sign Out & Try
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!isLoaded) {
     return (
       <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
         <div className="flex items-center justify-center py-8">
           <LoaderIcon className="w-6 h-6 animate-spin" />
+        </div>
+      </div>
+    );
+  }
+
+  // MFA Step
+  if (state.step === "mfa") {
+    return (
+      <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
+        <div className="space-y-4">
+          <div className="text-center">
+            <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
+            <h2 className="text-lg font-semibold">Two-Factor Authentication</h2>
+            <p className="text-sm text-muted-foreground">
+              Enter your authentication code
+            </p>
+          </div>
+
+          <form onSubmit={handleMfaSubmit} className="space-y-3">
+            <div className="space-y-2">
+              <Label htmlFor="mfa-code" className="text-sm font-medium">
+                Authentication Code
+              </Label>
+              <Input
+                id="mfa-code"
+                type="text"
+                value={mfaCode}
+                onChange={(e) => setMfaCode(e.target.value)}
+                placeholder="000000"
+                required
+                disabled={isLoading}
+                maxLength={6}
+                autoComplete="one-time-code"
+              />
+            </div>
+
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <Button type="submit" className="w-full" disabled={isLoading || mfaCode.length < 6}>
+              {isLoading ? (
+                <>
+                  <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />
+                  Verifying...
+                </>
+              ) : (
+                "Verify"
+              )}
+            </Button>
+          </form>
+
+          <div className="text-center">
+            <button
+              type="button"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => {
+                setState({ step: "form" });
+                setMfaCode("");
+                setError("");
+              }}
+              disabled={isLoading}
+            >
+              Back to sign in
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -208,18 +428,18 @@ export function ClerkSignInElement() {
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-medium">
-              Email
+            <Label htmlFor="identifier" className="text-sm font-medium">
+              {getIdentifierLabel()}
             </Label>
             <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@company.com"
+              id="identifier"
+              type={getIdentifierInputType()}
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              placeholder={getIdentifierPlaceholder()}
               required
               disabled={isLoading}
-              autoComplete="email"
+              autoComplete={getIdentifierType() === 'email' ? 'email' : 'username'}
             />
           </div>
 
@@ -278,10 +498,10 @@ export function ClerkSignInElement() {
             onClick={() =>
               signIn?.create({
                 strategy: "reset_password_email_code",
-                identifier: email,
+                identifier: identifier,
               })
             }
-            disabled={!email || isLoading}
+            disabled={!identifier || isLoading}
           >
             Forgot your password?
           </button>

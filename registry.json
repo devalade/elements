@@ -31,7 +31,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to Configure > API Keys\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n6. Go to Configure > Restrictions > Sign-up mode and enable Waitlist\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
+      "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to Configure > API Keys\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n6. Go to Configure > Restrictions > Sign-up mode and enable Waitlist\n\n**Setup:** Wrap your app with ClerkProvider in your root layout:\n\n```tsx\n// app/layout.tsx\nimport { ClerkProvider } from '@clerk/nextjs'\n\nexport default function RootLayout({ children }) {\n  return (\n    <ClerkProvider>\n      <html>\n        <body>{children}</body>\n      </html>\n    </ClerkProvider>\n  )\n}\n```\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
     },
     {
       "name": "clerk-sign-in",
@@ -56,7 +56,8 @@
         "@elements/gitlab-logo",
         "@elements/discord-logo",
         "@elements/notion-logo",
-        "@elements/google-logo"
+        "@elements/google-logo",
+        "@elements/clerk-middleware"
       ],
       "dependencies": ["@clerk/nextjs", "@clerk/types"],
       "files": [
@@ -85,7 +86,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-in component with email/password authentication, OAuth social providers, error handling, and proper validation. Includes password visibility toggle, loading states, and SSO callback handling for secure OAuth flows."
+      "docs": "Production-ready sign-in component with dynamic identifier detection, OAuth social providers, MFA support, session tasks handling, and comprehensive error handling with proper ClerkAPIError patterns. Includes password visibility toggle, loading states, and SSO callback handling.\\n\\n**Setup:** Wrap your app with ClerkProvider in your root layout:\\n\\n```tsx\\n// app/layout.tsx\\nimport { ClerkProvider } from '@clerk/nextjs'\\n\\nexport default function RootLayout({ children }) {\\n  return (\\n    <ClerkProvider>\\n      <html>\\n        <body>{children}</body>\\n      </html>\\n    </ClerkProvider>\\n  )\\n}\\n```"
     },
     {
       "name": "clerk-sign-up",
@@ -108,7 +109,8 @@
         "@elements/gitlab-logo",
         "@elements/discord-logo",
         "@elements/notion-logo",
-        "@elements/google-logo"
+        "@elements/google-logo",
+        "@elements/clerk-middleware"
       ],
       "dependencies": ["@clerk/nextjs", "@clerk/types"],
       "files": [
@@ -137,7 +139,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-up component with first name, last name, email, and password fields. Includes OAuth social providers, email verification flow, CAPTCHA support for bot protection, SSO callback handling, and comprehensive error handling."
+      "docs": "Production-ready sign-up component with dynamic field rendering based on Clerk configuration, OAuth social providers, email verification flow, dynamic verification methods, waitlist mode detection, session tasks handling, and comprehensive error handling with proper ClerkAPIError patterns.\\n\\n**Setup:** Wrap your app with ClerkProvider in your root layout:\\n\\n```tsx\\n// app/layout.tsx\\nimport { ClerkProvider } from '@clerk/nextjs'\\n\\nexport default function RootLayout({ children }) {\\n  return (\\n    <ClerkProvider>\\n      <html>\\n        <body>{children}</body>\\n      </html>\\n    </ClerkProvider>\\n  )\\n}\\n```"
     },
     {
       "name": "theme-switcher",
@@ -363,6 +365,26 @@
       ],
       "categories": ["logo", "brand"],
       "docs": "Google logo component with official four-color brand design."
+    },
+    {
+      "name": "clerk-middleware",
+      "type": "registry:ui",
+      "title": "Clerk Middleware",
+      "description": "Clerk middleware for Next.js App Router with route protection",
+      "registryDependencies": [],
+      "dependencies": ["@clerk/nextjs"],
+      "files": [
+        {
+          "path": "registry/default/elements/clerk/middleware.ts",
+          "type": "registry:lib",
+          "target": "middleware.ts"
+        }
+      ],
+      "envVars": {
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
+        "CLERK_SECRET_KEY": "sk_test_"
+      },
+      "docs": "Clerk middleware for Next.js App Router that handles authentication and route protection. Install this alongside clerk-sign-in or clerk-sign-up components.\n\n**Setup:** This middleware automatically protects your routes and should be installed in the root of your project as middleware.ts."
     }
   ]
 }

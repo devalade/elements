@@ -50,7 +50,7 @@ export default function DashboardPage() {
                 </Avatar>
                 <div>
                   <CardTitle className="text-xl">
-                    Welcome, {user.firstName || "User"}!
+                    Welcome, {user.firstName || user.username || "User"}!
                   </CardTitle>
                   <CardDescription>
                     You successfully signed in with Clerk
@@ -96,11 +96,19 @@ export default function DashboardPage() {
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="font-medium text-muted-foreground">Name:</span>
-                <p>{user.fullName || "Not provided"}</p>
+                <p>{user.fullName || `${user.firstName || ''} ${user.lastName || ''}`.trim() || "Not provided"}</p>
+              </div>
+              <div>
+                <span className="font-medium text-muted-foreground">Username:</span>
+                <p>{user.username || "Not provided"}</p>
               </div>
               <div>
                 <span className="font-medium text-muted-foreground">Email:</span>
                 <p>{user.primaryEmailAddress?.emailAddress || "Not provided"}</p>
+              </div>
+              <div>
+                <span className="font-medium text-muted-foreground">Phone:</span>
+                <p>{user.primaryPhoneNumber?.phoneNumber || "Not provided"}</p>
               </div>
               <div>
                 <span className="font-medium text-muted-foreground">User ID:</span>
