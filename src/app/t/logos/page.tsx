@@ -32,6 +32,10 @@ import { MistralLogo } from "@registry/default/logos/mistral";
 import { MetaLogo } from "@registry/default/logos/meta";
 import { AWSLogo } from "@registry/default/logos/aws";
 import { KimiLogo } from "@registry/default/logos/kimi";
+import { SupabaseIcon } from "@registry/default/logos/supabase";
+import { StripeIcon } from "@registry/default/logos/stripe";
+import { ResendIcon } from "@registry/default/logos/resend";
+import { BetterAuthIcon } from "@registry/default/logos/better-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -275,6 +279,34 @@ const logos: Logo[] = [
     displayName: "Kimi",
     component: KimiLogo,
     category: "AI",
+  },
+  {
+    id: "supabase",
+    name: "supabase-logo",
+    displayName: "Supabase",
+    component: SupabaseIcon,
+    category: "Database",
+  },
+  {
+    id: "stripe",
+    name: "stripe-logo",
+    displayName: "Stripe",
+    component: StripeIcon,
+    category: "Payments",
+  },
+  {
+    id: "resend",
+    name: "resend-logo",
+    displayName: "Resend",
+    component: ResendIcon,
+    category: "Email",
+  },
+  {
+    id: "better-auth",
+    name: "better-auth-logo",
+    displayName: "Better Auth",
+    component: BetterAuthIcon,
+    category: "Auth",
   },
 ];
 

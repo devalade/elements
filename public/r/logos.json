@@ -36,7 +36,11 @@
     "@elements/mistral-logo",
     "@elements/meta-logo",
     "@elements/aws-logo",
-    "@elements/kimi-logo"
+    "@elements/kimi-logo",
+    "@elements/supabase-logo",
+    "@elements/stripe-logo",
+    "@elements/resend-logo",
+    "@elements/better-auth-logo"
   ],
   "files": [],
   "docs": "Complete collection of brand logos including tech companies, AI services, and platforms. All logos are theme-adaptive and optimized for web use.",

@@ -15,6 +15,10 @@ import { MoneyIcon } from "@/components/icons/money";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
+import { SupabaseIcon } from "@/components/ui/logos/supabase";
+import { StripeIcon } from "@/components/ui/logos/stripe";
+import { ResendIcon } from "@/components/ui/logos/resend";
+import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
 import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 import { GroupIcon } from "@/components/icons/group";
 
@@ -131,7 +135,7 @@ export default function Home() {
         <div className="w-full py-16 border-t border-border border-dotted px-8">
           <div className="space-y-8">
             <h2 className="text-center text-2xl font-bold">
-              Beta Component Gallery
+              Beta Elements Gallery
             </h2>
 
             <div className="grid gap-4 place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -181,8 +185,9 @@ export default function Home() {
               <ComponentCard
                 name="Supabase DB"
                 description="Database connection and CRUD operation components"
-                icon={<ServerIcon className="w-6 h-6" />}
+                icon={<SupabaseIcon className="w-6 h-6" />}
                 category="Database"
+                brandColor="#3ECF8E"
               />
               <ComponentCard
                 name="ElectricSQL"
@@ -191,22 +196,25 @@ export default function Home() {
                 category="Database"
               />
               <ComponentCard
-                name="Auth Guard"
+                name="Better Auth"
                 description="Route protection and role-based access control"
-                icon={<ShieldIcon className="w-6 h-6" />}
+                icon={<BetterAuthIcon className="w-6 h-6" />}
                 category="Auth"
+                brandColor="#000000"
               />
               <ComponentCard
-                name="Email Templates"
+                name="Resend"
                 description="Responsive email templates with React Email"
-                icon={<MailIcon className="w-6 h-6" />}
+                icon={<ResendIcon className="w-6 h-6" />}
                 category="Email"
+                brandColor="#000000"
               />
               <ComponentCard
-                name="Payment Forms"
+                name="Stripe"
                 description="Stripe integration with checkout and subscription flows"
-                icon={<MoneyIcon className="w-6 h-6" />}
+                icon={<StripeIcon className="w-6 h-6" />}
                 category="Payments"
+                brandColor="#635BFF"
               />
             </div>
           </div>
