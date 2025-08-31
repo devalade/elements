@@ -242,7 +242,7 @@ export function ClerkSignUpElement() {
 
         // Note: Session tasks should be checked after setActive completes
 
-        router.push("/_dashboard_");
+        router.push("/0-dashboard");
       } else {
         setState((prev) => ({
           ...prev,
@@ -284,7 +284,7 @@ export function ClerkSignUpElement() {
       await signUp.authenticateWithRedirect({
         strategy: provider as OAuthStrategy,
         redirectUrl: "_sso-callback",
-        redirectUrlComplete: "_dashboard_",
+        redirectUrlComplete: "0-dashboard",
       });
     } catch (err: any) {
       let errorMessage = `Failed to sign up with ${provider.replace("oauth_", "")}`;
@@ -358,7 +358,7 @@ export function ClerkSignUpElement() {
           </div>
           <div className="flex space-x-2">
             <Button
-              onClick={() => router.push("/_dashboard_")}
+              onClick={() => router.push("/0-dashboard")}
               className="flex-1"
             >
               Go to Dashboard

@@ -35,6 +35,10 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         baseTheme: shadcn,
+        elements: {
+          modalBackdrop: "backdrop-blur-sm bg-black/50",
+          modalContent: "flex items-center justify-center !my-auto",
+        },
       }}
     >
       <html lang="en" suppressHydrationWarning>

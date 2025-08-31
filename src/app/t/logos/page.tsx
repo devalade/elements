@@ -48,6 +48,7 @@ import {
 import { GroupIcon } from "@/components/icons/group";
 import { CopyIcon } from "@/components/icons/copy";
 import { InstallCommand } from "@/components/install-command";
+import { SearchIcon } from "@/components/icons/search";
 
 interface Logo {
   id: string;
@@ -384,7 +385,7 @@ export default function TechLogosPage() {
 
         {/* Controls Section */}
         <div className="border-t border-border border-dotted px-4 sm:px-6 md:px-8 py-6">
-          <div className="max-w-5xl mx-auto">
+          <div className="w-full mx-auto">
             <div className="flex flex-row gap-4 items-center justify-between">
               <div className="relative flex-1 max-w-md">
                 <Input
@@ -395,19 +396,7 @@ export default function TechLogosPage() {
                   className="pr-10"
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <svg
-                    className="w-4 h-4 text-muted-foreground"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+                  <SearchIcon className="size-4" />
                 </div>
               </div>
 
@@ -427,7 +416,7 @@ export default function TechLogosPage() {
 
         {/* Logo Grid */}
         <div className="border-t border-border border-dotted px-4 sm:px-6 md:px-8 py-8">
-          <div className="max-w-5xl mx-auto">
+          <div className="w-full mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
               {filteredLogos.map((logo) => {
                 const LogoComponent = logo.component;

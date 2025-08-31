@@ -1,3 +1,5 @@
+'use client'
+
 import { ComponentPageTemplate } from "@/components/component-page-template";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { ClerkSignInElement } from "@registry/default/elements/clerk/sign-in";
@@ -7,9 +9,14 @@ import { ShieldIcon } from "@/components/icons/shield";
 import { ServerIcon } from "@/components/icons/server";
 import { ZapIcon } from "@/components/icons/zap";
 import { Badge } from "@/components/ui/badge";
-import { SignIn, SignInButton, SignUp, Waitlist } from "@clerk/nextjs";
+import { SignIn, SignUp, Waitlist, useUser, useClerk } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function ClerkPage() {
+  const { isSignedIn, isLoaded } = useUser();
+  const clerk = useClerk();
+  const router = useRouter();
   const features = [
     {
       icon: <ShieldIcon className="w-3 h-3" />,
@@ -57,8 +64,72 @@ export default function ClerkPage() {
 <span class="text-gray-500">{"<ClerkSignIn />"}</span>`;
 
   const clerkComponents = {
-    "sign-in": <SignIn />,
-    "sign-up": <SignUp />,
+    "sign-in": isLoaded && isSignedIn ? (
+      <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
+        <div className="space-y-4">
+          <div className="text-center">
+            <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
+            <h2 className="text-lg font-semibold">Already Signed In</h2>
+            <p className="text-sm text-muted-foreground">
+              You're currently signed in
+            </p>
+          </div>
+          <div className="flex space-x-2">
+            <Button
+              onClick={() => router.push("/0-dashboard")}
+              className="flex-1"
+            >
+              Go to Dashboard
+            </Button>
+            <Button
+              variant="outline"
+              onClick={async () => {
+                await clerk.signOut();
+                window.location.reload();
+              }}
+              className="flex-1"
+            >
+              Sign Out & Try
+            </Button>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <SignIn routing="hash" />
+    ),
+    "sign-up": isLoaded && isSignedIn ? (
+      <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
+        <div className="space-y-4">
+          <div className="text-center">
+            <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
+            <h2 className="text-lg font-semibold">Already Signed In</h2>
+            <p className="text-sm text-muted-foreground">
+              You're currently signed in
+            </p>
+          </div>
+          <div className="flex space-x-2">
+            <Button
+              onClick={() => router.push("/0-dashboard")}
+              className="flex-1"
+            >
+              Go to Dashboard
+            </Button>
+            <Button
+              variant="outline"
+              onClick={async () => {
+                await clerk.signOut();
+                window.location.reload();
+              }}
+              className="flex-1"
+            >
+              Sign Out & Try
+            </Button>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <SignUp routing="hash" />
+    ),
     waitlist: <Waitlist />,
     "sign-in-shadcn": <ClerkSignInElement />,
     "sign-up-shadcn": <ClerkSignUpElement />,

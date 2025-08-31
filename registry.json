@@ -75,7 +75,7 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/_dashboard_/page.tsx"
+          "target": "app/0-dashboard/page.tsx"
         },
         {
           "path": "registry/default/elements/clerk/sso-callback/page.tsx",
@@ -129,12 +129,12 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/_dashboard_/page.tsx"
+          "target": "app/0-dashboard/page.tsx"
         },
         {
           "path": "registry/default/elements/clerk/sso-callback/page.tsx",
           "type": "registry:page",
-          "target": "app/_sso-callback_/page.tsx"
+          "target": "app/0-sso-callback/page.tsx"
         }
       ],
       "envVars": {
@@ -184,15 +184,15 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/_dashboard_/page.tsx"
+          "target": "app/0-dashboard/page.tsx"
         }
       ],
       "envVars": {
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_",
         "NEXT_PUBLIC_CLERK_SIGN_IN_URL": "/sign-in",
-        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/_dashboard_",
-        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/_dashboard_"
+        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/0-dashboard",
+        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/0-dashboard"
       },
       "docs": "Sign-in page using Clerk's built-in SignIn component. Requires ClerkProvider in root layout."
     },
@@ -217,15 +217,15 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/_dashboard_/page.tsx"
+          "target": "app/0-dashboard/page.tsx"
         }
       ],
       "envVars": {
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_",
         "NEXT_PUBLIC_CLERK_SIGN_UP_URL": "/sign-up",
-        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/_dashboard_",
-        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/_dashboard_"
+        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/0-dashboard",
+        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/0-dashboard"
       },
       "docs": "Sign-up page using Clerk's built-in SignUp component. Requires ClerkProvider in root layout."
     },
