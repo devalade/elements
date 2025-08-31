@@ -86,7 +86,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-in component with dynamic identifier detection, OAuth social providers, MFA support, session tasks handling, and comprehensive error handling with proper ClerkAPIError patterns. Includes password visibility toggle, loading states, and SSO callback handling.\\n\\n**Setup:** Wrap your app with ClerkProvider in your root layout:\\n\\n```tsx\\n// app/layout.tsx\\nimport { ClerkProvider } from '@clerk/nextjs'\\n\\nexport default function RootLayout({ children }) {\\n  return (\\n    <ClerkProvider>\\n      <html>\\n        <body>{children}</body>\\n      </html>\\n    </ClerkProvider>\\n  )\\n}\\n```"
+      "docs": "Production-ready sign-in component with dynamic identifier detection, OAuth social providers, MFA support, and comprehensive error handling. Requires ClerkProvider in your root layout."
     },
     {
       "name": "clerk-sign-up",
