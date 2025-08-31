@@ -32,10 +32,6 @@
           "target": "app/elements/clerk/waitlist/page.tsx"
         }
       ],
-      "envVars": {
-        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
-        "CLERK_SECRET_KEY": "sk_test_"
-      },
       "docs": "Animated waitlist signup form with Clerk integration using custom ShadCN components. Requires ClerkProvider in root layout and waitlist mode enabled in Clerk dashboard (Configure > Restrictions > Sign-up mode)."
     },
     {
@@ -79,7 +75,7 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/elements/clerk/dashboard/page.tsx"
+          "target": "app/_dashboard_/page.tsx"
         },
         {
           "path": "registry/default/elements/clerk/sso-callback/page.tsx",
@@ -100,6 +96,7 @@
       "description": "Complete sign-up form with Clerk integration and CAPTCHA support using custom ShadCN components",
       "registryDependencies": [
         "button",
+        "card",
         "input",
         "label",
         "alert",
@@ -132,12 +129,12 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/elements/clerk/dashboard/page.tsx"
+          "target": "app/_dashboard_/page.tsx"
         },
         {
           "path": "registry/default/elements/clerk/sso-callback/page.tsx",
           "type": "registry:page",
-          "target": "app/elements/clerk/sso-callback/page.tsx"
+          "target": "app/_sso-callback_/page.tsx"
         }
       ],
       "envVars": {
@@ -171,7 +168,12 @@
       "type": "registry:ui",
       "title": "Clerk Sign In",
       "description": "Sign-in page using Clerk's built-in SignIn component",
-      "registryDependencies": ["@elements/clerk-middleware"],
+      "registryDependencies": [
+        "button",
+        "card",
+        "avatar",
+        "@elements/clerk-middleware"
+      ],
       "dependencies": ["@clerk/nextjs", "@clerk/themes"],
       "files": [
         {
@@ -182,15 +184,15 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/elements/clerk/dashboard/page.tsx"
+          "target": "app/_dashboard_/page.tsx"
         }
       ],
       "envVars": {
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_",
         "NEXT_PUBLIC_CLERK_SIGN_IN_URL": "/sign-in",
-        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/elements/clerk/dashboard",
-        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/elements/clerk/dashboard"
+        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/_dashboard_",
+        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/_dashboard_"
       },
       "docs": "Sign-in page using Clerk's built-in SignIn component. Requires ClerkProvider in root layout."
     },
@@ -199,7 +201,12 @@
       "type": "registry:ui",
       "title": "Clerk Sign Up",
       "description": "Sign-up page using Clerk's built-in SignUp component",
-      "registryDependencies": ["@elements/clerk-middleware"],
+      "registryDependencies": [
+        "button",
+        "card",
+        "avatar",
+        "@elements/clerk-middleware"
+      ],
       "dependencies": ["@clerk/nextjs", "@clerk/themes"],
       "files": [
         {
@@ -210,15 +217,15 @@
         {
           "path": "registry/default/elements/clerk/dashboard/page.tsx",
           "type": "registry:page",
-          "target": "app/elements/clerk/dashboard/page.tsx"
+          "target": "app/_dashboard_/page.tsx"
         }
       ],
       "envVars": {
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_",
         "NEXT_PUBLIC_CLERK_SIGN_UP_URL": "/sign-up",
-        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/elements/clerk/dashboard",
-        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/elements/clerk/dashboard"
+        "NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL": "/_dashboard_",
+        "NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL": "/_dashboard_"
       },
       "docs": "Sign-up page using Clerk's built-in SignUp component. Requires ClerkProvider in root layout."
     },

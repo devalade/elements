@@ -6,16 +6,18 @@ export default function SSOCallbackPage() {
       <div className="text-center space-y-4 p-8">
         <div className="animate-spin rounded-full h-12 w-12 border-2 border-muted border-t-primary mx-auto"></div>
         <div>
-          <h2 className="text-lg font-semibold mb-2">Completing authentication</h2>
+          <h2 className="text-lg font-semibold mb-2">
+            Completing authentication
+          </h2>
           <p className="text-sm text-muted-foreground">
             Please wait while we securely sign you in...
           </p>
         </div>
         <AuthenticateWithRedirectCallback
-          signInForceRedirectUrl="/elements/clerk/dashboard"
-          signUpForceRedirectUrl="/elements/clerk/dashboard"
-          signInFallbackRedirectUrl="/elements/clerk/sign-in"
-          signUpFallbackRedirectUrl="/elements/clerk/sign-up"
+          signInForceRedirectUrl="/_dashboard_"
+          signUpForceRedirectUrl="/_dashboard_"
+          signInFallbackRedirectUrl="/_dashboard_"
+          signUpFallbackRedirectUrl="/_dashboard_"
         />
       </div>
     </div>

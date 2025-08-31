@@ -241,9 +241,8 @@ export function ClerkSignUpElement() {
         await setActive({ session: result.createdSessionId });
 
         // Note: Session tasks should be checked after setActive completes
-        // For now, redirect to dashboard and handle session tasks there
 
-        router.push("/elements/clerk/dashboard");
+        router.push("/_dashboard_");
       } else {
         setState((prev) => ({
           ...prev,
@@ -284,8 +283,8 @@ export function ClerkSignUpElement() {
     try {
       await signUp.authenticateWithRedirect({
         strategy: provider as OAuthStrategy,
-        redirectUrl: "/elements/clerk/sso-callback",
-        redirectUrlComplete: "/elements/clerk/dashboard",
+        redirectUrl: "_sso-callback",
+        redirectUrlComplete: "_dashboard_",
       });
     } catch (err: any) {
       let errorMessage = `Failed to sign up with ${provider.replace("oauth_", "")}`;
@@ -359,7 +358,7 @@ export function ClerkSignUpElement() {
           </div>
           <div className="flex space-x-2">
             <Button
-              onClick={() => router.push("/elements/clerk/dashboard")}
+              onClick={() => router.push("/_dashboard_")}
               className="flex-1"
             >
               Go to Dashboard
