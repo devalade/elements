@@ -1,19 +1,11 @@
 "use client";
 
 import { ScrambleText } from "@/components/scramble-text";
-import { InstallCommand } from "@/components/install-command";
 import { ShadcnIcon } from "@/components/shadcn-icon";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { ElementWrapper } from "@/components/element-wrapper";
 import { ComponentCard } from "@/components/component-card";
 import { ClerkLogo } from "@/components/clerk-logo";
-import { ServerIcon } from "@/components/icons/server";
-import { ZapIcon } from "@/components/icons/zap";
-import { ShieldIcon } from "@/components/icons/shield";
-import { BranchIcon } from "@/components/icons/branch";
-import { MailIcon } from "@/components/icons/mail";
-import { MoneyIcon } from "@/components/icons/money";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
@@ -24,34 +16,31 @@ import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
 import { UpstashIcon } from "@/components/ui/logos/upstash";
 import { VercelIcon } from "@/components/ui/logos/vercel";
 import { PolarIcon } from "@/components/ui/logos/polar";
-import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 import { GroupIcon } from "@/components/icons/group";
 import { CrafterStationLogo } from "@/components/ui/logos/crafter-station";
 import { KeboLogo } from "@/components/ui/logos/kebo";
 import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
-import { PixelatedSharpCornerIcon } from "@/components/pixelated-sharp-corner-icon";
-import { PixelatedCheckIcon } from "@/components/pixelated-check-icon";
 import { ElementSuggestionForm } from "@/components/element-suggestion-form";
 import { QuickstartCard } from "@/components/quickstart-card";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const scrollToGallery = () => {
-    const gallerySection = document.getElementById('gallery');
+    const gallerySection = document.getElementById("gallery");
     if (gallerySection) {
-      gallerySection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start' 
+      gallerySection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
 
   const scrollToSuggest = () => {
-    const suggestSection = document.getElementById('suggest');
+    const suggestSection = document.getElementById("suggest");
     if (suggestSection) {
-      suggestSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start' 
+      suggestSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -66,14 +55,15 @@ export default function Home() {
             {/* Narrative Block */}
             <section className="space-y-6">
               <div className="text-lg uppercase tracking-[0.2em] font-mono text-primary/70">
-                [ELEMENTS ~ FULL-STACK COMPONENTS]
+                [ELEMENTS]
               </div>
               <h1 className="font-dotted font-black text-5xl lg:text-7xl leading-tight tracking-tight">
-                Vibecode
-                <br />
                 Full-Stack
                 <br />
-                <ScrambleText text="By Default" />
+                <ShadcnIcon className="size-8 md:size-12 lg:size-16 inline-block" />{" "}
+                shadcn/ui
+                <br />
+                components
               </h1>
               <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
                 Elements gives you production-ready auth, payments, AI and more
@@ -83,8 +73,8 @@ export default function Home() {
 
             {/* CTAs */}
             <div className="flex items-center gap-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="font-medium"
                 onClick={scrollToGallery}
               >
@@ -108,7 +98,10 @@ export default function Home() {
         </div>
 
         {/* Beta Component Gallery - Full Width */}
-        <div id="gallery" className="w-full py-16 border-t border-border border-dotted px-8">
+        <div
+          id="gallery"
+          className="w-full py-16 border-t border-border border-dotted px-8"
+        >
           <div className="space-y-8">
             <h2 className="w-full flex justify-center mb-16">
               <ScrambleText
@@ -296,7 +289,10 @@ export default function Home() {
         </div>
 
         {/* Element Suggestion Section */}
-        <div id="suggest" className="w-full border-t border-border border-dotted px-8 py-16">
+        <div
+          id="suggest"
+          className="w-full border-t border-border border-dotted px-8 py-16"
+        >
           <div className="max-w-2xl mx-auto">
             <ElementSuggestionForm />
           </div>

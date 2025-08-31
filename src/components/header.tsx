@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUser, useClerk, SignInButton } from "@clerk/nextjs";
+import { ElementsLogo } from "@/components/elements-logo";
 
 export function Header() {
   const { isSignedIn, user } = useUser();
@@ -19,6 +20,7 @@ export function Header() {
     <div className="w-full border-border border-dotted border-b-1">
       <div className="flex items-center justify-between max-w-screen-xl px-4 sm:px-8 mx-auto border-border border-dotted border-r-1 border-l-1">
         <Link className="flex space-x-2 py-4 sm:py-5 items-center" href="/">
+          <ElementsLogo className="size-6" />
           <h1 className="text-lg sm:text-xl font-semibold">Elements</h1>
           <span className="items-center justify-center border px-2 py-0.5 font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground hidden sm:inline-flex rounded-full text-xs">
             tryelements.dev
