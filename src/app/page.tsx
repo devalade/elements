@@ -19,6 +19,9 @@ import { SupabaseIcon } from "@/components/ui/logos/supabase";
 import { StripeIcon } from "@/components/ui/logos/stripe";
 import { ResendIcon } from "@/components/ui/logos/resend";
 import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
+import { UpstashIcon } from "@/components/ui/logos/upstash";
+import { VercelIcon } from "@/components/ui/logos/vercel";
+import { PolarIcon } from "@/components/ui/logos/polar";
 import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 import { GroupIcon } from "@/components/icons/group";
 
@@ -165,13 +168,31 @@ export default function Home() {
                 href="/t/theme-switcher"
               />
               <ComponentCard
-                name="Trigger.dev Jobs"
+                name="Vercel AI SDK"
+                description="AI-powered chat and streaming components with model providers"
+                icon={<VercelIcon className="w-6 h-6" />}
+                category="AI"
+                brandColor="#000000"
+                isEnabled={false}
+                href="/t/vercel"
+              />
+              <ComponentCard
+                name="Trigger.dev"
                 description="Background job scheduling and monitoring components"
                 icon={<TriggerIcon className="w-6 h-6" />}
                 category="Jobs"
                 brandColor="#8DFF53"
                 isEnabled={false}
                 href="/t/trigger"
+              />
+              <ComponentCard
+                name="Upstash"
+                description="Redis and Kafka database components with edge computing"
+                icon={<UpstashIcon className="w-6 h-6" />}
+                category="Database"
+                brandColor="#00C98D"
+                isEnabled={false}
+                href="/t/upstash"
               />
               <ComponentCard
                 name="UploadThing"
@@ -183,17 +204,18 @@ export default function Home() {
                 href="/t/uploadthing"
               />
               <ComponentCard
-                name="Supabase DB"
+                name="Supabase"
                 description="Database connection and CRUD operation components"
                 icon={<SupabaseIcon className="w-6 h-6" />}
                 category="Database"
                 brandColor="#3ECF8E"
               />
               <ComponentCard
-                name="ElectricSQL"
-                description="Real-time sync and offline-first database components"
-                icon={<BranchIcon className="w-6 h-6" />}
-                category="Database"
+                name="Polar"
+                description="Monetization platform for open source creators"
+                icon={<PolarIcon className="w-6 h-6" />}
+                category="Monetization"
+                brandColor="#0062FF"
               />
               <ComponentCard
                 name="Better Auth"

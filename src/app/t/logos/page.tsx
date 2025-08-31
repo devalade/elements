@@ -36,6 +36,9 @@ import { SupabaseIcon } from "@registry/default/logos/supabase";
 import { StripeIcon } from "@registry/default/logos/stripe";
 import { ResendIcon } from "@registry/default/logos/resend";
 import { BetterAuthIcon } from "@registry/default/logos/better-auth";
+import { UpstashIcon } from "@registry/default/logos/upstash";
+import { VercelIcon } from "@registry/default/logos/vercel";
+import { PolarIcon } from "@registry/default/logos/polar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -307,6 +310,27 @@ const logos: Logo[] = [
     displayName: "Better Auth",
     component: BetterAuthIcon,
     category: "Auth",
+  },
+  {
+    id: "upstash",
+    name: "upstash-logo",
+    displayName: "Upstash",
+    component: UpstashIcon,
+    category: "Database",
+  },
+  {
+    id: "vercel",
+    name: "vercel-logo",
+    displayName: "Vercel",
+    component: VercelIcon,
+    category: "Cloud",
+  },
+  {
+    id: "polar",
+    name: "polar-logo",
+    displayName: "Polar",
+    component: PolarIcon,
+    category: "Monetization",
   },
 ];
 

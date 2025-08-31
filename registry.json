@@ -979,6 +979,57 @@
       "docs": "Better Auth logo component that adapts to your theme. Uses currentColor to match your design system."
     },
     {
+      "name": "upstash-logo",
+      "type": "registry:ui",
+      "title": "Upstash Logo",
+      "description": "Upstash logo component with brand green",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/logos/upstash.tsx",
+          "type": "registry:component",
+          "target": "components/ui/logos/upstash.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Upstash logo component with official brand green color."
+    },
+    {
+      "name": "vercel-logo",
+      "type": "registry:ui",
+      "title": "Vercel Logo",
+      "description": "Vercel logo component with theme-adaptive colors",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/logos/vercel.tsx",
+          "type": "registry:component",
+          "target": "components/ui/logos/vercel.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Vercel logo component that adapts to your theme. Uses currentColor to match your design system."
+    },
+    {
+      "name": "polar-logo",
+      "type": "registry:ui",
+      "title": "Polar Logo",
+      "description": "Polar logo component with brand blue",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/logos/polar.tsx",
+          "type": "registry:component",
+          "target": "components/ui/logos/polar.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Polar logo component with official brand blue color."
+    },
+    {
       "name": "clerk-middleware",
       "type": "registry:ui",
       "title": "Clerk Middleware",
@@ -1038,7 +1089,10 @@
         "@elements/supabase-logo",
         "@elements/stripe-logo",
         "@elements/resend-logo",
-        "@elements/better-auth-logo"
+        "@elements/better-auth-logo",
+        "@elements/upstash-logo",
+        "@elements/vercel-logo",
+        "@elements/polar-logo"
       ],
       "dependencies": [],
       "files": [],

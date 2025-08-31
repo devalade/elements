@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "vercel-logo",
+  "type": "registry:ui",
+  "title": "Vercel Logo",
+  "description": "Vercel logo component with theme-adaptive colors",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/default/logos/vercel.tsx",
+      "content": "export function VercelIcon({ className }: { className?: string }) {\n  return (\n    <svg viewBox=\"0 0 256 222\" width=\"256\" height=\"222\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid\" className={className}>\n      <path fill=\"currentColor\" d=\"m128 0 128 221.705H0z\"/>\n    </svg>\n  );\n}",
+      "type": "registry:component",
+      "target": "components/ui/logos/vercel.tsx"
+    }
+  ],
+  "docs": "Vercel logo component that adapts to your theme. Uses currentColor to match your design system.",
+  "categories": [
+    "logo",
+    "brand"
+  ]
+}
