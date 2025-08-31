@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -24,12 +24,12 @@ export function Header() {
             tryelements.dev
           </span>
         </Link>
-        
+
         <div className="flex items-center gap-3">
           <Button
             asChild
             variant="outline"
-            className="rounded-full gap-0 text-sm sm:text-base"
+            className="rounded-md gap-0 text-sm sm:text-base"
           >
             <Link
               href="https://github.com/crafter-station/elements"
@@ -53,16 +53,27 @@ export function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="h-8 w-8 cursor-pointer">
-                  <AvatarImage src={user?.imageUrl} alt={user?.firstName || "User"} />
+                  <AvatarImage
+                    src={user?.imageUrl}
+                    alt={user?.firstName || "User"}
+                  />
                   <AvatarFallback>
-                    {user?.firstName?.[0] || user?.primaryEmailAddress?.emailAddress?.[0]?.toUpperCase() || "U"}
+                    {user?.firstName?.[0] ||
+                      user?.primaryEmailAddress?.emailAddress?.[0]?.toUpperCase() ||
+                      "U"}
                   </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-64" sideOffset={8}>
                 <div className="px-2 py-1.5">
-                  <p className="text-sm font-medium">{user?.fullName || `${user?.firstName || ''} ${user?.lastName || ''}`.trim() || "User"}</p>
-                  <p className="text-xs text-muted-foreground">{user?.primaryEmailAddress?.emailAddress || "No email"}</p>
+                  <p className="text-sm font-medium">
+                    {user?.fullName ||
+                      `${user?.firstName || ""} ${user?.lastName || ""}`.trim() ||
+                      "User"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {user?.primaryEmailAddress?.emailAddress || "No email"}
+                  </p>
                 </div>
                 <DropdownMenuItem onClick={() => signOut()}>
                   Sign out

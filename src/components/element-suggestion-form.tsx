@@ -2,12 +2,22 @@
 
 import { useState, useId } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { PixelatedSharpCornerIcon } from "@/components/pixelated-sharp-corner-icon";
 import { PixelatedCheckIcon } from "@/components/pixelated-check-icon";
@@ -21,6 +31,7 @@ import { PolarIcon } from "@/components/ui/logos/polar";
 import { GroupIcon } from "@/components/icons/group";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
+import { ChevronDownIcon } from "@/components/icons/chevron-down";
 
 interface ElementSuggestionFormProps {}
 
@@ -34,23 +45,73 @@ export function ElementSuggestionForm({}: ElementSuggestionFormProps) {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const providers = [
-    { value: "vercel", label: "Vercel AI SDK", icon: VercelIcon, category: "AI" },
-    { value: "trigger", label: "Trigger.dev", icon: TriggerIcon, category: "Jobs" },
-    { value: "upstash", label: "Upstash", icon: UpstashIcon, category: "Database" },
-    { value: "uploadthing", label: "UploadThing", icon: UploadThingIcon, category: "Files" },
-    { value: "supabase", label: "Supabase", icon: SupabaseIcon, category: "Database" },
-    { value: "polar", label: "Polar", icon: PolarIcon, category: "Monetization" },
-    { value: "better-auth", label: "Better Auth", icon: BetterAuthIcon, category: "Auth" },
+    {
+      value: "vercel",
+      label: "Vercel AI SDK",
+      icon: VercelIcon,
+      category: "AI",
+    },
+    {
+      value: "trigger",
+      label: "Trigger.dev",
+      icon: TriggerIcon,
+      category: "Jobs",
+    },
+    {
+      value: "upstash",
+      label: "Upstash",
+      icon: UpstashIcon,
+      category: "Database",
+    },
+    {
+      value: "uploadthing",
+      label: "UploadThing",
+      icon: UploadThingIcon,
+      category: "Files",
+    },
+    {
+      value: "supabase",
+      label: "Supabase",
+      icon: SupabaseIcon,
+      category: "Database",
+    },
+    {
+      value: "polar",
+      label: "Polar",
+      icon: PolarIcon,
+      category: "Monetization",
+    },
+    {
+      value: "better-auth",
+      label: "Better Auth",
+      icon: BetterAuthIcon,
+      category: "Auth",
+    },
     { value: "resend", label: "Resend", icon: ResendIcon, category: "Email" },
-    { value: "stripe", label: "Stripe", icon: StripeIcon, category: "Payments" },
-    { value: "logos", label: "Brand Logos", icon: GroupIcon, category: "Branding" },
-    { value: "unknown", label: "Other Provider", icon: PixelatedSharpCornerIcon, category: "Custom" },
+    {
+      value: "stripe",
+      label: "Stripe",
+      icon: StripeIcon,
+      category: "Payments",
+    },
+    {
+      value: "logos",
+      label: "Brand Logos",
+      icon: GroupIcon,
+      category: "Branding",
+    },
+    {
+      value: "unknown",
+      label: "Other Provider",
+      icon: PixelatedSharpCornerIcon,
+      category: "Custom",
+    },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedProvider || !description.trim()) return;
-    
+
     // Simulate submission
     setTimeout(() => {
       setIsSubmitted(true);
@@ -137,16 +198,22 @@ export function ElementSuggestionForm({}: ElementSuggestionFormProps) {
                     <span className="flex min-w-0 items-center gap-2">
                       {(() => {
                         const selectedItem = providers.find(
-                          (item) => item.value === selectedProvider
-                        )
+                          (item) => item.value === selectedProvider,
+                        );
                         if (selectedItem) {
-                          const Icon = selectedItem.icon
-                          return <Icon className="text-muted-foreground size-4" />
+                          const Icon = selectedItem.icon;
+                          return (
+                            <Icon className="text-muted-foreground size-4" />
+                          );
                         }
-                        return null
+                        return null;
                       })()}
                       <span className="truncate">
-                        {providers.find((item) => item.value === selectedProvider)?.label}
+                        {
+                          providers.find(
+                            (item) => item.value === selectedProvider,
+                          )?.label
+                        }
                       </span>
                     </span>
                   ) : (
@@ -155,8 +222,7 @@ export function ElementSuggestionForm({}: ElementSuggestionFormProps) {
                     </span>
                   )}
                   <ChevronDownIcon
-                    size={16}
-                    className="text-muted-foreground/80 shrink-0"
+                    className="opacity-50 text-muted-foreground/80 shrink-0"
                     aria-hidden="true"
                   />
                 </Button>
@@ -175,8 +241,12 @@ export function ElementSuggestionForm({}: ElementSuggestionFormProps) {
                           key={provider.value}
                           value={provider.value}
                           onSelect={(currentValue) => {
-                            setSelectedProvider(currentValue === selectedProvider ? "" : currentValue)
-                            setOpen(false)
+                            setSelectedProvider(
+                              currentValue === selectedProvider
+                                ? ""
+                                : currentValue,
+                            );
+                            setOpen(false);
                           }}
                           className="flex items-center justify-between"
                         >
