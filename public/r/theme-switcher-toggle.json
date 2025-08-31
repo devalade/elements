@@ -16,5 +16,5 @@
       "target": "components/elements/theme-switcher-toggle.tsx"
     }
   ],
-  "docs": "Custom toggle theme switcher with sliding animation and embedded icons. Requires next-themes and ThemeProvider setup."
+  "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Custom toggle with sliding animation."
 }

@@ -234,14 +234,9 @@
           "path": "registry/default/elements/theme-switcher/theme-switcher.tsx",
           "type": "registry:component",
           "target": "components/elements/theme-switcher.tsx"
-        },
-        {
-          "path": "registry/default/elements/theme-switcher/page.tsx",
-          "type": "registry:page",
-          "target": "app/elements/theme-switcher/page.tsx"
         }
       ],
-      "docs": "To use this component:\n\n1. Install next-themes: npm install next-themes\n2. Wrap your app with ThemeProvider from next-themes\n3. Set up your CSS variables for light/dark themes\n\nThe theme switcher automatically handles light/dark mode with smooth transitions and animated icons."
+      "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Switch-based theme switcher with animated icons."
     },
     {
       "name": "theme-switcher-switch",
@@ -257,11 +252,11 @@
           "target": "components/elements/theme-switcher-switch.tsx"
         }
       ],
-      "docs": "Switch-based theme switcher component with animated icons. Requires next-themes and ThemeProvider setup."
+      "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Switch-based theme switcher with animated icons."
     },
     {
       "name": "theme-switcher-button",
-      "type": "registry:ui", 
+      "type": "registry:ui",
       "title": "Theme Switcher Button",
       "description": "Button-based theme switcher with rotating icons",
       "registryDependencies": ["button"],
@@ -273,12 +268,12 @@
           "target": "components/elements/theme-switcher-button.tsx"
         }
       ],
-      "docs": "Button-based theme switcher with rotating sun/moon icons. Requires next-themes and ThemeProvider setup."
+      "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Button-based theme switcher with rotating icons."
     },
     {
       "name": "theme-switcher-dropdown",
       "type": "registry:ui",
-      "title": "Theme Switcher Dropdown", 
+      "title": "Theme Switcher Dropdown",
       "description": "Dropdown theme switcher with system/light/dark options",
       "registryDependencies": ["button", "dropdown-menu"],
       "dependencies": ["next-themes"],
@@ -289,7 +284,7 @@
           "target": "components/elements/theme-switcher-dropdown.tsx"
         }
       ],
-      "docs": "Dropdown theme switcher with three options: light, dark, and system. Requires next-themes and ThemeProvider setup."
+      "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Dropdown with light/dark/system options."
     },
     {
       "name": "theme-switcher-toggle",
@@ -305,7 +300,7 @@
           "target": "components/elements/theme-switcher-toggle.tsx"
         }
       ],
-      "docs": "Custom toggle theme switcher with sliding animation and embedded icons. Requires next-themes and ThemeProvider setup."
+      "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Custom toggle with sliding animation."
     },
     {
       "name": "theme-switcher-multi-button",
@@ -321,7 +316,7 @@
           "target": "components/elements/theme-switcher-multi-button.tsx"
         }
       ],
-      "docs": "Multi-button theme switcher with three distinct buttons for system, light, and dark modes. Requires next-themes and ThemeProvider setup."
+      "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Multi-button with system/light/dark options."
     },
     {
       "name": "apple-logo",

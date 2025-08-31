@@ -16,5 +16,5 @@
       "target": "components/elements/theme-switcher-multi-button.tsx"
     }
   ],
-  "docs": "Multi-button theme switcher with three distinct buttons for system, light, and dark modes. Requires next-themes and ThemeProvider setup."
+  "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Multi-button with system/light/dark options."
 }

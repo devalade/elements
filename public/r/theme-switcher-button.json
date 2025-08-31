@@ -18,5 +18,5 @@
       "target": "components/elements/theme-switcher-button.tsx"
     }
   ],
-  "docs": "Button-based theme switcher with rotating sun/moon icons. Requires next-themes and ThemeProvider setup."
+  "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Button-based theme switcher with rotating icons."
 }

@@ -18,5 +18,5 @@
       "target": "components/elements/theme-switcher-switch.tsx"
     }
   ],
-  "docs": "Switch-based theme switcher component with animated icons. Requires next-themes and ThemeProvider setup."
+  "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Switch-based theme switcher with animated icons."
 }

@@ -19,5 +19,5 @@
       "target": "components/elements/theme-switcher-dropdown.tsx"
     }
   ],
-  "docs": "Dropdown theme switcher with three options: light, dark, and system. Requires next-themes and ThemeProvider setup."
+  "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Dropdown with light/dark/system options."
 }
