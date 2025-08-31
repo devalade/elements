@@ -45,7 +45,7 @@ export default function RootLayout({
     >
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${figtree.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans antialiased`}
+          className={`${figtree.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans antialiased selection:bg-foreground selection:text-background`}
         >
           <ThemeProvider
             attribute="class"

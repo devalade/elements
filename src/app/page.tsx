@@ -12,6 +12,7 @@ import { UploadThingIcon } from "@/components/icons/upload-thing";
 import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
 import { QuickstartCard } from "@/components/quickstart-card";
 import { ScrambleText } from "@/components/scramble-text";
+import { ShadcnIcon } from "@/components/shadcn-icon";
 import { Button } from "@/components/ui/button";
 import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
 import { CrafterStationLogo } from "@/components/ui/logos/crafter-station";
@@ -54,14 +55,15 @@ export default function Home() {
             {/* Narrative Block */}
             <section className="space-y-6">
               <div className="text-lg uppercase tracking-[0.2em] font-mono text-primary/70">
-                [ELEMENTS ~ FULL-STACK COMPONENTS]
+                [ELEMENTS]
               </div>
               <h1 className="font-dotted font-black text-5xl lg:text-7xl leading-tight tracking-tight">
-                Vibecode
-                <br />
                 Full-Stack
                 <br />
-                <ScrambleText text="By Default" />
+                <ShadcnIcon className="size-8 md:size-12 lg:size-16 inline-block" />{" "}
+                shadcn/ui
+                <br />
+                components
               </h1>
               <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
                 Elements gives you production-ready auth, payments, AI and more
