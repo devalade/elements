@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { MoonIcon, SunIcon } from "lucide-react";
 
-export function ThemeSwitcherElement() {
+export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
