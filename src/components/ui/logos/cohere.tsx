@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
 
-export interface CohereLogoProps extends React.SVGProps<SVGSVGElement> {}
+export interface CohereLogoProps extends React.SVGProps<SVGSVGElement> { }
 
 export function CohereLogo({ className, ...props }: CohereLogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlSpace="preserve"
-      style={{ enableBackground: "new 0 0 75 75", flex: "none", lineHeight: 1 }}
+      style={{ flex: "none", lineHeight: 1 }}
       viewBox="0 0 75 75"
       width="1em"
       height="1em"
