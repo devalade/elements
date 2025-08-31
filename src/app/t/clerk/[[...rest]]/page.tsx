@@ -36,34 +36,6 @@ export default function ClerkPage() {
     },
   ];
 
-  const technicalDetails = [
-    {
-      icon: <ShieldIcon className="w-6 h-6" />,
-      title: "Production Ready",
-      description:
-        "Real Clerk API integration with proper error handling and loading states",
-    },
-    {
-      icon: <ServerIcon className="w-6 h-6" />,
-      title: "TypeScript",
-      description:
-        "Fully typed components with comprehensive error handling and validation",
-    },
-    {
-      icon: <ZapIcon className="w-6 h-6" />,
-      title: "Copy & Use",
-      description:
-        "Install once, use immediately - no additional configuration needed",
-    },
-  ];
-
-  const usageExample = `<span class="text-blue-400">import</span>
-<span class="text-foreground"> {"{ ClerkSignIn }"} </span>
-<span class="text-blue-400">from</span>
-<span class="text-green-400"> "@registry/clerk-sign-in"</span>
-<br />
-<span class="text-gray-500">{"<ClerkSignIn />"}</span>`;
-
   const clerkComponents = {
     "sign-in":
       isLoaded && isSignedIn ? (
@@ -156,9 +128,7 @@ export default function ClerkPage() {
       description="Complete authentication flows with Clerk. Drop-in full-stack elements for sign-in, sign-up, and waitlists."
       icon={<ClerkLogo className="w-12 h-12" />}
       features={features}
-      technicalDetails={technicalDetails}
       installCommand="bunx shadcn@latest add @elements/clerk-auth"
-      usageExample={usageExample}
       components={clerkComponents}
       componentInstallUrls={componentInstallUrls}
       layout={{ type: "auto", columns: 3, gap: "sm" }}
