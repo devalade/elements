@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { shadcn } from "@clerk/themes";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/next";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -48,6 +49,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
