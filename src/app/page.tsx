@@ -119,6 +119,8 @@ export default function Home() {
                 brandColor="#654BF6"
                 isEnabled={true}
                 href="/t/clerk"
+                elementsCount={6}
+                providerLink="https://clerk.com"
               />
               <ComponentCard
                 name="Tech Logos"
@@ -127,6 +129,7 @@ export default function Home() {
                 category="Brand"
                 isEnabled={true}
                 href="/t/logos"
+                elementsCount={34}
               />
               <ComponentCard
                 name="Theme Switcher"
@@ -135,6 +138,7 @@ export default function Home() {
                 category="UI"
                 isEnabled={true}
                 href="/t/theme-switcher"
+                elementsCount={6}
               />
               <ComponentCard
                 name="Vercel AI SDK"
@@ -144,6 +148,8 @@ export default function Home() {
                 brandColor="#000000"
                 isEnabled={false}
                 href="/t/vercel"
+                elementsCount={3}
+                providerLink="https://vercel.com/ai"
               />
               <ComponentCard
                 name="Trigger.dev"
@@ -153,6 +159,8 @@ export default function Home() {
                 brandColor="#8DFF53"
                 isEnabled={false}
                 href="/t/trigger"
+                elementsCount={4}
+                providerLink="https://trigger.dev"
               />
               <ComponentCard
                 name="Upstash"
@@ -162,6 +170,8 @@ export default function Home() {
                 brandColor="#00C98D"
                 isEnabled={false}
                 href="/t/upstash"
+                elementsCount={3}
+                providerLink="https://upstash.com"
               />
               <ComponentCard
                 name="UploadThing"
@@ -171,6 +181,8 @@ export default function Home() {
                 brandColor="#E91515"
                 isEnabled={false}
                 href="/t/uploadthing"
+                elementsCount={2}
+                providerLink="https://uploadthing.com"
               />
               <ComponentCard
                 name="Supabase"
@@ -178,6 +190,8 @@ export default function Home() {
                 icon={<SupabaseIcon className="w-6 h-6" />}
                 category="Database"
                 brandColor="#3ECF8E"
+                elementsCount={5}
+                providerLink="https://supabase.com"
               />
               <ComponentCard
                 name="Polar"
@@ -185,6 +199,8 @@ export default function Home() {
                 icon={<PolarIcon className="w-6 h-6" />}
                 category="Monetization"
                 brandColor="#0062FF"
+                elementsCount={2}
+                providerLink="https://polar.sh"
               />
               <ComponentCard
                 name="Better Auth"
@@ -192,6 +208,8 @@ export default function Home() {
                 icon={<BetterAuthIcon className="w-6 h-6" />}
                 category="Auth"
                 brandColor="#000000"
+                elementsCount={3}
+                providerLink="https://better-auth.com"
               />
               <ComponentCard
                 name="Resend"
@@ -199,6 +217,8 @@ export default function Home() {
                 icon={<ResendIcon className="w-6 h-6" />}
                 category="Email"
                 brandColor="#000000"
+                elementsCount={2}
+                providerLink="https://resend.com"
               />
               <ComponentCard
                 name="Stripe"
@@ -206,6 +226,8 @@ export default function Home() {
                 icon={<StripeIcon className="w-6 h-6" />}
                 category="Payments"
                 brandColor="#635BFF"
+                elementsCount={4}
+                providerLink="https://stripe.com"
               />
             </div>
           </div>

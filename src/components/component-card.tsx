@@ -9,6 +9,8 @@ interface ComponentCardProps {
   brandColor?: string;
   isEnabled?: boolean;
   href?: string;
+  elementsCount?: number;
+  providerLink?: string;
 }
 
 export function ComponentCard({
@@ -19,6 +21,8 @@ export function ComponentCard({
   brandColor,
   isEnabled = false,
   href,
+  elementsCount,
+  providerLink,
 }: ComponentCardProps) {
   const patternStyle =
     brandColor && isEnabled
@@ -78,8 +82,37 @@ export function ComponentCard({
           <Badge variant="outline" className="text-xs">
             {category}
           </Badge>
-          <div className="w-4 h-4 rounded-full bg-muted flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-border"></div>
+          <div className="flex items-center gap-2">
+            {isEnabled && elementsCount && (
+              <span className="text-xs text-muted-foreground">
+                {elementsCount} elements
+              </span>
+            )}
+            {providerLink && (
+              <a
+                href={providerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-arrow-up-right"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </a>
+            )}
           </div>
         </div>
       </div>
