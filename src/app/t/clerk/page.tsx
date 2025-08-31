@@ -1,4 +1,5 @@
 import { ComponentPageTemplate } from "@/components/component-page-template";
+import { InstallCommand } from "@/components/install-command";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { ClerkSignInElement } from "@registry/default/elements/clerk/sign-in";
 import { ClerkSignUpElement } from "@registry/default/elements/clerk/sign-up";
@@ -50,7 +51,7 @@ export default function ClerkPage() {
   const usageExample = `<span class="text-blue-400">import</span>
 <span class="text-foreground"> {"{ ClerkSignIn }"} </span>
 <span class="text-blue-400">from</span>
-<span class="text-green-400"> "@registry/clerk/sign-in"</span>
+<span class="text-green-400"> "@registry/clerk-sign-in"</span>
 <br />
 <span class="text-gray-500">{"<ClerkSignIn />"}</span>`;
 
@@ -75,7 +76,7 @@ export default function ClerkPage() {
       icon={<ClerkLogo className="w-12 h-12" />}
       features={features}
       technicalDetails={technicalDetails}
-      installCommand="shadcn@latest add @elements/clerk-auth"
+      installCommand="bunx shadcn@latest add @elements/clerk-auth"
       usageExample={usageExample}
       components={clerkComponents}
       componentInstallUrls={componentInstallUrls}

@@ -53,5 +53,5 @@
       "target": "app/elements/clerk/sso-callback/page.tsx"
     }
   ],
-  "docs": "Production-ready sign-up component with dynamic field rendering based on Clerk configuration, OAuth social providers, email verification flow, dynamic verification methods, waitlist mode detection, session tasks handling, and comprehensive error handling with proper ClerkAPIError patterns.\\n\\n**Setup:** Wrap your app with ClerkProvider in your root layout:\\n\\n```tsx\\n// app/layout.tsx\\nimport { ClerkProvider } from '@clerk/nextjs'\\n\\nexport default function RootLayout({ children }) {\\n  return (\\n    <ClerkProvider>\\n      <html>\\n        <body>{children}</body>\\n      </html>\\n    </ClerkProvider>\\n  )\\n}\\n```"
+  "docs": "Complete sign-up form with OAuth providers, email verification, and CAPTCHA support. Requires ClerkProvider in root layout."
 }

@@ -4,12 +4,9 @@ import { ReactNode } from "react";
 import { ScrambleText } from "@/components/scramble-text";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { InstallCommand } from "@/components/install-command";
 import {
   ThemeAwareBrandText,
-  ThemeAwareButton,
   ThemeAwarePattern,
 } from "@/components/theme-aware-brand";
 
@@ -118,27 +115,12 @@ export function ComponentPageTemplate({
               </div>
 
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
-                <ThemeAwareButton
+              <div className="flex justify-center">
+                <InstallCommand
+                  url={installCommand.replace(/^bunx shadcn@latest add /, "")}
+                  className="w-full max-w-lg"
                   brandColor={brandColor}
-                  darkBrandColor={darkBrandColor}
-                  className="text-sm md:text-base"
-                  onClick={() => {
-                    navigator.clipboard.writeText(installCommand);
-                    // Optional: Show toast notification
-                  }}
-                >
-                  Copy Install Command
-                </ThemeAwareButton>
-                <Button
-                  variant="outline"
-                  className="text-sm md:text-base"
-                  onClick={() =>
-                    window.open("https://docs.tryelements.dev", "_blank")
-                  }
-                >
-                  View Documentation
-                </Button>
+                />
               </div>
             </div>
           </div>
@@ -190,14 +172,15 @@ export function ComponentPageTemplate({
               {/* Installation */}
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-foreground">
-                  Quick Install
+                  Quick Start
                 </h3>
-                <div className="bg-muted/50 rounded p-3 font-mono text-sm">
-                  <div className="text-muted-foreground mb-2">
-                    # Install the component
-                  </div>
-                  <div className="text-primary">{installCommand}</div>
-                </div>
+                <p className="text-muted-foreground text-sm">
+                  Get the complete suite with one command
+                </p>
+                <InstallCommand
+                  url={installCommand.replace(/^bunx shadcn@latest add /, "")}
+                  className="w-full max-w-md"
+                />
               </div>
             </div>
           </div>

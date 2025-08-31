@@ -16,5 +16,5 @@
       "target": "middleware.ts"
     }
   ],
-  "docs": "Clerk middleware for Next.js App Router that handles authentication and route protection. Install this alongside clerk-sign-in or clerk-sign-up components.\n\n**Setup:** This middleware automatically protects your routes and should be installed in the root of your project as middleware.ts."
+  "docs": "Clerk middleware for Next.js App Router with route protection. Install in project root as middleware.ts."
 }

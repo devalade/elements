@@ -8,7 +8,12 @@
       "type": "registry:block",
       "title": "Clerk Waitlist",
       "description": "An animated waitlist signup form with Clerk integration",
-      "registryDependencies": ["button", "input", "label"],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label",
+        "@elements/clerk-middleware"
+      ],
       "dependencies": ["motion", "@clerk/backend", "@clerk/nextjs"],
       "files": [
         {
@@ -31,7 +36,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to Configure > API Keys\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n6. Go to Configure > Restrictions > Sign-up mode and enable Waitlist\n\n**Setup:** Wrap your app with ClerkProvider in your root layout:\n\n```tsx\n// app/layout.tsx\nimport { ClerkProvider } from '@clerk/nextjs'\n\nexport default function RootLayout({ children }) {\n  return (\n    <ClerkProvider>\n      <html>\n        <body>{children}</body>\n      </html>\n    </ClerkProvider>\n  )\n}\n```\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
+      "docs": "Animated waitlist signup form with Clerk integration. Requires ClerkProvider in root layout and waitlist mode enabled in Clerk dashboard (Configure > Restrictions > Sign-up mode)."
     },
     {
       "name": "clerk-sign-in",
@@ -86,7 +91,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-in component with dynamic identifier detection, OAuth social providers, MFA support, and comprehensive error handling. Requires ClerkProvider in your root layout."
+      "docs": "Complete sign-in form with OAuth providers, MFA support, and error handling. Requires ClerkProvider in root layout."
     },
     {
       "name": "clerk-sign-up",
@@ -139,7 +144,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Production-ready sign-up component with dynamic field rendering based on Clerk configuration, OAuth social providers, email verification flow, dynamic verification methods, waitlist mode detection, session tasks handling, and comprehensive error handling with proper ClerkAPIError patterns.\\n\\n**Setup:** Wrap your app with ClerkProvider in your root layout:\\n\\n```tsx\\n// app/layout.tsx\\nimport { ClerkProvider } from '@clerk/nextjs'\\n\\nexport default function RootLayout({ children }) {\\n  return (\\n    <ClerkProvider>\\n      <html>\\n        <body>{children}</body>\\n      </html>\\n    </ClerkProvider>\\n  )\\n}\\n```"
+      "docs": "Complete sign-up form with OAuth providers, email verification, and CAPTCHA support. Requires ClerkProvider in root layout."
     },
     {
       "name": "theme-switcher",
@@ -690,6 +695,67 @@
       "docs": "Kimi logo component that adapts to your theme. Uses currentColor to match your design system."
     },
     {
+      "name": "clerk-auth",
+      "type": "registry:block",
+      "title": "Clerk Auth Suite",
+      "description": "Complete Clerk authentication suite with sign-in, sign-up, waitlist, and middleware",
+      "registryDependencies": [
+        "@elements/clerk-sign-in",
+        "@elements/clerk-sign-up",
+        "@elements/clerk-waitlist"
+      ],
+      "dependencies": [],
+      "files": [],
+      "envVars": {
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
+        "CLERK_SECRET_KEY": "sk_test_"
+      },
+      "docs": "Complete Clerk authentication bundle: sign-in, sign-up, waitlist components, and middleware. Requires ClerkProvider in root layout."
+    },
+    {
+      "name": "logos",
+      "type": "registry:block",
+      "title": "Brand Logos Collection",
+      "description": "Complete collection of brand logos for popular tech companies and AI services",
+      "registryDependencies": [
+        "@elements/apple-logo",
+        "@elements/linear-logo",
+        "@elements/microsoft-logo",
+        "@elements/github-logo",
+        "@elements/spotify-logo",
+        "@elements/slack-logo",
+        "@elements/twitch-logo",
+        "@elements/twitter-logo",
+        "@elements/gitlab-logo",
+        "@elements/discord-logo",
+        "@elements/notion-logo",
+        "@elements/google-logo",
+        "@elements/qwen-logo",
+        "@elements/moonshot-ai-logo",
+        "@elements/cohere-logo",
+        "@elements/openai-logo",
+        "@elements/anthropic-logo",
+        "@elements/deepseek-logo",
+        "@elements/hugging-face-logo",
+        "@elements/groq-logo",
+        "@elements/grok-logo",
+        "@elements/gemini-logo",
+        "@elements/lovable-logo",
+        "@elements/perplexity-logo",
+        "@elements/xai-logo",
+        "@elements/v0-logo",
+        "@elements/claude-logo",
+        "@elements/mistral-logo",
+        "@elements/meta-logo",
+        "@elements/aws-logo",
+        "@elements/kimi-logo"
+      ],
+      "dependencies": [],
+      "files": [],
+      "categories": ["logo", "brand"],
+      "docs": "Complete collection of brand logos including tech companies, AI services, and platforms. All logos are theme-adaptive and optimized for web use."
+    },
+    {
       "name": "clerk-middleware",
       "type": "registry:ui",
       "title": "Clerk Middleware",
@@ -707,7 +773,7 @@
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_",
         "CLERK_SECRET_KEY": "sk_test_"
       },
-      "docs": "Clerk middleware for Next.js App Router that handles authentication and route protection. Install this alongside clerk-sign-in or clerk-sign-up components.\n\n**Setup:** This middleware automatically protects your routes and should be installed in the root of your project as middleware.ts."
+      "docs": "Clerk middleware for Next.js App Router with route protection. Install in project root as middleware.ts."
     }
   ]
 }

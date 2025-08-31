@@ -15,11 +15,13 @@ import {
 interface InstallCommandProps {
   url?: string;
   className?: string;
+  brandColor?: string;
 }
 
 export function InstallCommand({
   url = "@elements/clerk-waitlist",
   className,
+  brandColor,
 }: InstallCommandProps) {
   const [packageManager, setPackageManager] = useState("bunx");
   const [copied, setCopied] = useState(false);
@@ -64,7 +66,18 @@ export function InstallCommand({
           onClick={copyCommand}
           size="sm"
           variant="outline"
-          className="-ms-px rounded-s-none border-0 border-l shadow-none text-teal-600 hover:text-teal-500 h-9 w-12 sm:w-auto px-0 sm:px-3"
+          className={`-ms-px rounded-s-none border-0 border-l shadow-none h-9 w-12 sm:w-auto px-0 sm:px-3 ${
+            brandColor
+              ? `hover:text-[${brandColor}]`
+              : "text-teal-600 hover:text-teal-500"
+          }`}
+          style={
+            brandColor
+              ? {
+                  color: brandColor,
+                }
+              : undefined
+          }
         >
           {copied ? (
             <svg

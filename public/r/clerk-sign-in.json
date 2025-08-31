@@ -55,5 +55,5 @@
       "target": "app/elements/clerk/sso-callback/page.tsx"
     }
   ],
-  "docs": "Production-ready sign-in component with dynamic identifier detection, OAuth social providers, MFA support, and comprehensive error handling. Requires ClerkProvider in your root layout."
+  "docs": "Complete sign-in form with OAuth providers, MFA support, and error handling. Requires ClerkProvider in root layout."
 }

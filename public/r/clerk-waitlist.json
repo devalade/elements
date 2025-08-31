@@ -12,7 +12,8 @@
   "registryDependencies": [
     "button",
     "input",
-    "label"
+    "label",
+    "@elements/clerk-middleware"
   ],
   "files": [
     {
@@ -34,5 +35,5 @@
       "target": "app/elements/clerk/waitlist/page.tsx"
     }
   ],
-  "docs": "To get your Clerk API keys:\n\n1. Create an account at https://clerk.com\n2. Create a new application\n3. Go to Configure > API Keys\n4. Copy the Publishable Key and Secret Key\n5. Add them to your .env.local file\n6. Go to Configure > Restrictions > Sign-up mode and enable Waitlist\n\n**Setup:** Wrap your app with ClerkProvider in your root layout:\n\n```tsx\n// app/layout.tsx\nimport { ClerkProvider } from '@clerk/nextjs'\n\nexport default function RootLayout({ children }) {\n  return (\n    <ClerkProvider>\n      <html>\n        <body>{children}</body>\n      </html>\n    </ClerkProvider>\n  )\n}\n```\n\nThe waitlist component uses Clerk's waitlist feature to collect email signups with built-in validation and duplicate prevention."
+  "docs": "Animated waitlist signup form with Clerk integration. Requires ClerkProvider in root layout and waitlist mode enabled in Clerk dashboard (Configure > Restrictions > Sign-up mode)."
 }

@@ -47,6 +47,7 @@ import {
 } from "@/components/ui/select";
 import { GroupIcon } from "@/components/icons/group";
 import { CopyIcon } from "@/components/icons/copy";
+import { InstallCommand } from "@/components/install-command";
 
 interface Logo {
   id: string;
@@ -367,17 +368,15 @@ export default function TechLogosPage() {
                 </div>
                 <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   Popular tech company logos for your projects. Select the ones
-                  you need and install them instantly.
+                  you need or Install all {logos.length} logos at once
                 </p>
               </div>
 
-              <div className="flex items-center justify-center gap-2">
-                <Badge variant="secondary" className="text-sm">
-                  {logos.length} logos available
-                </Badge>
-                <Badge variant="outline" className="text-sm">
-                  {selectedLogos.size} selected
-                </Badge>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <InstallCommand
+                  url="@elements/logos"
+                  className="w-full max-w-md"
+                />
               </div>
             </div>
           </div>
@@ -419,8 +418,8 @@ export default function TechLogosPage() {
                 className="shrink-0"
               >
                 {selectedLogos.size === filteredLogos.length
-                  ? "Deselect All"
-                  : "Select All"}
+                  ? `Deselect All (${filteredLogos.length})`
+                  : `Select All (${filteredLogos.length})`}
               </Button>
             </div>
           </div>
