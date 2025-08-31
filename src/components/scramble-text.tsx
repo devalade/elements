@@ -25,9 +25,10 @@ export function ScrambleText({ text, className }: ScrambleTextProps) {
     >
       {text.split("").map((char, i) => (
         <motion.span
+          // biome-ignore lint/suspicious/noArrayIndexKey: key
           key={i}
           variants={{
-            hidden: { 
+            hidden: {
               opacity: 0,
               filter: "blur(4px)",
             },

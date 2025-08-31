@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export interface CohereLogoProps extends React.SVGProps<SVGSVGElement> { }
+export interface CohereLogoProps extends React.SVGProps<SVGSVGElement> {}
 
 export function CohereLogo({ className, ...props }: CohereLogoProps) {
   return (

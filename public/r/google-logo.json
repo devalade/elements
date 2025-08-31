@@ -15,8 +15,5 @@
     }
   ],
   "docs": "Google logo component with official four-color brand design.",
-  "categories": [
-    "logo",
-    "brand"
-  ]
+  "categories": ["logo", "brand"]
 }

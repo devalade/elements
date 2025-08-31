@@ -1,8 +1,8 @@
 import { ComponentPageTemplate } from "@/components/component-page-template";
-import { UploadThingIcon } from "@/components/icons/upload-thing";
 import { ServerIcon } from "@/components/icons/server";
-import { ZapIcon } from "@/components/icons/zap";
 import { ShieldIcon } from "@/components/icons/shield";
+import { UploadThingIcon } from "@/components/icons/upload-thing";
+import { ZapIcon } from "@/components/icons/zap";
 
 export default function UploadThingPage() {
   const features = [

@@ -1,14 +1,20 @@
 "use client";
 
-import { ReactNode, useState } from "react";
-import { ScrambleText } from "@/components/scramble-text";
-import { Header } from "@/components/header";
+import { type ReactNode, useState } from "react";
+
 import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { CopyIcon } from "@/components/icons/copy";
 import { InstallCommand } from "@/components/install-command";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ScrambleText } from "@/components/scramble-text";
+import {
+  ThemeAwareBrandText,
+  ThemeAwarePattern,
+} from "@/components/theme-aware-brand";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -16,11 +22,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CopyIcon } from "@/components/icons/copy";
-import {
-  ThemeAwareBrandText,
-  ThemeAwarePattern,
-} from "@/components/theme-aware-brand";
 
 interface Feature {
   icon: ReactNode;
@@ -79,10 +80,7 @@ export function ComponentPageTemplate({
   description,
   icon,
   features,
-  technicalDetails,
   installCommand,
-  usageExample,
-  additionalExamples = [],
   components,
   componentInstallUrls = {},
   layout = { type: "auto", columns: 4, gap: "lg" },
@@ -219,8 +217,8 @@ export function ComponentPageTemplate({
                   What's Included
                 </h3>
                 <div className="space-y-3">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-3">
+                  {features.map((feature) => (
+                    <div key={feature.title} className="flex items-start gap-3">
                       <div className="w-5 h-5 rounded-full flex items-center justify-center bg-primary/20 mt-0.5 flex-shrink-0">
                         <div className="w-2.5 h-2.5 text-primary">
                           {feature.icon}
@@ -303,6 +301,7 @@ export function ComponentPageTemplate({
                     viewBox="0 0 24 24"
                     className="w-4 h-4"
                   >
+                    <title>Copy Icon</title>
                     <path
                       d="M18 6h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm-2 2h2v-2h-2v2zm-2 2h2v-2h-2v2zm-2 0v2h2v-2H8zm-2-2h2v2H6v-2zm0 0H4v-2h2v2z"
                       fill="currentColor"
@@ -341,7 +340,7 @@ function ComponentGrid({
   // Determine grid layout
   const isCustomLayout = layout.type === "custom";
 
-  let gridClasses = "";
+  let _gridClasses = "";
   let gapClasses = "";
 
   // Gap classes
@@ -359,7 +358,7 @@ function ComponentGrid({
 
   if (isCustomLayout) {
     // For custom layout, we'll use a flexible grid that components can span
-    gridClasses = `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${gapClasses}`;
+    _gridClasses = `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${gapClasses}`;
   } else {
     // Auto layout based on columns prop
     const colsClass = {
@@ -369,11 +368,11 @@ function ComponentGrid({
       4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
     }[layout.columns || 4];
 
-    gridClasses = `grid ${colsClass} ${gapClasses}`;
+    _gridClasses = `grid ${colsClass} ${gapClasses}`;
   }
 
   // Helper function to get col-span classes
-  const getColSpanClass = (colSpan: ComponentWithLayout["colSpan"]) => {
+  const _getColSpanClass = (colSpan: ComponentWithLayout["colSpan"]) => {
     if (!colSpan || colSpan === 1) return "";
     if (colSpan === "full") return "col-span-full";
 
@@ -434,12 +433,13 @@ function ComponentGrid({
                     className="shrink-0"
                   />
                   <div className="flex items-center gap-2">
-                    <span
+                    <button
+                      type="button"
                       className="text-sm md:text-base font-medium text-foreground capitalize cursor-pointer hover:text-primary transition-colors"
                       onClick={() => onComponentToggle(key)}
                     >
                       {key.replace("-", " ")}
-                    </span>
+                    </button>
                     {key.includes("shadcn") && (
                       <Badge
                         variant="outline"

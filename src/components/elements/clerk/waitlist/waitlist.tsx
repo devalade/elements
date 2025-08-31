@@ -1,11 +1,14 @@
 "use client";
 
-import { motion } from "motion/react";
 import { useActionState } from "react";
-import { addToWaitlist } from "./actions";
+
+import { motion } from "motion/react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+import { addToWaitlist } from "./actions";
 
 type WaitlistState = {
   success?: boolean;
@@ -45,6 +48,7 @@ function PixelatedCheckIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       className={className}
     >
+      <title>Pixelated Check Icon</title>
       <path
         d="M18 6h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm-2 2h2v-2h-2v2zm-2 2h2v-2h-2v2zm-2 0v2h2v-2H8zm-2-2h2v2H6v-2zm0 0H4v-2h2v2z"
         fill="currentColor"

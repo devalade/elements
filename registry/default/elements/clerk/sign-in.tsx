@@ -1,33 +1,34 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import type { OAuthStrategy } from "@clerk/types";
+import { useEffect, useMemo, useState } from "react";
+
+import { useClerk, useSignIn, useUser } from "@clerk/nextjs";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
-import { useUser, useClerk } from "@clerk/nextjs";
+import type { OAuthStrategy } from "@clerk/types";
+import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+
+import { ClerkLogo } from "@/components/clerk-logo";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ClerkLogo } from "@/components/clerk-logo";
-import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
-import { GitHubLogo } from "@/components/ui/logos/github";
-import { GoogleLogo } from "@/components/ui/logos/google";
 import { AppleLogo } from "@/components/ui/logos/apple";
+import { DiscordLogo } from "@/components/ui/logos/discord";
+import { GitHubLogo } from "@/components/ui/logos/github";
+import { GitLabLogo } from "@/components/ui/logos/gitlab";
+import { GoogleLogo } from "@/components/ui/logos/google";
 import { LinearLogo } from "@/components/ui/logos/linear";
 import { MicrosoftLogo } from "@/components/ui/logos/microsoft";
-import { SpotifyLogo } from "@/components/ui/logos/spotify";
+import { NotionLogo } from "@/components/ui/logos/notion";
 import { SlackLogo } from "@/components/ui/logos/slack";
+import { SpotifyLogo } from "@/components/ui/logos/spotify";
 import { TwitchLogo } from "@/components/ui/logos/twitch";
 import { TwitterLogo } from "@/components/ui/logos/twitter";
-import { GitLabLogo } from "@/components/ui/logos/gitlab";
-import { DiscordLogo } from "@/components/ui/logos/discord";
-import { NotionLogo } from "@/components/ui/logos/notion";
 
 interface SignInState {
   step: "form" | "mfa";
-  mfaFactors?: any[];
+  mfaFactors?: { strategy: "phone_code" | "totp" | "backup_code" }[];
 }
 
 export function ClerkSignInElement() {
@@ -146,7 +147,7 @@ export function ClerkSignInElement() {
       } else {
         setError(`MFA verification incomplete: ${result.status}`);
       }
-    } catch (err: any) {
+    } catch (err) {
       let displayError = "Invalid MFA code";
       if (isClerkAPIResponseError(err)) {
         const clerkError = err.errors[0];
@@ -190,19 +191,21 @@ export function ClerkSignInElement() {
         // Handle other incomplete statuses
         setError(`Sign-in incomplete: ${result.status}`);
       }
-    } catch (err: any) {
+    } catch (err) {
       let displayError = "Failed to sign in";
 
       if (isClerkAPIResponseError(err)) {
         const clerkError = err.errors[0];
 
         switch (clerkError.code) {
-          case "user_locked":
+          case "user_locked": {
             const lockoutSeconds =
-              (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
+              (clerkError.meta as Record<string, number>)
+                .lockout_expires_in_seconds || 1800;
             const unlockTime = new Date(Date.now() + lockoutSeconds * 1000);
             displayError = `Account locked. Try again at ${unlockTime.toLocaleTimeString()}`;
             break;
+          }
           case "too_many_requests":
             displayError =
               "Too many attempts. Please wait a moment and try again.";
@@ -214,7 +217,7 @@ export function ClerkSignInElement() {
               "Failed to sign in";
         }
       } else {
-        displayError = err.message || "Failed to sign in";
+        displayError = err instanceof Error ? err.message : "Failed to sign in";
       }
 
       setError(displayError);
@@ -235,7 +238,7 @@ export function ClerkSignInElement() {
         redirectUrl: "/0-sso-callback",
         redirectUrlComplete: "/0-dashboard",
       });
-    } catch (err: any) {
+    } catch (err) {
       let errorMessage = `Failed to sign in with ${provider.replace("oauth_", "")}`;
 
       if (isClerkAPIResponseError(err)) {
@@ -243,7 +246,7 @@ export function ClerkSignInElement() {
         errorMessage =
           clerkError.longMessage || clerkError.message || errorMessage;
       } else {
-        errorMessage = err.message || errorMessage;
+        errorMessage = err instanceof Error ? err.message : errorMessage;
       }
 
       setError(errorMessage);

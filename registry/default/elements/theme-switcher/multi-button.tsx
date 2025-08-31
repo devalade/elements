@@ -1,8 +1,9 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { MoonIcon, SunIcon, MonitorIcon } from "lucide-react";
+
+import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export function ThemeSwitcherMultiButton() {
   const { theme, setTheme } = useTheme();
@@ -25,9 +26,9 @@ export function ThemeSwitcherMultiButton() {
   }
 
   const themes = [
-    { value: 'system', icon: MonitorIcon, label: 'Switch to system theme' },
-    { value: 'light', icon: SunIcon, label: 'Switch to light theme' },
-    { value: 'dark', icon: MoonIcon, label: 'Switch to dark theme' }
+    { value: "system", icon: MonitorIcon, label: "Switch to system theme" },
+    { value: "light", icon: SunIcon, label: "Switch to light theme" },
+    { value: "dark", icon: MoonIcon, label: "Switch to dark theme" },
   ];
 
   return (
@@ -44,11 +45,11 @@ export function ThemeSwitcherMultiButton() {
           {theme === value && (
             <div className="-z-1 absolute inset-0 rounded-full bg-muted" />
           )}
-          <Icon 
+          <Icon
             className={`relative m-auto size-3.5 transition duration-200 ease-out ${
-              theme === value 
-                ? 'text-foreground' 
-                : 'text-secondary-foreground group-hover:text-foreground group-focus-visible:text-foreground'
+              theme === value
+                ? "text-foreground"
+                : "text-secondary-foreground group-hover:text-foreground group-focus-visible:text-foreground"
             }`}
             aria-hidden="true"
           />

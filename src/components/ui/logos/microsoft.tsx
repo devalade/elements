@@ -8,6 +8,7 @@ export function MicrosoftLogo({ className }: { className?: string }) {
       preserveAspectRatio="xMidYMid"
       className={className || "w-8 h-8"}
     >
+      <title>Microsoft Logo</title>
       <path fill="#F1511B" d="M121.666 121.666H0V0h121.666z" />
       <path fill="#80CC28" d="M256 121.666H134.335V0H256z" />
       <path fill="#00ADEF" d="M121.663 256.002H0V134.336h121.663z" />

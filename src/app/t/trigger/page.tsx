@@ -1,8 +1,8 @@
 import { ComponentPageTemplate } from "@/components/component-page-template";
+import { BranchIcon } from "@/components/icons/branch";
+import { ServerIcon } from "@/components/icons/server";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { ZapIcon } from "@/components/icons/zap";
-import { ServerIcon } from "@/components/icons/server";
-import { BranchIcon } from "@/components/icons/branch";
 
 export default function TriggerPage() {
   const features = [

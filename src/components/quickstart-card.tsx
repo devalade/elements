@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { CopyIcon } from "@/components/icons/copy";
-import { CodeBlock } from "@/components/ui/code-block";
-import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
+import { useEffect, useState } from "react";
+
 import { ElementWrapper } from "@/components/element-wrapper";
+import { CopyIcon } from "@/components/icons/copy";
 import { MoonIcon } from "@/components/icons/moon";
+import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
-  type CarouselApi,
 } from "@/components/ui/carousel";
+import { CodeBlock } from "@/components/ui/code-block";
 
 interface QuickstartCardProps {
   className?: string;
@@ -73,11 +74,11 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
   }, [api]);
 
   const scrollToGallery = () => {
-    const gallerySection = document.getElementById('gallery');
+    const gallerySection = document.getElementById("gallery");
     if (gallerySection) {
-      gallerySection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start' 
+      gallerySection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -119,6 +120,7 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
               {/* Tabs */}
               <div className="flex gap-8 mb-4">
                 <button
+                  type="button"
                   onClick={() => handleTabClick("registry")}
                   className={`text-sm uppercase tracking-wider font-medium transition-all duration-300 ${
                     activeTab === "registry"
@@ -129,6 +131,7 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
                   Registry
                 </button>
                 <button
+                  type="button"
                   onClick={() => handleTabClick("install")}
                   className={`text-sm uppercase tracking-wider font-medium transition-all duration-300 ${
                     activeTab === "install"
@@ -178,6 +181,7 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
                             viewBox="0 0 24 24"
                             className="w-4 h-4 text-primary"
                           >
+                            <title>Copy Icon</title>
                             <path
                               d="M18 6h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm-2 2h2v-2h-2v2zm-2 2h2v-2h-2v2zm-2 0v2h2v-2H8zm-2-2h2v2H6v-2zm0 0H4v-2h2v2z"
                               fill="currentColor"
@@ -218,6 +222,7 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
                             viewBox="0 0 24 24"
                             className="w-4 h-4 text-primary"
                           >
+                            <title>Copy Icon</title>
                             <path
                               d="M18 6h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm-2 2h2v-2h-2v2zm-2 2h2v-2h-2v2zm-2 0v2h2v-2H8zm-2-2h2v2H6v-2zm0 0H4v-2h2v2z"
                               fill="currentColor"
@@ -254,10 +259,12 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
               <Button
                 size="sm"
                 className="text-xs font-medium"
-                onClick={() => copyToClipboard(
-                  activeTab === "registry" ? registryCode : installCode, 
-                  activeTab
-                )}
+                onClick={() =>
+                  copyToClipboard(
+                    activeTab === "registry" ? registryCode : installCode,
+                    activeTab,
+                  )
+                }
               >
                 {copied === activeTab ? "Copied!" : "Copy Code"}
               </Button>

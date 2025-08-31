@@ -1,28 +1,28 @@
 "use client";
 
-import { ScrambleText } from "@/components/scramble-text";
-import { ShadcnIcon } from "@/components/shadcn-icon";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { ComponentCard } from "@/components/component-card";
 import { ClerkLogo } from "@/components/clerk-logo";
+import { ComponentCard } from "@/components/component-card";
+import { ElementSuggestionForm } from "@/components/element-suggestion-form";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { GroupIcon } from "@/components/icons/group";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
-import { SupabaseIcon } from "@/components/ui/logos/supabase";
-import { StripeIcon } from "@/components/ui/logos/stripe";
-import { ResendIcon } from "@/components/ui/logos/resend";
+import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
+import { QuickstartCard } from "@/components/quickstart-card";
+import { ScrambleText } from "@/components/scramble-text";
+import { ShadcnIcon } from "@/components/shadcn-icon";
+import { Button } from "@/components/ui/button";
 import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
-import { UpstashIcon } from "@/components/ui/logos/upstash";
-import { VercelIcon } from "@/components/ui/logos/vercel";
-import { PolarIcon } from "@/components/ui/logos/polar";
-import { GroupIcon } from "@/components/icons/group";
 import { CrafterStationLogo } from "@/components/ui/logos/crafter-station";
 import { KeboLogo } from "@/components/ui/logos/kebo";
-import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
-import { ElementSuggestionForm } from "@/components/element-suggestion-form";
-import { QuickstartCard } from "@/components/quickstart-card";
-import { Button } from "@/components/ui/button";
+import { PolarIcon } from "@/components/ui/logos/polar";
+import { ResendIcon } from "@/components/ui/logos/resend";
+import { StripeIcon } from "@/components/ui/logos/stripe";
+import { SupabaseIcon } from "@/components/ui/logos/supabase";
+import { UpstashIcon } from "@/components/ui/logos/upstash";
+import { VercelIcon } from "@/components/ui/logos/vercel";
 
 export default function Home() {
   const scrollToGallery = () => {

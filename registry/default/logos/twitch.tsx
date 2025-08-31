@@ -6,6 +6,7 @@ export function TwitchLogo({ className }: { className?: string }) {
       viewBox="0 0 2400 2800"
       className={className || "w-8 h-8"}
     >
+      <title>Twitch Logo</title>
       <path
         fill="#fff"
         d="m2200 1300-400 400h-400l-350 350v-350H600V200h1600z"

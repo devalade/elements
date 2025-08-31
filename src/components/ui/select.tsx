@@ -1,10 +1,14 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
+
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { PixelatedCheckIcon } from "../pixelated-check-icon";
-import { ChevronDownIcon } from "@/components/icons/chevron-down";
+
 import { cn } from "@/lib/utils";
+
+import { ChevronDownIcon } from "@/components/icons/chevron-down";
+
+import { PixelatedCheckIcon } from "../pixelated-check-icon";
 
 function Select({
   ...props

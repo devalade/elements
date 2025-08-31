@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Figtree, JetBrains_Mono, Doto } from "next/font/google";
+import { Doto, Figtree, JetBrains_Mono } from "next/font/google";
+
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
-import { shadcn } from "@clerk/themes";
+
 import { ClerkProvider } from "@clerk/nextjs";
+import { shadcn } from "@clerk/themes";
 import { Analytics } from "@vercel/analytics/next";
 
 const figtree = Figtree({
