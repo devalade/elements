@@ -1030,6 +1030,40 @@
       "docs": "Polar logo component with official brand blue color."
     },
     {
+      "name": "crafter-station-logo",
+      "type": "registry:ui",
+      "title": "Crafter Station Logo",
+      "description": "Crafter Station logo component with brand yellow",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/logos/crafter-station.tsx",
+          "type": "registry:component",
+          "target": "components/ui/logos/crafter-station.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Crafter Station logo component with official brand yellow color."
+    },
+    {
+      "name": "kebo-logo",
+      "type": "registry:ui",
+      "title": "Kebo Logo",
+      "description": "Kebo logo component with brand purple",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/default/logos/kebo.tsx",
+          "type": "registry:component",
+          "target": "components/ui/logos/kebo.tsx"
+        }
+      ],
+      "categories": ["logo", "brand"],
+      "docs": "Kebo logo component with official brand purple color."
+    },
+    {
       "name": "clerk-middleware",
       "type": "registry:ui",
       "title": "Clerk Middleware",
@@ -1092,7 +1126,9 @@
         "@elements/better-auth-logo",
         "@elements/upstash-logo",
         "@elements/vercel-logo",
-        "@elements/polar-logo"
+        "@elements/polar-logo",
+        "@elements/crafter-station-logo",
+        "@elements/kebo-logo"
       ],
       "dependencies": [],
       "files": [],

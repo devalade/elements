@@ -24,6 +24,12 @@ import { VercelIcon } from "@/components/ui/logos/vercel";
 import { PolarIcon } from "@/components/ui/logos/polar";
 import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 import { GroupIcon } from "@/components/icons/group";
+import { CrafterStationLogo } from "@/components/ui/logos/crafter-station";
+import { KeboLogo } from "@/components/ui/logos/kebo";
+import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
+import { PixelatedSharpCornerIcon } from "@/components/pixelated-sharp-corner-icon";
+import { PixelatedCheckIcon } from "@/components/pixelated-check-icon";
+import { ElementSuggestionForm } from "@/components/element-suggestion-form";
 
 export default function Home() {
   return (
@@ -137,8 +143,11 @@ export default function Home() {
         {/* Beta Component Gallery - Full Width */}
         <div className="w-full py-16 border-t border-border border-dotted px-8">
           <div className="space-y-8">
-            <h2 className="text-center text-2xl font-bold">
-              Beta Elements Gallery
+            <h2 className="w-full flex justify-center mb-16">
+              <ScrambleText
+                text="Beta Elements Gallery"
+                className="font-dotted font-black text-4xl lg:text-6xl"
+              />
             </h2>
 
             <div className="grid gap-4 place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -239,6 +248,90 @@ export default function Home() {
                 brandColor="#635BFF"
               />
             </div>
+          </div>
+        </div>
+
+        {/* Sponsors & Contact Section */}
+        <div className="w-full border-t border-border border-dotted">
+          <div className="space-y-0">
+            <div className="px-8 py-16 text-center space-y-8">
+              <div className="space-y-2">
+                <h2>
+                  <ScrambleText
+                    text="Sponsors"
+                    className="font-dotted font-black text-4xl lg:text-6xl"
+                  />
+                </h2>
+                <p className="text-muted-foreground text-lg">
+                  Join these companies building with Elements - ready-to-use
+                  components that scale
+                </p>
+              </div>
+            </div>
+
+            {/* Three Column Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3">
+              <a
+                href="https://crafterstation.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center border-t border-r md:border-r border-border border-dotted bg-card/30 backdrop-blur-sm hover:bg-accent/20 transition-all duration-300 group"
+              >
+                <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
+                  <CrafterStationLogo className="h-12 w-12 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="text-center space-y-1">
+                    <h4 className="text-2xl uppercase font-black font-dotted text-foreground group-hover:text-primary transition-colors">
+                      Crafter Station
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      crafterstation.com
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://kebo.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center border-t border-l md:border-l-0 border-r md:border-r border-border border-dotted bg-card/30 backdrop-blur-sm hover:bg-accent/20 transition-all duration-300 group"
+              >
+                <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
+                  <KeboLogo className="h-12 w-12 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="text-center space-y-1">
+                    <h4 className="text-2xl uppercase font-black font-dotted text-foreground group-hover:text-primary transition-colors">
+                      Kebo
+                    </h4>
+                    <p className="text-xs text-muted-foreground">kebo.app</p>
+                  </div>
+                </div>
+              </a>
+              <div className="flex items-center justify-center border-t border-l md:border-l-0 border-border border-dotted bg-card/30 backdrop-blur-sm">
+                <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
+                  <PixelatedHeartIcon className="h-12 w-12 text-red-500 opacity-80" />
+                  <div className="text-center space-y-2">
+                    <h4 className="text-sm font-medium text-foreground">
+                      It Can Be You
+                    </h4>
+                    <div className="space-y-3 text-xs text-muted-foreground">
+                      <p>Need custom components for your company?</p>
+                      <a
+                        href="mailto:railly@crafterstation.com?subject=Custom Elements Inquiry"
+                        className="inline-flex items-center px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 text-xs font-medium"
+                      >
+                        Get Custom Elements
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Element Suggestion Section */}
+        <div className="w-full border-t border-border border-dotted px-8 py-16">
+          <div className="max-w-2xl mx-auto">
+            <ElementSuggestionForm />
           </div>
         </div>
       </div>

@@ -39,9 +39,10 @@ import { BetterAuthIcon } from "@registry/default/logos/better-auth";
 import { UpstashIcon } from "@registry/default/logos/upstash";
 import { VercelIcon } from "@registry/default/logos/vercel";
 import { PolarIcon } from "@registry/default/logos/polar";
+import { CrafterStationLogo } from "@registry/default/logos/crafter-station";
+import { KeboLogo } from "@registry/default/logos/kebo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrambleText } from "@/components/scramble-text";
@@ -331,6 +332,20 @@ const logos: Logo[] = [
     displayName: "Polar",
     component: PolarIcon,
     category: "Monetization",
+  },
+  {
+    id: "crafter-station",
+    name: "crafter-station-logo",
+    displayName: "Crafter Station",
+    component: CrafterStationLogo,
+    category: "Development",
+  },
+  {
+    id: "kebo",
+    name: "kebo-logo",
+    displayName: "Kebo",
+    component: KeboLogo,
+    category: "Development",
   },
 ];
 

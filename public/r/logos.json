@@ -43,7 +43,9 @@
     "@elements/better-auth-logo",
     "@elements/upstash-logo",
     "@elements/vercel-logo",
-    "@elements/polar-logo"
+    "@elements/polar-logo",
+    "@elements/crafter-station-logo",
+    "@elements/kebo-logo"
   ],
   "files": [],
   "docs": "Complete collection of brand logos including tech companies, AI services, and platforms. All logos are theme-adaptive and optimized for web use.",
