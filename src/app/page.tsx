@@ -1,3 +1,5 @@
+"use client";
+
 import { ScrambleText } from "@/components/scramble-text";
 import { InstallCommand } from "@/components/install-command";
 import { ShadcnIcon } from "@/components/shadcn-icon";
@@ -30,118 +32,83 @@ import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
 import { PixelatedSharpCornerIcon } from "@/components/pixelated-sharp-corner-icon";
 import { PixelatedCheckIcon } from "@/components/pixelated-check-icon";
 import { ElementSuggestionForm } from "@/components/element-suggestion-form";
+import { QuickstartCard } from "@/components/quickstart-card";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const scrollToGallery = () => {
+    const gallerySection = document.getElementById('gallery');
+    if (gallerySection) {
+      gallerySection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start' 
+      });
+    }
+  };
+
+  const scrollToSuggest = () => {
+    const suggestSection = document.getElementById('suggest');
+    if (suggestSection) {
+      suggestSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start' 
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex-1 w-full max-w-screen-xl border-border border-dotted border-x mx-auto">
-        {/* Main Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full min-h-[80vh] py-16 px-8 lg:px-16">
-          <div className="transition-all duration-700 space-y-6">
-            <section className="w-full">
-              <div className="text-left">
-                <div className="text-base uppercase tracking-widest font-light mb-2 text-primary/70">
-                  <span className="font-mono">[ FULL-STACK COMPONENTS ]</span>
-                </div>
-                <h1 className="font-dotted font-black text-4xl lg:text-6xl mb-4">
-                  <ScrambleText text="Elements" />
-                </h1>
-                <p className="text-muted-foreground text-lg">
-                  Ready-to-use components for modern web apps. Install flows,
-                  not pixels.
-                </p>
+        {/* Main Hero Section - Basement Style */}
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16 items-center w-full min-h-[80vh] py-16 px-8 lg:px-16">
+          <div className="lg:col-span-4 space-y-8">
+            {/* Narrative Block */}
+            <section className="space-y-6">
+              <div className="text-lg uppercase tracking-[0.2em] font-mono text-primary/70">
+                [ELEMENTS ~ FULL-STACK COMPONENTS]
               </div>
+              <h1 className="font-dotted font-black text-5xl lg:text-7xl leading-tight tracking-tight">
+                Vibecode
+                <br />
+                Full-Stack
+                <br />
+                <ScrambleText text="By Default" />
+              </h1>
+              <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
+                Elements gives you production-ready auth, payments, AI and more
+                — built for Next.js, TypeScript, and the agentic era.
+              </p>
             </section>
 
-            <div className="space-y-0 transition-all duration-700">
-              <div className="group py-6 transition-all duration-500">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 bg-primary/20">
-                    <ServerIcon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h5 className="mb-2 transition-colors duration-500 text-foreground font-medium">
-                      Full-Stack Components
-                    </h5>
-                    <p className="text-sm transition-colors duration-500 text-muted-foreground">
-                      Complete solutions ready for the agentic era. Install
-                      flows, not pixels.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-t border-dashed border-border/50"></div>
-
-              <div className="group py-6 transition-all duration-500">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 bg-primary/20">
-                    <ZapIcon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h5 className="mb-2 transition-colors duration-500 text-foreground font-medium">
-                      One-Command Install
-                    </h5>
-                    <p className="text-sm transition-colors duration-500 text-muted-foreground">
-                      Install with shadcn CLI 3.0. Ready to use immediately with
-                      minimal configuration.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-t border-dashed border-border/50"></div>
-
-              <div className="group py-6 transition-all duration-500">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 bg-primary/20">
-                    <ShieldIcon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h5 className="mb-2 transition-colors duration-500 text-foreground font-medium">
-                      Framework Ready
-                    </h5>
-                    <p className="text-sm transition-colors duration-500 text-muted-foreground">
-                      Built for Next.js with TypeScript. Integrates with Clerk,
-                      Stripe, and modern services.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {/* CTAs */}
+            <div className="flex items-center gap-4">
+              <Button 
+                size="lg" 
+                className="font-medium"
+                onClick={scrollToGallery}
+              >
+                Explore Gallery →
+              </Button>
+              <Button
+                size="lg"
+                variant="ghost"
+                className="font-medium hover:underline"
+                onClick={scrollToSuggest}
+              >
+                Suggest an Element
+              </Button>
             </div>
           </div>
 
-          <div className="w-full relative">
-            <div className="relative p-6 border border-dashed border-border/50 transition-all duration-700 bg-primary/5 rounded-lg">
-              <div className="relative rounded-lg w-full flex flex-col items-center justify-center min-h-[400px] transition-all duration-700 space-y-4">
-                <div className="text-center space-y-2 mb-6">
-                  <p className="text-lg font-medium text-foreground max-w-sm">
-                    Switch themes instantly
-                  </p>
-                </div>
-                <ElementWrapper icon={<MoonIcon className="w-4 h-4" />}>
-                  <ThemeSwitcherElement />
-                </ElementWrapper>
-
-                <p className="text-xs text-muted-foreground/60 text-center mb-0">
-                  Toggle between light and dark modes
-                </p>
-
-                <div className="space-y-3 w-full max-w-md mt-8">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
-                    <ShadcnIcon className="w-3 h-3" />
-                    <span>Install with shadcn CLI 3.0</span>
-                  </div>
-                  <InstallCommand url="@elements/theme-switcher" />
-                </div>
-              </div>
-            </div>
+          {/* Quickstart Card */}
+          <div className="lg:col-span-3 w-full">
+            <QuickstartCard />
           </div>
         </div>
 
         {/* Beta Component Gallery - Full Width */}
-        <div className="w-full py-16 border-t border-border border-dotted px-8">
+        <div id="gallery" className="w-full py-16 border-t border-border border-dotted px-8">
           <div className="space-y-8">
             <h2 className="w-full flex justify-center mb-16">
               <ScrambleText
@@ -329,7 +296,7 @@ export default function Home() {
         </div>
 
         {/* Element Suggestion Section */}
-        <div className="w-full border-t border-border border-dotted px-8 py-16">
+        <div id="suggest" className="w-full border-t border-border border-dotted px-8 py-16">
           <div className="max-w-2xl mx-auto">
             <ElementSuggestionForm />
           </div>
