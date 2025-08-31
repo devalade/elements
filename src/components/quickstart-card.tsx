@@ -67,7 +67,9 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
     };
 
     api.on("select", onSelect);
-    return () => api.off("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
 
   const scrollToGallery = () => {

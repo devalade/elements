@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import type { BundledLanguage, Highlighter } from "shiki/bundle/web";
+import type { BundledLanguage, Highlighter, ThemeInput } from "shiki/bundle/web";
 import { createHighlighter } from "shiki/bundle/web";
 import vesperDark from "../../../public/vesper-dark.json";
 import vesperLight from "../../../public/vesper-light.json";
@@ -28,8 +28,8 @@ export function CodeBlock({ code, lang, className = "" }: CodeBlockProps) {
         if (!highlighter) {
           highlighter = await createHighlighter({
             themes: [
-              { ...vesperLight, name: 'vesper-light' },
-              { ...vesperDark, name: 'vesper-dark' }
+              { ...vesperLight, name: 'vesper-light' } as ThemeInput,
+              { ...vesperDark, name: 'vesper-dark' } as ThemeInput
             ],
             langs: ['javascript', 'typescript', 'json', 'bash', 'shell'],
           });
