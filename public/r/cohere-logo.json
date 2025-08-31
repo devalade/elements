@@ -15,8 +15,5 @@
     }
   ],
   "docs": "Cohere logo component with official brand colors.",
-  "categories": [
-    "logo",
-    "brand"
-  ]
+  "categories": ["logo", "brand"]
 }

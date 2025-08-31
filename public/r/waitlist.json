@@ -4,16 +4,8 @@
   "type": "registry:block",
   "title": "Waitlist Element",
   "description": "An animated waitlist signup form with Clerk integration",
-  "dependencies": [
-    "motion",
-    "@clerk/backend",
-    "@clerk/nextjs"
-  ],
-  "registryDependencies": [
-    "button",
-    "input",
-    "label"
-  ],
+  "dependencies": ["motion", "@clerk/backend", "@clerk/nextjs"],
+  "registryDependencies": ["button", "input", "label"],
   "files": [
     {
       "path": "registry/default/elements/clerk/waitlist/waitlist.tsx",

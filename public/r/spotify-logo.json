@@ -15,8 +15,5 @@
     }
   ],
   "docs": "Spotify logo component with official brand green color.",
-  "categories": [
-    "logo",
-    "brand"
-  ]
+  "categories": ["logo", "brand"]
 }

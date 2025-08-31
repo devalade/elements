@@ -1,10 +1,16 @@
 "use client";
 
-import { useState, useId } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useId, useState } from "react";
+
+import { AnimatePresence, motion } from "motion/react";
+
+import { ChevronDownIcon } from "@/components/icons/chevron-down";
+import { GroupIcon } from "@/components/icons/group";
+import { TriggerIcon } from "@/components/icons/trigger";
+import { UploadThingIcon } from "@/components/icons/upload-thing";
+import { PixelatedCheckIcon } from "@/components/pixelated-check-icon";
+import { PixelatedSharpCornerIcon } from "@/components/pixelated-sharp-corner-icon";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Command,
   CommandEmpty,
@@ -13,34 +19,28 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
+import { PolarIcon } from "@/components/ui/logos/polar";
+import { ResendIcon } from "@/components/ui/logos/resend";
+import { StripeIcon } from "@/components/ui/logos/stripe";
+import { SupabaseIcon } from "@/components/ui/logos/supabase";
+import { UpstashIcon } from "@/components/ui/logos/upstash";
+import { VercelIcon } from "@/components/ui/logos/vercel";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
-import { PixelatedSharpCornerIcon } from "@/components/pixelated-sharp-corner-icon";
-import { PixelatedCheckIcon } from "@/components/pixelated-check-icon";
-import { VercelIcon } from "@/components/ui/logos/vercel";
-import { SupabaseIcon } from "@/components/ui/logos/supabase";
-import { StripeIcon } from "@/components/ui/logos/stripe";
-import { ResendIcon } from "@/components/ui/logos/resend";
-import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
-import { UpstashIcon } from "@/components/ui/logos/upstash";
-import { PolarIcon } from "@/components/ui/logos/polar";
-import { GroupIcon } from "@/components/icons/group";
-import { TriggerIcon } from "@/components/icons/trigger";
-import { UploadThingIcon } from "@/components/icons/upload-thing";
-import { ChevronDownIcon } from "@/components/icons/chevron-down";
+import { Textarea } from "@/components/ui/textarea";
 
-interface ElementSuggestionFormProps {}
-
-export function ElementSuggestionForm({}: ElementSuggestionFormProps) {
+export function ElementSuggestionForm() {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
   const [selectedProvider, setSelectedProvider] = useState<string>("");
   const [customProvider, setCustomProvider] = useState<string>("");
-  const [elementName, setElementName] = useState<string>("");
+  const [_elementName, setElementName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 

@@ -1,51 +1,57 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
+
+import { AnthropicLogo } from "@registry/default/logos/anthropic";
 import { AppleLogo } from "@registry/default/logos/apple";
-import { GoogleLogo } from "@registry/default/logos/google";
-import { GitHubLogo } from "@registry/default/logos/github";
-import { LinearLogo } from "@registry/default/logos/linear";
-import { MicrosoftLogo } from "@registry/default/logos/microsoft";
-import { SlackLogo } from "@registry/default/logos/slack";
-import { NotionLogo } from "@registry/default/logos/notion";
+import { AWSLogo } from "@registry/default/logos/aws";
+import { BetterAuthIcon } from "@registry/default/logos/better-auth";
+import { ClaudeLogo } from "@registry/default/logos/claude";
+import { CohereLogo } from "@registry/default/logos/cohere";
+import { CrafterStationLogo } from "@registry/default/logos/crafter-station";
+import { DeepSeekLogo } from "@registry/default/logos/deepseek";
 import { DiscordLogo } from "@registry/default/logos/discord";
+import { GeminiLogo } from "@registry/default/logos/gemini";
+import { GitHubLogo } from "@registry/default/logos/github";
+import { GitLabLogo } from "@registry/default/logos/gitlab";
+import { GoogleLogo } from "@registry/default/logos/google";
+import { GrokLogo } from "@registry/default/logos/grok";
+import { GroqLogo } from "@registry/default/logos/groq";
+import { HuggingFaceLogo } from "@registry/default/logos/hugging-face";
+import { KeboLogo } from "@registry/default/logos/kebo";
+import { KimiLogo } from "@registry/default/logos/kimi";
+import { LinearLogo } from "@registry/default/logos/linear";
+import { LovableLogo } from "@registry/default/logos/lovable";
+import { MetaLogo } from "@registry/default/logos/meta";
+import { MicrosoftLogo } from "@registry/default/logos/microsoft";
+import { MistralLogo } from "@registry/default/logos/mistral";
+import { MoonshotAILogo } from "@registry/default/logos/moonshot-ai";
+import { NotionLogo } from "@registry/default/logos/notion";
+import { OpenAILogo } from "@registry/default/logos/openai";
+import { PerplexityLogo } from "@registry/default/logos/perplexity";
+import { PolarIcon } from "@registry/default/logos/polar";
+import { QwenLogo } from "@registry/default/logos/qwen";
+import { ResendIcon } from "@registry/default/logos/resend";
+import { SlackLogo } from "@registry/default/logos/slack";
 import { SpotifyLogo } from "@registry/default/logos/spotify";
+import { StripeIcon } from "@registry/default/logos/stripe";
+import { SupabaseIcon } from "@registry/default/logos/supabase";
 import { TwitchLogo } from "@registry/default/logos/twitch";
 import { TwitterLogo } from "@registry/default/logos/twitter";
-import { GitLabLogo } from "@registry/default/logos/gitlab";
-import { QwenLogo } from "@registry/default/logos/qwen";
-import { MoonshotAILogo } from "@registry/default/logos/moonshot-ai";
-import { CohereLogo } from "@registry/default/logos/cohere";
-import { OpenAILogo } from "@registry/default/logos/openai";
-import { AnthropicLogo } from "@registry/default/logos/anthropic";
-import { DeepSeekLogo } from "@registry/default/logos/deepseek";
-import { HuggingFaceLogo } from "@registry/default/logos/hugging-face";
-import { GroqLogo } from "@registry/default/logos/groq";
-import { GrokLogo } from "@registry/default/logos/grok";
-import { GeminiLogo } from "@registry/default/logos/gemini";
-import { LovableLogo } from "@registry/default/logos/lovable";
-import { PerplexityLogo } from "@registry/default/logos/perplexity";
-import { XAILogo } from "@registry/default/logos/xai";
-import { V0Logo } from "@registry/default/logos/v0";
-import { ClaudeLogo } from "@registry/default/logos/claude";
-import { MistralLogo } from "@registry/default/logos/mistral";
-import { MetaLogo } from "@registry/default/logos/meta";
-import { AWSLogo } from "@registry/default/logos/aws";
-import { KimiLogo } from "@registry/default/logos/kimi";
-import { SupabaseIcon } from "@registry/default/logos/supabase";
-import { StripeIcon } from "@registry/default/logos/stripe";
-import { ResendIcon } from "@registry/default/logos/resend";
-import { BetterAuthIcon } from "@registry/default/logos/better-auth";
 import { UpstashIcon } from "@registry/default/logos/upstash";
+import { V0Logo } from "@registry/default/logos/v0";
 import { VercelIcon } from "@registry/default/logos/vercel";
-import { PolarIcon } from "@registry/default/logos/polar";
-import { CrafterStationLogo } from "@registry/default/logos/crafter-station";
-import { KeboLogo } from "@registry/default/logos/kebo";
+import { XAILogo } from "@registry/default/logos/xai";
+
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { CopyIcon } from "@/components/icons/copy";
+import { GroupIcon } from "@/components/icons/group";
+import { SearchIcon } from "@/components/icons/search";
+import { InstallCommand } from "@/components/install-command";
+import { ScrambleText } from "@/components/scramble-text";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { ScrambleText } from "@/components/scramble-text";
 import {
   Select,
   SelectContent,
@@ -53,10 +59,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { GroupIcon } from "@/components/icons/group";
-import { CopyIcon } from "@/components/icons/copy";
-import { InstallCommand } from "@/components/install-command";
-import { SearchIcon } from "@/components/icons/search";
 
 interface Logo {
   id: string;
@@ -494,7 +496,8 @@ export default function TechLogosPage() {
                 const isSelected = selectedLogos.has(logo.id);
 
                 return (
-                  <div
+                  <button
+                    type="button"
                     key={logo.id}
                     onClick={() => handleLogoToggle(logo.id)}
                     className={`
@@ -521,6 +524,7 @@ export default function TechLogosPage() {
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
+                          <title>Check Icon</title>
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                         </svg>
                       )}
@@ -540,7 +544,7 @@ export default function TechLogosPage() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -555,6 +559,7 @@ export default function TechLogosPage() {
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
+                    <title>No logos found</title>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -610,6 +615,7 @@ export default function TechLogosPage() {
                     viewBox="0 0 24 24"
                     className="w-4 h-4"
                   >
+                    <title>Copy Icon</title>
                     <path
                       d="M18 6h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm-2 2h2v-2h-2v2zm-2 2h2v-2h-2v2zm-2 0v2h2v-2H8zm-2-2h2v2H6v-2zm0 0H4v-2h2v2z"
                       fill="currentColor"

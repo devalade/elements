@@ -15,8 +15,5 @@
     }
   ],
   "docs": "v0 logo component that adapts to your theme. Uses white colors.",
-  "categories": [
-    "logo",
-    "brand"
-  ]
+  "categories": ["logo", "brand"]
 }

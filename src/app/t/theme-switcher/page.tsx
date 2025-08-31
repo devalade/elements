@@ -1,12 +1,13 @@
-import { ComponentPageTemplate } from "@/components/component-page-template";
-import { MoonIcon } from "@/components/icons/moon";
-import { ThemeSwitcherSwitch } from "@registry/default/elements/theme-switcher/switch";
 import { ThemeSwitcherButton } from "@registry/default/elements/theme-switcher/button";
 import { ThemeSwitcherDropdown } from "@registry/default/elements/theme-switcher/dropdown";
-import { ThemeSwitcherToggle } from "@registry/default/elements/theme-switcher/toggle";
 import { ThemeSwitcherMultiButton } from "@registry/default/elements/theme-switcher/multi-button";
-import { ShieldIcon } from "@/components/icons/shield";
+import { ThemeSwitcherSwitch } from "@registry/default/elements/theme-switcher/switch";
+import { ThemeSwitcherToggle } from "@registry/default/elements/theme-switcher/toggle";
+
+import { ComponentPageTemplate } from "@/components/component-page-template";
+import { MoonIcon } from "@/components/icons/moon";
 import { ServerIcon } from "@/components/icons/server";
+import { ShieldIcon } from "@/components/icons/shield";
 import { ZapIcon } from "@/components/icons/zap";
 
 export default function ThemeSwitcherPage() {
@@ -38,8 +39,7 @@ export default function ThemeSwitcherPage() {
     {
       icon: <ServerIcon className="w-6 h-6" />,
       title: "TypeScript",
-      description:
-        "Fully typed components with proper theme state management",
+      description: "Fully typed components with proper theme state management",
     },
     {
       icon: <ZapIcon className="w-6 h-6" />,
@@ -57,18 +57,18 @@ export default function ThemeSwitcherPage() {
 <span class="text-gray-500">&lt;ThemeSwitcherButton /&gt;</span>`;
 
   const themeSwitcherComponents = {
-    "switch": <ThemeSwitcherSwitch />,
-    "button": <ThemeSwitcherButton />,
-    "dropdown": <ThemeSwitcherDropdown />,
-    "toggle": <ThemeSwitcherToggle />,
+    switch: <ThemeSwitcherSwitch />,
+    button: <ThemeSwitcherButton />,
+    dropdown: <ThemeSwitcherDropdown />,
+    toggle: <ThemeSwitcherToggle />,
     "multi-button": <ThemeSwitcherMultiButton />,
   };
 
   const componentInstallUrls = {
-    "switch": "@elements/theme-switcher-switch",
-    "button": "@elements/theme-switcher-button", 
-    "dropdown": "@elements/theme-switcher-dropdown",
-    "toggle": "@elements/theme-switcher-toggle",
+    switch: "@elements/theme-switcher-switch",
+    button: "@elements/theme-switcher-button",
+    dropdown: "@elements/theme-switcher-dropdown",
+    toggle: "@elements/theme-switcher-toggle",
     "multi-button": "@elements/theme-switcher-multi-button",
   };
 

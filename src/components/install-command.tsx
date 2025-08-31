@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+
+import { Copy } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Copy } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -88,6 +90,7 @@ export function InstallCommand({
               viewBox="0 0 24 24"
               className="w-4 h-4"
             >
+              <title>Copy Icon</title>
               <path
                 d="M18 6h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm-2 2h2v-2h-2v2zm-2 2h2v-2h-2v2zm-2 0v2h2v-2H8zm-2-2h2v2H6v-2zm0 0H4v-2h2v2z"
                 fill="currentColor"

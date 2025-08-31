@@ -6,6 +6,7 @@ export function BetterAuthIcon({ className }: { className?: string }) {
       viewBox="0 0 500 500"
       className={className}
     >
+      <title>BetterAuth Logo</title>
       <path fill="var(--color-foreground)" d="M0 0h500v500H0z" />
       <path
         fill="var(--color-background)"

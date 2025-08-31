@@ -1,8 +1,9 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+
 import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export function ThemeSwitcherToggle() {
   const { theme, setTheme } = useTheme();
@@ -29,6 +30,7 @@ export function ThemeSwitcherToggle() {
   return (
     <div className="flex items-center space-x-2">
       <button
+        type="button"
         onClick={toggleTheme}
         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
           isDark ? "bg-primary" : "bg-muted"

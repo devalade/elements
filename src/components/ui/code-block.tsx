@@ -1,9 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { useTheme } from "next-themes";
-import type { BundledLanguage, Highlighter, ThemeInput } from "shiki/bundle/web";
+import type {
+  BundledLanguage,
+  Highlighter,
+  ThemeInput,
+} from "shiki/bundle/web";
 import { createHighlighter } from "shiki/bundle/web";
+
 import vesperDark from "../../../public/vesper-dark.json";
 import vesperLight from "../../../public/vesper-light.json";
 
@@ -28,16 +34,17 @@ export function CodeBlock({ code, lang, className = "" }: CodeBlockProps) {
         if (!highlighter) {
           highlighter = await createHighlighter({
             themes: [
-              { ...vesperLight, name: 'vesper-light' } as ThemeInput,
-              { ...vesperDark, name: 'vesper-dark' } as ThemeInput
+              { ...vesperLight, name: "vesper-light" } as ThemeInput,
+              { ...vesperDark, name: "vesper-dark" } as ThemeInput,
             ],
-            langs: ['javascript', 'typescript', 'json', 'bash', 'shell'],
+            langs: ["javascript", "typescript", "json", "bash", "shell"],
           });
         }
 
         // Determine current theme
-        const currentTheme = theme === 'system' ? systemTheme : theme;
-        const themeToUse = currentTheme === 'dark' ? 'vesper-dark' : 'vesper-light';
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        const themeToUse =
+          currentTheme === "dark" ? "vesper-dark" : "vesper-light";
 
         // Highlight with current theme
         const highlightedCode = highlighter.codeToHtml(code, {
@@ -55,7 +62,7 @@ export function CodeBlock({ code, lang, className = "" }: CodeBlockProps) {
             },
           ],
         });
-        
+
         setHtml(highlightedCode);
       } catch (error) {
         console.error("Failed to highlight code:", error);
@@ -83,6 +90,7 @@ export function CodeBlock({ code, lang, className = "" }: CodeBlockProps) {
   return (
     <div
       className={`[&_pre]:bg-muted/50 [&_pre]:rounded [&_pre]:border [&_pre]:border-border/50 [&_pre]:p-4 [&_pre]:font-mono [&_pre]:text-sm [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-hidden ${className}`}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: html is safe
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

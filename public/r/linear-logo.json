@@ -15,8 +15,5 @@
     }
   ],
   "docs": "Linear logo component with official brand colors and gradient.",
-  "categories": [
-    "logo",
-    "brand"
-  ]
+  "categories": ["logo", "brand"]
 }

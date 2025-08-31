@@ -8,6 +8,7 @@ export function GitHubLogo({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       className={className || "w-8 h-8"}
     >
+      <title>GitHub Logo</title>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

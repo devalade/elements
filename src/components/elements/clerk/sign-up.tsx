@@ -1,28 +1,30 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useSignUp, useSignIn, useUser, useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import type { OAuthStrategy } from "@clerk/types";
+import { useEffect, useMemo, useState } from "react";
+
+import { useClerk, useSignIn, useSignUp, useUser } from "@clerk/nextjs";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
+import type { OAuthStrategy } from "@clerk/types";
+import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+
+import { ClerkLogo } from "@/components/clerk-logo";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ClerkLogo } from "@/components/clerk-logo";
-import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
-import { GitHubLogo } from "@/components/ui/logos/github";
-import { GoogleLogo } from "@/components/ui/logos/google";
 import { AppleLogo } from "@/components/ui/logos/apple";
+import { DiscordLogo } from "@/components/ui/logos/discord";
+import { GitHubLogo } from "@/components/ui/logos/github";
+import { GitLabLogo } from "@/components/ui/logos/gitlab";
+import { GoogleLogo } from "@/components/ui/logos/google";
 import { LinearLogo } from "@/components/ui/logos/linear";
 import { MicrosoftLogo } from "@/components/ui/logos/microsoft";
-import { SpotifyLogo } from "@/components/ui/logos/spotify";
+import { NotionLogo } from "@/components/ui/logos/notion";
 import { SlackLogo } from "@/components/ui/logos/slack";
+import { SpotifyLogo } from "@/components/ui/logos/spotify";
 import { TwitchLogo } from "@/components/ui/logos/twitch";
 import { TwitterLogo } from "@/components/ui/logos/twitter";
-import { GitLabLogo } from "@/components/ui/logos/gitlab";
-import { DiscordLogo } from "@/components/ui/logos/discord";
-import { NotionLogo } from "@/components/ui/logos/notion";
 
 interface SignUpState {
   isLoading?: boolean;
@@ -143,7 +145,13 @@ export function ClerkSignUpElement() {
     setState((prev) => ({ ...prev, isLoading: true, error: undefined }));
 
     try {
-      const createParams: any = {};
+      const createParams: {
+        firstName?: string;
+        lastName?: string;
+        emailAddress?: string;
+        username?: string;
+        password?: string;
+      } = {};
 
       if (isFieldRequired("firstName") || requiredFields.length === 0) {
         createParams.firstName = formData.firstName;
@@ -189,7 +197,7 @@ export function ClerkSignUpElement() {
         // No verification needed, user should be ready
         setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
       }
-    } catch (err: any) {
+    } catch (err) {
       let displayError = "Failed to create account";
 
       if (isClerkAPIResponseError(err)) {
@@ -197,12 +205,14 @@ export function ClerkSignUpElement() {
 
         // Handle specific error codes
         switch (clerkError.code) {
-          case "user_locked":
+          case "user_locked": {
             const lockoutSeconds =
-              (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
+              (clerkError.meta as Record<string, number>)
+                .lockout_expires_in_seconds || 1800;
             const unlockTime = new Date(Date.now() + lockoutSeconds * 1000);
             displayError = `Account locked. Try again at ${unlockTime.toLocaleTimeString()}`;
             break;
+          }
           case "too_many_requests":
             displayError =
               "Too many attempts. Please wait a moment and try again.";
@@ -214,7 +224,8 @@ export function ClerkSignUpElement() {
               "Failed to create account";
         }
       } else {
-        displayError = err.message || "Failed to create account";
+        displayError =
+          err instanceof Error ? err.message : "Failed to create account";
       }
 
       setState((prev) => ({
@@ -250,7 +261,7 @@ export function ClerkSignUpElement() {
           error: "Verification incomplete",
         }));
       }
-    } catch (err: any) {
+    } catch (err) {
       let errorMessage = "Invalid verification code";
 
       if (isClerkAPIResponseError(err)) {
@@ -260,7 +271,8 @@ export function ClerkSignUpElement() {
           clerkError.message ||
           "Invalid verification code";
       } else {
-        errorMessage = err.message || "Invalid verification code";
+        errorMessage =
+          err instanceof Error ? err.message : "Invalid verification code";
       }
 
       setState((prev) => ({
@@ -286,7 +298,7 @@ export function ClerkSignUpElement() {
         redirectUrl: "_sso-callback",
         redirectUrlComplete: "0-dashboard",
       });
-    } catch (err: any) {
+    } catch (err) {
       let errorMessage = `Failed to sign up with ${provider.replace("oauth_", "")}`;
 
       if (isClerkAPIResponseError(err)) {
@@ -294,7 +306,7 @@ export function ClerkSignUpElement() {
         errorMessage =
           clerkError.longMessage || clerkError.message || errorMessage;
       } else {
-        errorMessage = err.message || errorMessage;
+        errorMessage = err instanceof Error ? err.message : "Failed to sign up";
       }
 
       setState((prev) => ({
