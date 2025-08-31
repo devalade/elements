@@ -44,7 +44,6 @@ export function ClerkSignInElement() {
   const [mfaCode, setMfaCode] = useState("");
   const router = useRouter();
 
-  // Clear errors after some time
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => setError(""), 5000);
@@ -52,7 +51,6 @@ export function ClerkSignInElement() {
     }
   }, [error]);
 
-  // Initialize signIn to populate supportedFirstFactors (only once)
   useEffect(() => {
     if (isLoaded && signIn && !signIn.id && !hasInitialized && !isSignedIn) {
       setHasInitialized(true);
@@ -78,45 +76,48 @@ export function ClerkSignInElement() {
   }, [signIn?.supportedIdentifiers]);
 
   const getIdentifierType = () => {
-    if (supportedIdentifiers.includes('email_address') && supportedIdentifiers.includes('username')) {
-      return 'email_or_username';
+    if (
+      supportedIdentifiers.includes("email_address") &&
+      supportedIdentifiers.includes("username")
+    ) {
+      return "email_or_username";
     }
-    if (supportedIdentifiers.includes('email_address')) {
-      return 'email';
+    if (supportedIdentifiers.includes("email_address")) {
+      return "email";
     }
-    if (supportedIdentifiers.includes('username')) {
-      return 'username';
+    if (supportedIdentifiers.includes("username")) {
+      return "username";
     }
-    return 'email';
+    return "email";
   };
 
   const getIdentifierLabel = () => {
     const type = getIdentifierType();
     switch (type) {
-      case 'email_or_username':
-        return 'Email or username';
-      case 'username':
-        return 'Username';
+      case "email_or_username":
+        return "Email or username";
+      case "username":
+        return "Username";
       default:
-        return 'Email';
+        return "Email";
     }
   };
 
   const getIdentifierPlaceholder = () => {
     const type = getIdentifierType();
     switch (type) {
-      case 'email_or_username':
-        return 'you@company.com or username';
-      case 'username':
-        return 'username';
+      case "email_or_username":
+        return "you@company.com or username";
+      case "username":
+        return "username";
       default:
-        return 'you@company.com';
+        return "you@company.com";
     }
   };
 
   const getIdentifierInputType = () => {
     const type = getIdentifierType();
-    return type === 'email' ? 'email' : 'text';
+    return type === "email" ? "email" : "text";
   };
 
   const handleMfaSubmit = async (e: React.FormEvent) => {
@@ -127,6 +128,7 @@ export function ClerkSignInElement() {
     setError("");
 
     try {
+      // Use the first available MFA factor (could be TOTP, SMS, etc.)
       const mfaFactor = state.mfaFactors?.[0];
       if (!mfaFactor) {
         setError("No MFA factors available");
@@ -148,7 +150,8 @@ export function ClerkSignInElement() {
       let displayError = "Invalid MFA code";
       if (isClerkAPIResponseError(err)) {
         const clerkError = err.errors[0];
-        displayError = clerkError.longMessage || clerkError.message || "Invalid MFA code";
+        displayError =
+          clerkError.longMessage || clerkError.message || "Invalid MFA code";
       }
       setError(displayError);
     } finally {
@@ -172,15 +175,17 @@ export function ClerkSignInElement() {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        
+
         // Note: Session tasks should be checked after setActive completes
-        
+        // For now, we redirect to dashboard and let the app handle session tasks
+        // You could also check window.Clerk?.session?.currentTask after setActive
+
         router.push("/elements/clerk/dashboard");
       } else if (result.status === "needs_second_factor") {
         // Handle multi-factor authentication - show MFA UI
-        setState({ 
-          step: "mfa", 
-          mfaFactors: result.supportedSecondFactors || [] 
+        setState({
+          step: "mfa",
+          mfaFactors: result.supportedSecondFactors || [],
         });
         setIsLoading(false);
         return;
@@ -193,18 +198,23 @@ export function ClerkSignInElement() {
 
       if (isClerkAPIResponseError(err)) {
         const clerkError = err.errors[0];
-        
+
         switch (clerkError.code) {
-          case 'user_locked':
-            const lockoutSeconds = (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
-            const unlockTime = new Date(Date.now() + (lockoutSeconds * 1000));
+          case "user_locked":
+            const lockoutSeconds =
+              (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
+            const unlockTime = new Date(Date.now() + lockoutSeconds * 1000);
             displayError = `Account locked. Try again at ${unlockTime.toLocaleTimeString()}`;
             break;
-          case 'too_many_requests':
-            displayError = "Too many attempts. Please wait a moment and try again.";
+          case "too_many_requests":
+            displayError =
+              "Too many attempts. Please wait a moment and try again.";
             break;
           default:
-            displayError = clerkError.longMessage || clerkError.message || "Failed to sign in";
+            displayError =
+              clerkError.longMessage ||
+              clerkError.message ||
+              "Failed to sign in";
         }
       } else {
         displayError = err.message || "Failed to sign in";
@@ -229,10 +239,17 @@ export function ClerkSignInElement() {
         redirectUrlComplete: "/elements/clerk/dashboard",
       });
     } catch (err: any) {
-      setError(
-        err.errors?.[0]?.message ||
-          `Failed to sign in with ${provider.replace("oauth_", "")}`,
-      );
+      let errorMessage = `Failed to sign in with ${provider.replace("oauth_", "")}`;
+
+      if (isClerkAPIResponseError(err)) {
+        const clerkError = err.errors[0];
+        errorMessage =
+          clerkError.longMessage || clerkError.message || errorMessage;
+      } else {
+        errorMessage = err.message || errorMessage;
+      }
+
+      setError(errorMessage);
       setIsLoading(false);
     }
   };
@@ -285,17 +302,17 @@ export function ClerkSignInElement() {
             <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
             <h2 className="text-lg font-semibold">Already Signed In</h2>
             <p className="text-sm text-muted-foreground">
-              You're currently signed in
+              You're currently signed in as {identifier || "a user"}
             </p>
           </div>
           <div className="flex space-x-2">
-            <Button 
+            <Button
               onClick={() => router.push("/elements/clerk/dashboard")}
               className="flex-1"
             >
               Go to Dashboard
             </Button>
-            <Button 
+            <Button
               variant="outline"
               onClick={async () => {
                 await clerk.signOut();
@@ -358,7 +375,11 @@ export function ClerkSignInElement() {
               </Alert>
             )}
 
-            <Button type="submit" className="w-full" disabled={isLoading || mfaCode.length < 6}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isLoading || mfaCode.length < 6}
+            >
               {isLoading ? (
                 <>
                   <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />
@@ -390,121 +411,125 @@ export function ClerkSignInElement() {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
-      <div className="space-y-4">
-        <div className="text-center">
-          <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
-          <h2 className="text-lg font-semibold">Sign in</h2>
-          <p className="text-sm text-muted-foreground">Welcome back</p>
-        </div>
+    <div>
+      <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card">
+        <div className="space-y-4">
+          <div className="text-center">
+            <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
+            <h2 className="text-lg font-semibold">Sign in</h2>
+            <p className="text-sm text-muted-foreground">Welcome back</p>
+          </div>
 
-        {socialProviders.length > 0 && (
-          <div className="space-y-3">
-            {socialProviders.map((provider) => (
-              <Button
-                key={provider.strategy}
-                type="button"
-                variant="outline"
-                className="w-full"
-                onClick={() => handleSocialSignIn(provider.strategy)}
-                disabled={isLoading}
-              >
-                {getSocialIcon(provider.strategy)}
-                <span className="ml-2">
-                  Continue with {getProviderLabel(provider.strategy)}
-                </span>
-              </Button>
-            ))}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or</span>
+          {socialProviders.length > 0 && (
+            <div className="space-y-3">
+              {socialProviders.map((provider) => (
+                <Button
+                  key={provider.strategy}
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => handleSocialSignIn(provider.strategy)}
+                  disabled={isLoading}
+                >
+                  {getSocialIcon(provider.strategy)}
+                  <span className="ml-2">
+                    Continue with {getProviderLabel(provider.strategy)}
+                  </span>
+                </Button>
+              ))}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-card px-2 text-muted-foreground">Or</span>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <div className="space-y-2">
-            <Label htmlFor="identifier" className="text-sm font-medium">
-              {getIdentifierLabel()}
-            </Label>
-            <Input
-              id="identifier"
-              type={getIdentifierInputType()}
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
-              placeholder={getIdentifierPlaceholder()}
-              required
-              disabled={isLoading}
-              autoComplete={getIdentifierType() === 'email' ? 'email' : 'username'}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-medium">
-              Password
-            </Label>
-            <div className="relative">
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                disabled={isLoading}
-                autoComplete="current-password"
-                className="pr-10"
-              />
-              <button
-                type="button"
-                className="absolute inset-y-0 right-0 flex items-center pr-3"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <EyeOffIcon className="w-4 h-4 text-muted-foreground" />
-                ) : (
-                  <EyeIcon className="w-4 h-4 text-muted-foreground" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
           )}
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />
-                Signing in...
-              </>
-            ) : (
-              "Sign in"
-            )}
-          </Button>
-        </form>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="space-y-2">
+              <Label htmlFor="identifier" className="text-sm font-medium">
+                {getIdentifierLabel()}
+              </Label>
+              <Input
+                id="identifier"
+                type={getIdentifierInputType()}
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                placeholder={getIdentifierPlaceholder()}
+                required
+                disabled={isLoading}
+                autoComplete={
+                  getIdentifierType() === "email" ? "email" : "username"
+                }
+              />
+            </div>
 
-        <div className="text-center">
-          <button
-            type="button"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            onClick={() =>
-              signIn?.create({
-                strategy: "reset_password_email_code",
-                identifier: identifier,
-              })
-            }
-            disabled={!identifier || isLoading}
-          >
-            Forgot your password?
-          </button>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium">
+                Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  disabled={isLoading}
+                  autoComplete="current-password"
+                  className="pr-10"
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className="w-4 h-4 text-muted-foreground" />
+                  ) : (
+                    <EyeIcon className="w-4 h-4 text-muted-foreground" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                "Sign in"
+              )}
+            </Button>
+          </form>
+
+          <div className="text-center">
+            <button
+              type="button"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() =>
+                signIn?.create({
+                  strategy: "reset_password_email_code",
+                  identifier: identifier,
+                })
+              }
+              disabled={!identifier || isLoading}
+            >
+              Forgot your password?
+            </button>
+          </div>
         </div>
       </div>
     </div>

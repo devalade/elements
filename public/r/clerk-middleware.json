@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "clerk-middleware",
+  "type": "registry:ui",
+  "title": "Clerk Middleware",
+  "description": "Clerk middleware for Next.js App Router with route protection",
+  "dependencies": [
+    "@clerk/nextjs"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/default/elements/clerk/middleware.ts",
+      "content": "import { clerkMiddleware } from \"@clerk/nextjs/server\";\n\nexport default clerkMiddleware();\n\nexport const config = {\n  matcher: [\n    // Skip Next.js internals and all static files, unless found in search params\n    \"/((?!_next|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)\",\n    // Always run for API routes\n    \"/(api|trpc)(.*)\",\n  ],\n};",
+      "type": "registry:lib",
+      "target": "middleware.ts"
+    }
+  ],
+  "docs": "Clerk middleware for Next.js App Router that handles authentication and route protection. Install this alongside clerk-sign-in or clerk-sign-up components.\n\n**Setup:** This middleware automatically protects your routes and should be installed in the root of your project as middleware.ts."
+}

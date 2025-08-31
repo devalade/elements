@@ -114,24 +114,26 @@ export function ClerkSignUpElement() {
   };
 
   const shouldShowPasswordField = () => {
-    return isFieldRequired('password') || requiredFields.length === 0;
+    return isFieldRequired("password") || requiredFields.length === 0;
   };
 
   const shouldShowUsernameField = () => {
-    return isFieldRequired('username');
+    return isFieldRequired("username");
   };
 
   const isWaitlistMode = () => {
     // Better waitlist detection: check for specific waitlist indicators
+    // Waitlist mode is typically indicated by restricted sign-up access
+    // This could be when only email is allowed and other fields are restricted
     return (
-      signUp?.status === 'missing_requirements' && 
-      requiredFields.length === 1 && 
-      requiredFields.includes('email_address') &&
-      !signUp?.emailAddress
-    ) ||
-    (signUp?.status === 'abandoned' && requiredFields.length === 0);
+      (signUp?.status === "missing_requirements" &&
+        requiredFields.length === 1 &&
+        requiredFields.includes("email_address") &&
+        !signUp?.emailAddress) || // No email captured yet
+      // Alternative: detect based on sign-up restrictions or settings
+      (signUp?.status === "abandoned" && requiredFields.length === 0)
+    );
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,59 +144,74 @@ export function ClerkSignUpElement() {
 
     try {
       const createParams: any = {};
-      
-      if (isFieldRequired('firstName') || requiredFields.length === 0) {
+
+      if (isFieldRequired("firstName") || requiredFields.length === 0) {
         createParams.firstName = formData.firstName;
       }
-      if (isFieldRequired('lastName') || requiredFields.length === 0) {
+      if (isFieldRequired("lastName") || requiredFields.length === 0) {
         createParams.lastName = formData.lastName;
       }
-      if (isFieldRequired('email_address') || requiredFields.length === 0) {
+      if (isFieldRequired("email_address") || requiredFields.length === 0) {
         createParams.emailAddress = formData.email;
       }
-      if (isFieldRequired('username')) {
+      if (isFieldRequired("username")) {
         createParams.username = formData.username;
       }
-      if (isFieldRequired('password') || requiredFields.length === 0) {
+      if (isFieldRequired("password") || requiredFields.length === 0) {
         createParams.password = formData.password;
       }
 
       await signUp.create(createParams);
 
       // Dynamic verification method detection
-      if (signUp.unverifiedFields?.includes('email_address')) {
+      // Check what verification methods are available
+      if (signUp.unverifiedFields?.includes("email_address")) {
+        // Email needs verification - use email code by default
+        // You could also detect if email links are preferred based on settings
         try {
-          await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+          await signUp.prepareEmailAddressVerification({
+            strategy: "email_code",
+          });
           setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
         } catch (verifyErr) {
-          console.warn('Email code verification failed:', verifyErr);
+          // Fallback: try email link if code fails
+          console.warn(
+            "Email code verification failed, trying email link:",
+            verifyErr,
+          );
+          // For email link, you'd redirect to a different flow
         }
-      } else if (signUp.unverifiedFields?.includes('phone_number')) {
+      } else if (signUp.unverifiedFields?.includes("phone_number")) {
+        // Phone verification needed
         await signUp.preparePhoneNumberVerification({ strategy: "phone_code" });
         setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
       } else {
+        // No verification needed, user should be ready
         setState((prev) => ({ ...prev, isLoading: false, step: "verify" }));
       }
     } catch (err: any) {
-      const errorMessage =
-        err.errors?.[0]?.message || "Failed to create account";
-
       let displayError = "Failed to create account";
 
       if (isClerkAPIResponseError(err)) {
         const clerkError = err.errors[0];
-        
+
+        // Handle specific error codes
         switch (clerkError.code) {
-          case 'user_locked':
-            const lockoutSeconds = (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
-            const unlockTime = new Date(Date.now() + (lockoutSeconds * 1000));
+          case "user_locked":
+            const lockoutSeconds =
+              (clerkError.meta as any)?.lockout_expires_in_seconds || 1800;
+            const unlockTime = new Date(Date.now() + lockoutSeconds * 1000);
             displayError = `Account locked. Try again at ${unlockTime.toLocaleTimeString()}`;
             break;
-          case 'too_many_requests':
-            displayError = "Too many attempts. Please wait a moment and try again.";
+          case "too_many_requests":
+            displayError =
+              "Too many attempts. Please wait a moment and try again.";
             break;
           default:
-            displayError = clerkError.longMessage || clerkError.message || "Failed to create account";
+            displayError =
+              clerkError.longMessage ||
+              clerkError.message ||
+              "Failed to create account";
         }
       } else {
         displayError = err.message || "Failed to create account";
@@ -222,9 +239,10 @@ export function ClerkSignUpElement() {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        
+
         // Note: Session tasks should be checked after setActive completes
-        
+        // For now, redirect to dashboard and handle session tasks there
+
         router.push("/elements/clerk/dashboard");
       } else {
         setState((prev) => ({
@@ -234,10 +252,22 @@ export function ClerkSignUpElement() {
         }));
       }
     } catch (err: any) {
+      let errorMessage = "Invalid verification code";
+
+      if (isClerkAPIResponseError(err)) {
+        const clerkError = err.errors[0];
+        errorMessage =
+          clerkError.longMessage ||
+          clerkError.message ||
+          "Invalid verification code";
+      } else {
+        errorMessage = err.message || "Invalid verification code";
+      }
+
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        error: err.errors?.[0]?.message || "Invalid verification code",
+        error: errorMessage,
       }));
     }
   };
@@ -258,12 +288,20 @@ export function ClerkSignUpElement() {
         redirectUrlComplete: "/elements/clerk/dashboard",
       });
     } catch (err: any) {
+      let errorMessage = `Failed to sign up with ${provider.replace("oauth_", "")}`;
+
+      if (isClerkAPIResponseError(err)) {
+        const clerkError = err.errors[0];
+        errorMessage =
+          clerkError.longMessage || clerkError.message || errorMessage;
+      } else {
+        errorMessage = err.message || errorMessage;
+      }
+
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        error:
-          err.errors?.[0]?.message ||
-          `Failed to sign up with ${provider.replace("oauth_", "")}`,
+        error: errorMessage,
       }));
     }
   };
@@ -320,13 +358,13 @@ export function ClerkSignUpElement() {
             </p>
           </div>
           <div className="flex space-x-2">
-            <Button 
+            <Button
               onClick={() => router.push("/elements/clerk/dashboard")}
               className="flex-1"
             >
               Go to Dashboard
             </Button>
-            <Button 
+            <Button
               variant="outline"
               onClick={async () => {
                 await clerk.signOut();
@@ -427,186 +465,208 @@ export function ClerkSignUpElement() {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card relative">
-      <div className="space-y-4">
-        <div className="text-center">
-          <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
-          <h2 className="text-lg font-semibold">Create account</h2>
-          <p className="text-sm text-muted-foreground">Get started today</p>
+    <div>
+      <div className="w-full max-w-sm mx-auto p-6 border border-border rounded-lg bg-card relative">
+        <div className="space-y-4">
+          <div className="text-center">
+            <ClerkLogo className="w-8 h-8 mx-auto mb-2" />
+            <h2 className="text-lg font-semibold">Create account</h2>
+            <p className="text-sm text-muted-foreground">Get started today</p>
+          </div>
+
+          {socialProviders.length > 0 && (
+            <div className="space-y-3">
+              {socialProviders.map((provider) => (
+                <Button
+                  key={provider.strategy}
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => handleSocialSignUp(provider.strategy)}
+                  disabled={state.isLoading}
+                >
+                  {getSocialIcon(provider.strategy)}
+                  <span className="ml-2">
+                    Continue with {getProviderLabel(provider.strategy)}
+                  </span>
+                </Button>
+              ))}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-card px-2 text-muted-foreground">Or</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-3">
+            {(isFieldRequired("firstName") ||
+              isFieldRequired("lastName") ||
+              requiredFields.length === 0) && (
+              <div className="grid grid-cols-2 gap-2">
+                {(isFieldRequired("firstName") ||
+                  requiredFields.length === 0) && (
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName" className="text-sm font-medium">
+                      First name
+                    </Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      value={formData.firstName}
+                      onChange={(e) =>
+                        updateFormData("firstName", e.target.value)
+                      }
+                      placeholder="John"
+                      required={
+                        isFieldRequired("firstName") ||
+                        requiredFields.length === 0
+                      }
+                      disabled={state.isLoading}
+                      autoComplete="given-name"
+                    />
+                  </div>
+                )}
+                {(isFieldRequired("lastName") ||
+                  requiredFields.length === 0) && (
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName" className="text-sm font-medium">
+                      Last name
+                    </Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      value={formData.lastName}
+                      onChange={(e) =>
+                        updateFormData("lastName", e.target.value)
+                      }
+                      placeholder="Doe"
+                      required={
+                        isFieldRequired("lastName") ||
+                        requiredFields.length === 0
+                      }
+                      disabled={state.isLoading}
+                      autoComplete="family-name"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {(isFieldRequired("email_address") ||
+              requiredFields.length === 0) && (
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => updateFormData("email", e.target.value)}
+                  placeholder="you@company.com"
+                  required={
+                    isFieldRequired("email_address") ||
+                    requiredFields.length === 0
+                  }
+                  disabled={state.isLoading}
+                  autoComplete="email"
+                />
+              </div>
+            )}
+
+            {shouldShowUsernameField() && (
+              <div className="space-y-2">
+                <Label htmlFor="username" className="text-sm font-medium">
+                  Username
+                </Label>
+                <Input
+                  id="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={(e) => updateFormData("username", e.target.value)}
+                  placeholder="johndoe"
+                  required={isFieldRequired("username")}
+                  disabled={state.isLoading}
+                  autoComplete="username"
+                />
+              </div>
+            )}
+
+            {shouldShowPasswordField() && (
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-medium">
+                  Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={formData.password}
+                    onChange={(e) => updateFormData("password", e.target.value)}
+                    placeholder="••••••••"
+                    required={
+                      isFieldRequired("password") || requiredFields.length === 0
+                    }
+                    disabled={state.isLoading}
+                    autoComplete="new-password"
+                    className="pr-10"
+                    minLength={8}
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOffIcon className="w-4 h-4 text-muted-foreground" />
+                    ) : (
+                      <EyeIcon className="w-4 h-4 text-muted-foreground" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {state.error && (
+              <Alert variant="destructive">
+                <AlertDescription>{state.error}</AlertDescription>
+              </Alert>
+            )}
+
+            {/* CAPTCHA Widget - Required for Smart CAPTCHA */}
+            <div id="clerk-captcha"></div>
+
+            <Button type="submit" className="w-full" disabled={state.isLoading}>
+              {state.isLoading ? (
+                <>
+                  <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />
+                  Creating account...
+                </>
+              ) : (
+                "Create account"
+              )}
+            </Button>
+          </form>
         </div>
 
-        {socialProviders.length > 0 && (
-          <div className="space-y-3">
-            {socialProviders.map((provider) => (
-              <Button
-                key={provider.strategy}
-                type="button"
-                variant="outline"
-                className="w-full"
-                onClick={() => handleSocialSignUp(provider.strategy)}
-                disabled={state.isLoading}
-              >
-                {getSocialIcon(provider.strategy)}
-                <span className="ml-2">
-                  Continue with {getProviderLabel(provider.strategy)}
-                </span>
-              </Button>
-            ))}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or</span>
-              </div>
+        {/* Waitlist Backdrop Overlay */}
+        {isWaitlistMode() && (
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
+            <div className="text-center px-4">
+              <p className="font-medium text-foreground">
+                Waitlist mode is enabled
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Change the config in Clerk if you want to use it
+              </p>
             </div>
           </div>
         )}
-
-        <form onSubmit={handleSubmit} className="space-y-3">
-          {(isFieldRequired('firstName') || isFieldRequired('lastName') || requiredFields.length === 0) && (
-            <div className="grid grid-cols-2 gap-2">
-              {(isFieldRequired('firstName') || requiredFields.length === 0) && (
-                <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-sm font-medium">
-                    First name
-                  </Label>
-                  <Input
-                    id="firstName"
-                    type="text"
-                    value={formData.firstName}
-                    onChange={(e) => updateFormData("firstName", e.target.value)}
-                    placeholder="John"
-                    required={isFieldRequired('firstName') || requiredFields.length === 0}
-                    disabled={state.isLoading}
-                    autoComplete="given-name"
-                  />
-                </div>
-              )}
-              {(isFieldRequired('lastName') || requiredFields.length === 0) && (
-                <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-sm font-medium">
-                    Last name
-                  </Label>
-                  <Input
-                    id="lastName"
-                    type="text"
-                    value={formData.lastName}
-                    onChange={(e) => updateFormData("lastName", e.target.value)}
-                    placeholder="Doe"
-                    required={isFieldRequired('lastName') || requiredFields.length === 0}
-                    disabled={state.isLoading}
-                    autoComplete="family-name"
-                  />
-                </div>
-              )}
-            </div>
-          )}
-
-          {(isFieldRequired('emailAddress') || requiredFields.length === 0) && (
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => updateFormData("email", e.target.value)}
-                placeholder="you@company.com"
-                required={isFieldRequired('email_address') || requiredFields.length === 0}
-                disabled={state.isLoading}
-                autoComplete="email"
-              />
-            </div>
-          )}
-
-          {shouldShowUsernameField() && (
-            <div className="space-y-2">
-              <Label htmlFor="username" className="text-sm font-medium">
-                Username
-              </Label>
-              <Input
-                id="username"
-                type="text"
-                value={formData.username}
-                onChange={(e) => updateFormData("username", e.target.value)}
-                placeholder="johndoe"
-                required={isFieldRequired('username')}
-                disabled={state.isLoading}
-                autoComplete="username"
-              />
-            </div>
-          )}
-
-          {shouldShowPasswordField() && (
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-sm font-medium">
-                Password
-              </Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={formData.password}
-                  onChange={(e) => updateFormData("password", e.target.value)}
-                  placeholder="••••••••"
-                  required={isFieldRequired('password') || requiredFields.length === 0}
-                  disabled={state.isLoading}
-                  autoComplete="new-password"
-                  className="pr-10"
-                  minLength={8}
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOffIcon className="w-4 h-4 text-muted-foreground" />
-                  ) : (
-                    <EyeIcon className="w-4 h-4 text-muted-foreground" />
-                  )}
-                </button>
-              </div>
-            </div>
-          )}
-
-          {state.error && (
-            <Alert variant="destructive">
-              <AlertDescription>{state.error}</AlertDescription>
-            </Alert>
-          )}
-
-          {/* CAPTCHA Widget - Required for Smart CAPTCHA */}
-          <div id="clerk-captcha"></div>
-
-          <Button type="submit" className="w-full" disabled={state.isLoading}>
-            {state.isLoading ? (
-              <>
-                <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />
-                Creating account...
-              </>
-            ) : (
-              "Create account"
-            )}
-          </Button>
-        </form>
       </div>
-
-      {/* Waitlist Backdrop Overlay */}
-      {isWaitlistMode() && (
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
-          <div className="text-center px-4">
-            <p className="font-medium text-foreground">
-              Waitlist mode is enabled
-            </p>
-            <p className="text-sm text-muted-foreground mt-1">
-              Change the config in Clerk if you want to use it
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
