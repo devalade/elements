@@ -10,10 +10,20 @@ bunx shadcn@latest add @elements/theme-switcher
 
 ## Available Components
 
-- **Clerk Auth** - Complete authentication flows
-- **Theme Switcher** - Dark/light mode toggles  
-- **Tech Logos** - Popular brand logos
-- **More coming soon...**
+### Clerk Auth
+Complete authentication flows with sign-in, sign-up, and waitlist components.
+
+![Clerk Demo](clerk-demo.webp)
+
+### Tech Logos  
+Popular brand logos collection with shopping cart functionality.
+
+![Logos Demo](logos-demo.webp)
+
+### Theme Switcher
+Dark/light mode toggles with multiple variants.
+
+**More coming soon...**
 
 ## Registry
 
