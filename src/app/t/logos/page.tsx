@@ -13,6 +13,25 @@ import { SpotifyLogo } from "@registry/default/logos/spotify";
 import { TwitchLogo } from "@registry/default/logos/twitch";
 import { TwitterLogo } from "@registry/default/logos/twitter";
 import { GitLabLogo } from "@registry/default/logos/gitlab";
+import { QwenLogo } from "@registry/default/logos/qwen";
+import { MoonshotAILogo } from "@registry/default/logos/moonshot-ai";
+import { CohereLogo } from "@registry/default/logos/cohere";
+import { OpenAILogo } from "@registry/default/logos/openai";
+import { AnthropicLogo } from "@registry/default/logos/anthropic";
+import { DeepSeekLogo } from "@registry/default/logos/deepseek";
+import { HuggingFaceLogo } from "@registry/default/logos/hugging-face";
+import { GroqLogo } from "@registry/default/logos/groq";
+import { GrokLogo } from "@registry/default/logos/grok";
+import { GeminiLogo } from "@registry/default/logos/gemini";
+import { LovableLogo } from "@registry/default/logos/lovable";
+import { PerplexityLogo } from "@registry/default/logos/perplexity";
+import { XAILogo } from "@registry/default/logos/xai";
+import { V0Logo } from "@registry/default/logos/v0";
+import { ClaudeLogo } from "@registry/default/logos/claude";
+import { MistralLogo } from "@registry/default/logos/mistral";
+import { MetaLogo } from "@registry/default/logos/meta";
+import { AWSLogo } from "@registry/default/logos/aws";
+import { KimiLogo } from "@registry/default/logos/kimi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -122,6 +141,139 @@ const logos: Logo[] = [
     component: GitLabLogo,
     category: "Development",
   },
+  {
+    id: "qwen",
+    name: "qwen-logo",
+    displayName: "Qwen",
+    component: QwenLogo,
+    category: "AI",
+  },
+  {
+    id: "moonshot-ai",
+    name: "moonshot-ai-logo",
+    displayName: "MoonshotAI",
+    component: MoonshotAILogo,
+    category: "AI",
+  },
+  {
+    id: "cohere",
+    name: "cohere-logo",
+    displayName: "Cohere",
+    component: CohereLogo,
+    category: "AI",
+  },
+  {
+    id: "openai",
+    name: "openai-logo",
+    displayName: "OpenAI",
+    component: OpenAILogo,
+    category: "AI",
+  },
+  {
+    id: "anthropic",
+    name: "anthropic-logo",
+    displayName: "Anthropic",
+    component: AnthropicLogo,
+    category: "AI",
+  },
+  {
+    id: "deepseek",
+    name: "deepseek-logo",
+    displayName: "DeepSeek",
+    component: DeepSeekLogo,
+    category: "AI",
+  },
+  {
+    id: "hugging-face",
+    name: "hugging-face-logo",
+    displayName: "Hugging Face",
+    component: HuggingFaceLogo,
+    category: "AI",
+  },
+  {
+    id: "groq",
+    name: "groq-logo",
+    displayName: "Groq",
+    component: GroqLogo,
+    category: "AI",
+  },
+  {
+    id: "grok",
+    name: "grok-logo",
+    displayName: "Grok",
+    component: GrokLogo,
+    category: "AI",
+  },
+  {
+    id: "gemini",
+    name: "gemini-logo",
+    displayName: "Gemini",
+    component: GeminiLogo,
+    category: "AI",
+  },
+  {
+    id: "lovable",
+    name: "lovable-logo",
+    displayName: "Lovable",
+    component: LovableLogo,
+    category: "AI",
+  },
+  {
+    id: "perplexity",
+    name: "perplexity-logo",
+    displayName: "Perplexity",
+    component: PerplexityLogo,
+    category: "AI",
+  },
+  {
+    id: "xai",
+    name: "xai-logo",
+    displayName: "xAI",
+    component: XAILogo,
+    category: "AI",
+  },
+  {
+    id: "v0",
+    name: "v0-logo",
+    displayName: "v0",
+    component: V0Logo,
+    category: "AI",
+  },
+  {
+    id: "claude",
+    name: "claude-logo",
+    displayName: "Claude",
+    component: ClaudeLogo,
+    category: "AI",
+  },
+  {
+    id: "mistral",
+    name: "mistral-logo",
+    displayName: "Mistral",
+    component: MistralLogo,
+    category: "AI",
+  },
+  {
+    id: "meta",
+    name: "meta-logo",
+    displayName: "Meta",
+    component: MetaLogo,
+    category: "Social",
+  },
+  {
+    id: "aws",
+    name: "aws-logo",
+    displayName: "AWS",
+    component: AWSLogo,
+    category: "Cloud",
+  },
+  {
+    id: "kimi",
+    name: "kimi-logo",
+    displayName: "Kimi",
+    component: KimiLogo,
+    category: "AI",
+  },
 ];
 
 export default function TechLogosPage() {
@@ -165,10 +317,10 @@ export default function TechLogosPage() {
       .join(" ");
 
     const commands = {
-      bunx: `bunx shadcn add ${selectedNamesWithPrefix}`,
-      npx: `npx shadcn add ${selectedNamesWithPrefix}`,
-      pnpm: `pnpm dlx shadcn add ${selectedNamesWithPrefix}`,
-      yarn: `yarn dlx shadcn add ${selectedNamesWithPrefix}`,
+      bunx: `bunx shadcn@latest add ${selectedNamesWithPrefix}`,
+      npx: `npx shadcn@latest add ${selectedNamesWithPrefix}`,
+      pnpm: `pnpm dlx shadcn@latest add ${selectedNamesWithPrefix}`,
+      yarn: `yarn dlx shadcn@latest add ${selectedNamesWithPrefix}`,
     };
     return commands[pm as keyof typeof commands] || "";
   };
@@ -378,7 +530,7 @@ export default function TechLogosPage() {
               </Select>
               <Input
                 readOnly
-                value={`shadcn add ${logos
+                value={`shadcn@latest add ${logos
                   .filter((logo) => selectedLogos.has(logo.id))
                   .map((logo) => `@elements/${logo.name}`)
                   .join(" ")}`}

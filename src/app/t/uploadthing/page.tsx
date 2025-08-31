@@ -9,36 +9,42 @@ export default function UploadThingPage() {
     {
       icon: <ZapIcon className="w-3 h-3" />,
       title: "File Upload Components",
-      description: "Drag & drop uploader, file browser, and progress indicators"
+      description:
+        "Drag & drop uploader, file browser, and progress indicators",
     },
     {
       icon: <ServerIcon className="w-3 h-3" />,
       title: "Backend Integration",
-      description: "Server-side file handling, validation, and storage management"
+      description:
+        "Server-side file handling, validation, and storage management",
     },
     {
       icon: <ShieldIcon className="w-3 h-3" />,
       title: "Security & Validation",
-      description: "File type validation, size limits, and secure upload endpoints"
-    }
+      description:
+        "File type validation, size limits, and secure upload endpoints",
+    },
   ];
 
   const technicalDetails = [
     {
       icon: <ZapIcon className="w-6 h-6" />,
       title: "High Performance",
-      description: "Chunked uploads, resume capability, and optimized file processing"
+      description:
+        "Chunked uploads, resume capability, and optimized file processing",
     },
     {
       icon: <ServerIcon className="w-6 h-6" />,
       title: "Cloud Storage",
-      description: "Direct uploads to S3, Vercel Blob, and other cloud providers"
+      description:
+        "Direct uploads to S3, Vercel Blob, and other cloud providers",
     },
     {
       icon: <ShieldIcon className="w-6 h-6" />,
       title: "Type Safety",
-      description: "Full TypeScript support with file type validation and error handling"
-    }
+      description:
+        "Full TypeScript support with file type validation and error handling",
+    },
   ];
 
   const usageExample = `<span class="text-blue-400">import</span>
@@ -51,8 +57,8 @@ export default function UploadThingPage() {
   const additionalExamples = [
     {
       title: "File Upload Handler",
-      code: `<span class="text-blue-400">const</span> <span class="text-foreground">{ startUpload }</span> = <span class="text-foreground">useUploadThing</span>(<span class="text-green-400">"imageUploader"</span>)`
-    }
+      code: `<span class="text-blue-400">const</span> <span class="text-foreground">{ startUpload }</span> = <span class="text-foreground">useUploadThing</span>(<span class="text-green-400">"imageUploader"</span>)`,
+    },
   ];
 
   return (
@@ -64,7 +70,7 @@ export default function UploadThingPage() {
       icon={<UploadThingIcon className="w-12 h-12" />}
       features={features}
       technicalDetails={technicalDetails}
-      installCommand="shadcn add @elements/uploadthing"
+      installCommand="shadcn@latest add @elements/uploadthing"
       usageExample={usageExample}
       additionalExamples={additionalExamples}
     >
@@ -85,7 +91,8 @@ export default function UploadThingPage() {
               </div>
               <h3 className="font-semibold mb-3">Drag & Drop</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Intuitive drag and drop interface with visual feedback and file previews
+                Intuitive drag and drop interface with visual feedback and file
+                previews
               </p>
               <div className="bg-muted/50 rounded p-2 font-mono text-xs">
                 {"<UploadDropzone />"}
@@ -98,7 +105,8 @@ export default function UploadThingPage() {
               </div>
               <h3 className="font-semibold mb-3">Progress Tracking</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Real-time upload progress with pause, resume, and cancel functionality
+                Real-time upload progress with pause, resume, and cancel
+                functionality
               </p>
               <div className="bg-muted/50 rounded p-2 font-mono text-xs">
                 {"<UploadProgress />"}
@@ -111,7 +119,8 @@ export default function UploadThingPage() {
               </div>
               <h3 className="font-semibold mb-3">File Browser</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Browse and manage uploaded files with filtering and search capabilities
+                Browse and manage uploaded files with filtering and search
+                capabilities
               </p>
               <div className="bg-muted/50 rounded p-2 font-mono text-xs">
                 {"<FileBrowser />"}

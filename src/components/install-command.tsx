@@ -26,10 +26,10 @@ export function InstallCommand({
 
   const getCommand = (pm: string) => {
     const commands = {
-      bunx: `bunx shadcn add ${url}`,
-      npx: `npx shadcn add ${url}`,
-      pnpm: `pnpm dlx shadcn add ${url}`,
-      yarn: `yarn dlx shadcn add ${url}`,
+      bunx: `bunx shadcn@latest add ${url}`,
+      npx: `npx shadcn@latest add ${url}`,
+      pnpm: `pnpm dlx shadcn@latest add ${url}`,
+      yarn: `yarn dlx shadcn@latest add ${url}`,
     };
     return commands[pm as keyof typeof commands];
   };
@@ -57,7 +57,7 @@ export function InstallCommand({
         </Select>
         <Input
           readOnly
-          value={`shadcn add ${url}`}
+          value={`shadcn@latest add ${url}`}
           className="-ms-px flex-1 rounded-none border-0 shadow-none font-mono text-xs sm:text-sm focus-visible:ring-0"
         />
         <Button

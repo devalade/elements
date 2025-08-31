@@ -75,7 +75,7 @@ export default function ClerkPage() {
       icon={<ClerkLogo className="w-12 h-12" />}
       features={features}
       technicalDetails={technicalDetails}
-      installCommand="shadcn add @elements/clerk-auth"
+      installCommand="shadcn@latest add @elements/clerk-auth"
       usageExample={usageExample}
       components={clerkComponents}
       componentInstallUrls={componentInstallUrls}

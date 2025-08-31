@@ -9,36 +9,40 @@ export default function TriggerPage() {
     {
       icon: <ZapIcon className="w-3 h-3" />,
       title: "Job Queue Components",
-      description: "Async job processing, scheduling, and priority handling"
+      description: "Async job processing, scheduling, and priority handling",
     },
     {
       icon: <ServerIcon className="w-3 h-3" />,
       title: "Monitoring Dashboard",
-      description: "Real-time job status, logs, and performance metrics"
+      description: "Real-time job status, logs, and performance metrics",
     },
     {
       icon: <BranchIcon className="w-3 h-3" />,
       title: "Workflow Management",
-      description: "Complex job chains, conditional execution, and error handling"
-    }
+      description:
+        "Complex job chains, conditional execution, and error handling",
+    },
   ];
 
   const technicalDetails = [
     {
       icon: <ZapIcon className="w-6 h-6" />,
       title: "High Performance",
-      description: "Optimized queue processing with Redis backend and intelligent batching"
+      description:
+        "Optimized queue processing with Redis backend and intelligent batching",
     },
     {
       icon: <ServerIcon className="w-6 h-6" />,
       title: "Real-time Monitoring",
-      description: "Live dashboard with job metrics, error tracking, and performance insights"
+      description:
+        "Live dashboard with job metrics, error tracking, and performance insights",
     },
     {
       icon: <BranchIcon className="w-6 h-6" />,
       title: "Error Recovery",
-      description: "Automatic retry with exponential backoff and dead letter queues"
-    }
+      description:
+        "Automatic retry with exponential backoff and dead letter queues",
+    },
   ];
 
   const usageExample = `<span class="text-blue-400">import</span>
@@ -51,8 +55,8 @@ export default function TriggerPage() {
   const additionalExamples = [
     {
       title: "Create a job",
-      code: `<span class="text-blue-400">await</span> <span class="text-foreground">trigger.send</span>(<span class="text-green-400">"send-email"</span>, data)`
-    }
+      code: `<span class="text-blue-400">await</span> <span class="text-foreground">trigger.send</span>(<span class="text-green-400">"send-email"</span>, data)`,
+    },
   ];
 
   return (
@@ -65,7 +69,7 @@ export default function TriggerPage() {
       icon={<TriggerIcon className="w-12 h-12" />}
       features={features}
       technicalDetails={technicalDetails}
-      installCommand="shadcn add @elements/trigger-jobs"
+      installCommand="shadcn@latest add @elements/trigger-jobs"
       usageExample={usageExample}
       additionalExamples={additionalExamples}
     >
@@ -75,7 +79,8 @@ export default function TriggerPage() {
           <div className="text-center space-y-4">
             <h2 className="text-2xl font-bold">Job Types & Features</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Handle any background task with built-in retry logic, scheduling, and monitoring.
+              Handle any background task with built-in retry logic, scheduling,
+              and monitoring.
             </p>
           </div>
 
@@ -86,7 +91,8 @@ export default function TriggerPage() {
               </div>
               <h3 className="font-semibold mb-3">Instant Jobs</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Execute jobs immediately with priority queuing and parallel processing
+                Execute jobs immediately with priority queuing and parallel
+                processing
               </p>
               <div className="bg-muted/50 rounded p-2 font-mono text-xs">
                 trigger.send("process-payment")
@@ -99,7 +105,8 @@ export default function TriggerPage() {
               </div>
               <h3 className="font-semibold mb-3">Scheduled Jobs</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Cron-like scheduling with timezone support and recurring patterns
+                Cron-like scheduling with timezone support and recurring
+                patterns
               </p>
               <div className="bg-muted/50 rounded p-2 font-mono text-xs">
                 trigger.scheduleJob("0 9 * * *")
