@@ -15,7 +15,7 @@ import { MoneyIcon } from "@/components/icons/money";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
-import { WaitlistElement } from "@registry/default/elements/clerk/waitlist-shadcn/waitlist";
+import { ThemeSwitcherElement } from "@/components/theme-switcher-element";
 import { GroupIcon } from "@/components/icons/group";
 
 export default function Home() {
@@ -49,11 +49,11 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h5 className="mb-2 transition-colors duration-500 text-foreground font-medium">
-                      Full-Stack Integration
+                      Full-Stack Components
                     </h5>
                     <p className="text-sm transition-colors duration-500 text-muted-foreground">
-                      Complete components with backend logic, database schemas,
-                      and API routes included.
+                      Complete solutions ready for the agentic era. Install
+                      flows, not pixels.
                     </p>
                   </div>
                 </div>
@@ -68,11 +68,11 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h5 className="mb-2 transition-colors duration-500 text-foreground font-medium">
-                      Copy & Paste Ready
+                      One-Command Install
                     </h5>
                     <p className="text-sm transition-colors duration-500 text-muted-foreground">
-                      Install with shadcn CLI 3.0. No complex setup or
-                      configuration required.
+                      Install with shadcn CLI 3.0. Ready to use immediately with
+                      minimal configuration.
                     </p>
                   </div>
                 </div>
@@ -87,11 +87,11 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h5 className="mb-2 transition-colors duration-500 text-foreground font-medium">
-                      Platform Agnostic
+                      Framework Ready
                     </h5>
                     <p className="text-sm transition-colors duration-500 text-muted-foreground">
-                      Works with any platform - Vercel, Supabase, Clerk, Stripe,
-                      and more.
+                      Built for Next.js with TypeScript. Integrates with Clerk,
+                      Stripe, and modern services.
                     </p>
                   </div>
                 </div>
@@ -104,15 +104,15 @@ export default function Home() {
               <div className="relative rounded-lg w-full flex flex-col items-center justify-center min-h-[400px] transition-all duration-700 space-y-4">
                 <div className="text-center space-y-2 mb-6">
                   <p className="text-lg font-medium text-foreground max-w-sm">
-                    Be first. No noise.
+                    Switch themes instantly
                   </p>
                 </div>
-                <ElementWrapper icon={<ClerkLogo className="w-4 h-4" />}>
-                  <WaitlistElement />
+                <ElementWrapper icon={<MoonIcon className="w-4 h-4" />}>
+                  <ThemeSwitcherElement />
                 </ElementWrapper>
 
                 <p className="text-xs text-muted-foreground/60 text-center mb-0">
-                  Only drops worth your inbox.
+                  Toggle between light and dark modes
                 </p>
 
                 <div className="space-y-3 w-full max-w-md mt-8">
@@ -120,7 +120,7 @@ export default function Home() {
                     <ShadcnIcon className="w-3 h-3" />
                     <span>Install with shadcn CLI 3.0</span>
                   </div>
-                  <InstallCommand />
+                  <InstallCommand url="@elements/theme-switcher" />
                 </div>
               </div>
             </div>
@@ -130,12 +130,9 @@ export default function Home() {
         {/* Beta Component Gallery - Full Width */}
         <div className="w-full py-16 border-t border-border border-dotted px-8">
           <div className="space-y-8">
-            <div className="text-center space-y-2">
-              <h2 className="text-2xl font-bold">Beta Component Gallery</h2>
-              <p className="text-muted-foreground">
-                Components coming soon to Elements
-              </p>
-            </div>
+            <h2 className="text-center text-2xl font-bold">
+              Beta Component Gallery
+            </h2>
 
             <div className="grid gap-4 place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               <ComponentCard
@@ -146,24 +143,6 @@ export default function Home() {
                 brandColor="#654BF6"
                 isEnabled={true}
                 href="/t/clerk"
-              />
-              <ComponentCard
-                name="Trigger.dev Jobs"
-                description="Background job scheduling and monitoring components"
-                icon={<TriggerIcon className="w-6 h-6" />}
-                category="Jobs"
-                brandColor="#8DFF53"
-                isEnabled={true}
-                href="/t/trigger"
-              />
-              <ComponentCard
-                name="UploadThing"
-                description="Complete file upload solution with drag & drop interface"
-                icon={<UploadThingIcon className="w-6 h-6" />}
-                category="Files"
-                brandColor="#E91515"
-                isEnabled={true}
-                href="/t/uploadthing"
               />
               <ComponentCard
                 name="Tech Logos"
@@ -180,6 +159,24 @@ export default function Home() {
                 category="UI"
                 isEnabled={true}
                 href="/t/theme-switcher"
+              />
+              <ComponentCard
+                name="Trigger.dev Jobs"
+                description="Background job scheduling and monitoring components"
+                icon={<TriggerIcon className="w-6 h-6" />}
+                category="Jobs"
+                brandColor="#8DFF53"
+                isEnabled={false}
+                href="/t/trigger"
+              />
+              <ComponentCard
+                name="UploadThing"
+                description="Complete file upload solution with drag & drop interface"
+                icon={<UploadThingIcon className="w-6 h-6" />}
+                category="Files"
+                brandColor="#E91515"
+                isEnabled={false}
+                href="/t/uploadthing"
               />
               <ComponentCard
                 name="Supabase DB"

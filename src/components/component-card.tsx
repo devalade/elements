@@ -88,7 +88,7 @@ export function ComponentCard({
 
   if (href && isEnabled) {
     return (
-      <Link className="w-full" href={href}>
+      <Link className="w-full h-full" href={href}>
         {CardContent}
       </Link>
     );

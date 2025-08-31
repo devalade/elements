@@ -247,7 +247,7 @@ export function ComponentPageTemplate({
                 </p>
                 <InstallCommand
                   url={installCommand.replace(/^bunx shadcn@latest add /, "")}
-                  className="w-full max-w-md"
+                  className="w-full max-w-lg"
                 />
               </div>
             </div>
@@ -411,9 +411,12 @@ function ComponentGrid({
         const isSelected = selectedComponents.has(key);
 
         return (
-          <div key={key} className={`${customClassName} border-t border-l border-r border-b border-dotted transition-all duration-200 ${
-                isSelected ? "border-primary/50" : "border-border"
-              }`}>
+          <div
+            key={key}
+            className={`${customClassName} border-t border-l border-r border-b border-dotted transition-all duration-200 ${
+              isSelected ? "border-primary/50" : "border-border"
+            }`}
+          >
             {/* Component Header - Outside bordered area */}
             <div
               className={`px-4 sm:px-6 py-4 transition-all duration-200 ${
@@ -431,14 +434,17 @@ function ComponentGrid({
                     className="shrink-0"
                   />
                   <div className="flex items-center gap-2">
-                    <span 
+                    <span
                       className="text-sm md:text-base font-medium text-foreground capitalize cursor-pointer hover:text-primary transition-colors"
                       onClick={() => onComponentToggle(key)}
                     >
                       {key.replace("-", " ")}
                     </span>
                     {key.includes("shadcn") && (
-                      <Badge variant="outline" className="border-blue-500 text-blue-500 text-xs">
+                      <Badge
+                        variant="outline"
+                        className="border-blue-500 text-blue-500 text-xs"
+                      >
                         BETA
                       </Badge>
                     )}
@@ -454,16 +460,14 @@ function ComponentGrid({
                       installUrls[key] ||
                       (item as ComponentWithLayout).installUrl
                     }
-                    className="w-auto"
+                    className="w-full max-w-lg"
                   />
                 )}
               </div>
             </div>
 
             {/* Component Display Area - Bordered */}
-            <div
-              className="bg-card/30 backdrop-blur-sm border-t border-dotted border-border"
-            >
+            <div className="bg-card/30 backdrop-blur-sm border-t border-dotted border-border">
               <div className="flex items-center justify-center min-h-[350px] md:min-h-[400px] px-4 py-14">
                 <div className="flex justify-center w-full max-w-lg">
                   {componentNode as ReactNode}

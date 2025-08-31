@@ -244,6 +244,86 @@
       "docs": "To use this component:\n\n1. Install next-themes: npm install next-themes\n2. Wrap your app with ThemeProvider from next-themes\n3. Set up your CSS variables for light/dark themes\n\nThe theme switcher automatically handles light/dark mode with smooth transitions and animated icons."
     },
     {
+      "name": "theme-switcher-switch",
+      "type": "registry:ui",
+      "title": "Theme Switcher Switch",
+      "description": "Switch-based theme switcher with animated sun/moon icons",
+      "registryDependencies": ["switch"],
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "registry/default/elements/theme-switcher/switch.tsx",
+          "type": "registry:component",
+          "target": "components/elements/theme-switcher-switch.tsx"
+        }
+      ],
+      "docs": "Switch-based theme switcher component with animated icons. Requires next-themes and ThemeProvider setup."
+    },
+    {
+      "name": "theme-switcher-button",
+      "type": "registry:ui", 
+      "title": "Theme Switcher Button",
+      "description": "Button-based theme switcher with rotating icons",
+      "registryDependencies": ["button"],
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "registry/default/elements/theme-switcher/button.tsx",
+          "type": "registry:component",
+          "target": "components/elements/theme-switcher-button.tsx"
+        }
+      ],
+      "docs": "Button-based theme switcher with rotating sun/moon icons. Requires next-themes and ThemeProvider setup."
+    },
+    {
+      "name": "theme-switcher-dropdown",
+      "type": "registry:ui",
+      "title": "Theme Switcher Dropdown", 
+      "description": "Dropdown theme switcher with system/light/dark options",
+      "registryDependencies": ["button", "dropdown-menu"],
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "registry/default/elements/theme-switcher/dropdown.tsx",
+          "type": "registry:component",
+          "target": "components/elements/theme-switcher-dropdown.tsx"
+        }
+      ],
+      "docs": "Dropdown theme switcher with three options: light, dark, and system. Requires next-themes and ThemeProvider setup."
+    },
+    {
+      "name": "theme-switcher-toggle",
+      "type": "registry:ui",
+      "title": "Theme Switcher Toggle",
+      "description": "Custom toggle theme switcher with sliding animation",
+      "registryDependencies": [],
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "registry/default/elements/theme-switcher/toggle.tsx",
+          "type": "registry:component",
+          "target": "components/elements/theme-switcher-toggle.tsx"
+        }
+      ],
+      "docs": "Custom toggle theme switcher with sliding animation and embedded icons. Requires next-themes and ThemeProvider setup."
+    },
+    {
+      "name": "theme-switcher-multi-button",
+      "type": "registry:ui",
+      "title": "Theme Switcher Multi Button",
+      "description": "Multi-button theme switcher with system/light/dark options",
+      "registryDependencies": [],
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "registry/default/elements/theme-switcher/multi-button.tsx",
+          "type": "registry:component",
+          "target": "components/elements/theme-switcher-multi-button.tsx"
+        }
+      ],
+      "docs": "Multi-button theme switcher with three distinct buttons for system, light, and dark modes. Requires next-themes and ThemeProvider setup."
+    },
+    {
       "name": "apple-logo",
       "type": "registry:ui",
       "title": "Apple Logo",

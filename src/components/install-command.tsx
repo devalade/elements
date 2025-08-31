@@ -59,7 +59,7 @@ export function InstallCommand({
         </Select>
         <Input
           readOnly
-          value={`shadcn@latest add ${url}`}
+          value={`shadcn add ${url}`}
           className="-ms-px flex-1 rounded-none border-0 shadow-none font-mono text-xs sm:text-sm focus-visible:ring-0"
         />
         <Button

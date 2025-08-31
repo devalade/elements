@@ -14,7 +14,7 @@ export function ThemeSwitcherElement() {
 
   if (!mounted) {
     return (
-      <div className="border-2 border-dashed border-foreground/50 p-3 rounded-md">
+      <div className="flex justify-center items-center">
         <div className="h-[1.15rem] w-8 bg-input rounded-full border shadow-xs animate-pulse" />
       </div>
     );
@@ -27,7 +27,7 @@ export function ThemeSwitcherElement() {
   const isDark = theme === "dark";
 
   return (
-    <div className="border-2 border-dashed border-foreground/50 p-3 rounded-md">
+    <div className="flex justify-center items-center">
       <div className="relative h-[1.15rem] w-8">
         <Switch
           checked={isDark}
