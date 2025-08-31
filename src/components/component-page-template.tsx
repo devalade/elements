@@ -411,12 +411,14 @@ function ComponentGrid({
         const isSelected = selectedComponents.has(key);
 
         return (
-          <div key={key} className={`${customClassName}`}>
+          <div key={key} className={`${customClassName} border-t border-l border-r border-b border-dotted transition-all duration-200 ${
+                isSelected ? "border-primary/50" : "border-border"
+              }`}>
             {/* Component Header - Outside bordered area */}
             <div
-              className={`px-4 sm:px-6 py-4 border-t border-border border-dotted transition-all duration-200 ${
+              className={`px-4 sm:px-6 py-4 transition-all duration-200 ${
                 isSelected
-                  ? "bg-primary/10 border-primary"
+                  ? "bg-primary/10"
                   : "bg-background hover:bg-accent/50"
               }`}
             >
@@ -429,7 +431,10 @@ function ComponentGrid({
                     className="shrink-0"
                   />
                   <div className="flex items-center gap-2">
-                    <span className="text-sm md:text-base font-medium text-foreground capitalize">
+                    <span 
+                      className="text-sm md:text-base font-medium text-foreground capitalize cursor-pointer hover:text-primary transition-colors"
+                      onClick={() => onComponentToggle(key)}
+                    >
                       {key.replace("-", " ")}
                     </span>
                     {key.includes("shadcn") && (
@@ -457,9 +462,7 @@ function ComponentGrid({
 
             {/* Component Display Area - Bordered */}
             <div
-              className={`border-t border-l border-r border-b border-dotted bg-card/30 backdrop-blur-sm transition-all duration-300 hover:bg-card/60 ${
-                isSelected ? "border-primary/50" : "border-border"
-              }`}
+              className="bg-card/30 backdrop-blur-sm border-t border-dotted border-border"
             >
               <div className="flex items-center justify-center min-h-[350px] md:min-h-[400px] px-4 py-14">
                 <div className="flex justify-center w-full max-w-lg">
