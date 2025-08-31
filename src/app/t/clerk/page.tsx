@@ -1,12 +1,13 @@
 import { ComponentPageTemplate } from "@/components/component-page-template";
-import { InstallCommand } from "@/components/install-command";
 import { ClerkLogo } from "@/components/clerk-logo";
 import { ClerkSignInElement } from "@registry/default/elements/clerk/sign-in";
 import { ClerkSignUpElement } from "@registry/default/elements/clerk/sign-up";
-import { WaitlistElement } from "@registry/default/elements/clerk/waitlist/waitlist";
+import { WaitlistElement } from "@registry/default/elements/clerk/waitlist-shadcn/waitlist";
 import { ShieldIcon } from "@/components/icons/shield";
 import { ServerIcon } from "@/components/icons/server";
 import { ZapIcon } from "@/components/icons/zap";
+import { Badge } from "@/components/ui/badge";
+import { SignIn, SignInButton, SignUp, Waitlist } from "@clerk/nextjs";
 
 export default function ClerkPage() {
   const features = [
@@ -56,15 +57,21 @@ export default function ClerkPage() {
 <span class="text-gray-500">{"<ClerkSignIn />"}</span>`;
 
   const clerkComponents = {
-    "sign-in": <ClerkSignInElement />,
-    "sign-up": <ClerkSignUpElement />,
-    waitlist: <WaitlistElement />,
+    "sign-in": <SignIn />,
+    "sign-up": <SignUp />,
+    waitlist: <Waitlist />,
+    "sign-in-shadcn": <ClerkSignInElement />,
+    "sign-up-shadcn": <ClerkSignUpElement />,
+    "waitlist-shadcn": <WaitlistElement />,
   };
 
   const componentInstallUrls = {
     "sign-in": "@elements/clerk-sign-in",
     "sign-up": "@elements/clerk-sign-up",
     waitlist: "@elements/clerk-waitlist",
+    "sign-in-shadcn": "@elements/clerk-sign-in-shadcn",
+    "sign-up-shadcn": "@elements/clerk-sign-up-shadcn",
+    "waitlist-shadcn": "@elements/clerk-waitlist-shadcn",
   };
 
   return (

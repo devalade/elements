@@ -15,7 +15,7 @@ import { MoneyIcon } from "@/components/icons/money";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
 import { UploadThingIcon } from "@/components/icons/upload-thing";
-import { WaitlistElement } from "@registry/default/elements/clerk/waitlist/waitlist";
+import { WaitlistElement } from "@registry/default/elements/clerk/waitlist-shadcn/waitlist";
 import { GroupIcon } from "@/components/icons/group";
 
 export default function Home() {

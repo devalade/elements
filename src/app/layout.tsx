@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Figtree, JetBrains_Mono, Doto } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { shadcn } from "@clerk/themes";
 import { ClerkProvider } from "@clerk/nextjs";
 
 const figtree = Figtree({
@@ -30,7 +31,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: shadcn,
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <body
           className={`${figtree.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans antialiased`}
