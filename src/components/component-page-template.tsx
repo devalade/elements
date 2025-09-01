@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// @ts-expect-error
 import registryData from "@/registry";
 
 interface Feature {
@@ -108,7 +109,7 @@ export function ComponentPageTemplate({
   const [activeTreeViewer, setActiveTreeViewer] = useState<string | null>(null);
 
   // Get relevant registry items for this component
-  const relevantRegistryItems = registryData.items.filter((item) => {
+  const relevantRegistryItems = registryData.items.filter((item: any) => {
     const itemName = item.name.toLowerCase();
     const searchName = name.toLowerCase().replace(/\s+/g, "-"); // Convert spaces to hyphens
     const searchCategory = category.toLowerCase();
@@ -124,8 +125,12 @@ export function ComponentPageTemplate({
       return true;
 
     // Check for common words/parts
-    const nameParts = searchName.split("-").filter((part) => part.length > 2);
-    const itemParts = itemName.split("-").filter((part) => part.length > 2);
+    const nameParts = searchName
+      .split("-")
+      .filter((part: string) => part.length > 2);
+    const itemParts = itemName
+      .split("-")
+      .filter((part: string) => part.length > 2);
     const commonParts = nameParts.filter((part) => itemParts.includes(part));
 
     // If at least one meaningful part matches
