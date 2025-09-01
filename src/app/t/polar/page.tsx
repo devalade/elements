@@ -83,32 +83,18 @@ export default function PolarPage() {
     },
   ];
 
-  const mockSponsors = [
-    {
-      name: "Example Corp",
-      tier: "Sponsor",
-      url: "#",
-      logo: (
-        <div className="w-8 h-8 bg-primary/20 rounded flex items-center justify-center text-xs">
-          EC
-        </div>
-      ),
-    },
-  ];
-
   const mockSponsorHandler = async (tierName: string) => {
     console.log("Mock sponsor handler:", tierName);
     alert(`Demo: Would initiate sponsorship for ${tierName} tier`);
   };
 
   const polarComponents = {
-    "sponsorship-page": (
+    sponsorship: (
       <div className="w-full max-w-4xl mx-auto">
         <SponsorshipPage
           title="Support Elements"
           subtitle="Help us build the future of full-stack components"
           tiers={mockTiers}
-          sponsors={mockSponsors}
           onSponsor={mockSponsorHandler}
         />
       </div>
@@ -116,7 +102,7 @@ export default function PolarPage() {
   };
 
   const componentInstallUrls = {
-    "sponsorship-page": "@elements/polar-sponsorship-page",
+    sponsorship: "@elements/polar-sponsorship",
   };
 
   return (

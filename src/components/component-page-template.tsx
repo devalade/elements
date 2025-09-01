@@ -467,9 +467,9 @@ function ComponentGrid({
             </div>
 
             {/* Component Display Area - Bordered */}
-            <div className="bg-card/30 border-t border-dotted border-border">
-              <div className="flex items-center justify-center min-h-[350px] md:min-h-[400px] px-4 py-14">
-                <div className="flex justify-center w-full max-w-lg">
+            <div className="bg-card/30 border-t border-dotted border-border w-full">
+              <div className="w-full min-h-[350px] md:min-h-[400px] flex items-center justify-center px-4 py-14">
+                <div className="w-full max-w-none flex justify-center items-center">
                   {componentNode as ReactNode}
                 </div>
               </div>

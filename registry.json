@@ -1154,24 +1154,9 @@
           "target": "components/elements/polar/sponsor-tiers.tsx"
         },
         {
-          "path": "registry/default/elements/polar/sponsorship/current-sponsors.tsx",
-          "type": "registry:component",
-          "target": "components/elements/polar/current-sponsors.tsx"
-        },
-        {
           "path": "registry/default/elements/polar/sponsorship/checkout-route.ts",
           "type": "registry:lib",
           "target": "app/api/checkout/route.ts"
-        },
-        {
-          "path": "registry/default/elements/polar/sponsorship/polar-lib.ts",
-          "type": "registry:lib",
-          "target": "lib/polar.ts"
-        },
-        {
-          "path": "registry/default/elements/polar/sponsorship/sponsor-lib.ts",
-          "type": "registry:lib",
-          "target": "lib/sponsors.ts"
         },
         {
           "path": "registry/default/elements/polar/sponsorship/sponsorship-page.tsx",

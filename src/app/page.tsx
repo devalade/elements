@@ -121,11 +121,23 @@ export default function Home() {
                 providerLink="https://clerk.com"
               />
               <ComponentCard
+                name="Polar"
+                description="Monetization platform for open source creators"
+                icon={<PolarIcon className="w-6 h-6" />}
+                category="Monetization"
+                brandColor="#0062FF"
+                isEnabled={true}
+                href="/t/polar"
+                elementsCount={1}
+                providerLink="https://polar.sh"
+              />
+              <ComponentCard
                 name="Tech Logos"
                 description="Collection of popular tech company logos with shopping cart selection"
                 icon={<GroupIcon className="w-6 h-6" />}
                 category="Brand"
                 isEnabled={true}
+                brandColor="#444444"
                 href="/t/logos"
                 elementsCount={34}
               />
@@ -136,6 +148,7 @@ export default function Home() {
                 category="UI"
                 isEnabled={true}
                 href="/t/theme-switcher"
+                brandColor="#444444"
                 elementsCount={6}
               />
               <ComponentCard
@@ -190,15 +203,6 @@ export default function Home() {
                 brandColor="#3ECF8E"
                 elementsCount={5}
                 providerLink="https://supabase.com"
-              />
-              <ComponentCard
-                name="Polar"
-                description="Monetization platform for open source creators"
-                icon={<PolarIcon className="w-6 h-6" />}
-                category="Monetization"
-                brandColor="#0062FF"
-                elementsCount={2}
-                providerLink="https://polar.sh"
               />
               <ComponentCard
                 name="Better Auth"
