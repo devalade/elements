@@ -43,25 +43,13 @@ export function SponsorshipPage({
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const handleChooseYourTier = () => {
-    // Smooth scroll to sponsor tiers section
-    const sponsorTiersSection = document.getElementById("sponsor-tiers");
-    if (sponsorTiersSection) {
-      sponsorTiersSection.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-    // Select Supporter tier by default
-    setSelectedTier("Supporter");
-  };
-
   const handleSponsor = (tierName: string) => {
     startTransition(() => {
       try {
         // Use provided product IDs or fall back to examples
         const productIdsToUse = productIds || EXAMPLE_POLAR_PRODUCT_IDS;
-        const productId = productIdsToUse[tierName];
+        const productId =
+          productIdsToUse[tierName as keyof typeof productIdsToUse];
 
         if (!productId) {
           throw new Error(`No product ID found for tier: ${tierName}`);
