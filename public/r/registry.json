@@ -246,6 +246,11 @@
           "path": "registry/default/elements/theme-switcher/layout.tsx",
           "type": "registry:page",
           "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/theme-switcher-page.tsx",
+          "type": "registry:page",
+          "target": "app/theme-switcher/page.tsx"
         }
       ],
       "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Switch-based theme switcher with animated icons."
@@ -267,6 +272,11 @@
           "path": "registry/default/elements/theme-switcher/layout.tsx",
           "type": "registry:page",
           "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/switch-page.tsx",
+          "type": "registry:page",
+          "target": "app/theme-switcher-switch/page.tsx"
         }
       ],
       "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Switch-based theme switcher with animated icons."
@@ -288,6 +298,11 @@
           "path": "registry/default/elements/theme-switcher/layout.tsx",
           "type": "registry:page",
           "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/button-page.tsx",
+          "type": "registry:page",
+          "target": "app/theme-switcher-button/page.tsx"
         }
       ],
       "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Button-based theme switcher with rotating icons."
@@ -309,6 +324,11 @@
           "path": "registry/default/elements/theme-switcher/layout.tsx",
           "type": "registry:page",
           "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/dropdown-page.tsx",
+          "type": "registry:page",
+          "target": "app/theme-switcher-dropdown/page.tsx"
         }
       ],
       "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Dropdown with light/dark/system options."
@@ -330,6 +350,11 @@
           "path": "registry/default/elements/theme-switcher/layout.tsx",
           "type": "registry:page",
           "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/toggle-page.tsx",
+          "type": "registry:page",
+          "target": "app/theme-switcher-toggle/page.tsx"
         }
       ],
       "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Custom toggle with sliding animation."
@@ -351,6 +376,11 @@
           "path": "registry/default/elements/theme-switcher/layout.tsx",
           "type": "registry:page",
           "target": "app/layout.tsx"
+        },
+        {
+          "path": "registry/default/elements/theme-switcher/multi-button-page.tsx",
+          "type": "registry:page",
+          "target": "app/theme-switcher-multi-button/page.tsx"
         }
       ],
       "docs": "⚠️ Requires ThemeProvider setup! Wrap your app with <ThemeProvider> and add suppressHydrationWarning to <html>. Multi-button with system/light/dark options."

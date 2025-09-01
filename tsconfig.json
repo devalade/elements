@@ -23,7 +23,7 @@
       "@/.source": [".source"],
       "@/mdx-components": ["./mdx-components"],
       "@/*": ["./src/*"],
-      "@registry/*": ["./registry/*"]
+      "@/registry*": ["./registry*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

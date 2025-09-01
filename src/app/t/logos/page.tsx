@@ -2,47 +2,6 @@
 
 import { useMemo, useState } from "react";
 
-import { AnthropicLogo } from "@registry/default/logos/anthropic";
-import { AppleLogo } from "@registry/default/logos/apple";
-import { AWSLogo } from "@registry/default/logos/aws";
-import { BetterAuthIcon } from "@registry/default/logos/better-auth";
-import { ClaudeLogo } from "@registry/default/logos/claude";
-import { CohereLogo } from "@registry/default/logos/cohere";
-import { CrafterStationLogo } from "@registry/default/logos/crafter-station";
-import { DeepSeekLogo } from "@registry/default/logos/deepseek";
-import { DiscordLogo } from "@registry/default/logos/discord";
-import { GeminiLogo } from "@registry/default/logos/gemini";
-import { GitHubLogo } from "@registry/default/logos/github";
-import { GitLabLogo } from "@registry/default/logos/gitlab";
-import { GoogleLogo } from "@registry/default/logos/google";
-import { GrokLogo } from "@registry/default/logos/grok";
-import { GroqLogo } from "@registry/default/logos/groq";
-import { HuggingFaceLogo } from "@registry/default/logos/hugging-face";
-import { KeboLogo } from "@registry/default/logos/kebo";
-import { KimiLogo } from "@registry/default/logos/kimi";
-import { LinearLogo } from "@registry/default/logos/linear";
-import { LovableLogo } from "@registry/default/logos/lovable";
-import { MetaLogo } from "@registry/default/logos/meta";
-import { MicrosoftLogo } from "@registry/default/logos/microsoft";
-import { MistralLogo } from "@registry/default/logos/mistral";
-import { MoonshotAILogo } from "@registry/default/logos/moonshot-ai";
-import { NotionLogo } from "@registry/default/logos/notion";
-import { OpenAILogo } from "@registry/default/logos/openai";
-import { PerplexityLogo } from "@registry/default/logos/perplexity";
-import { PolarIcon } from "@registry/default/logos/polar";
-import { QwenLogo } from "@registry/default/logos/qwen";
-import { ResendIcon } from "@registry/default/logos/resend";
-import { SlackLogo } from "@registry/default/logos/slack";
-import { SpotifyLogo } from "@registry/default/logos/spotify";
-import { StripeIcon } from "@registry/default/logos/stripe";
-import { SupabaseIcon } from "@registry/default/logos/supabase";
-import { TwitchLogo } from "@registry/default/logos/twitch";
-import { TwitterLogo } from "@registry/default/logos/twitter";
-import { UpstashIcon } from "@registry/default/logos/upstash";
-import { V0Logo } from "@registry/default/logos/v0";
-import { VercelIcon } from "@registry/default/logos/vercel";
-import { XAILogo } from "@registry/default/logos/xai";
-
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { CopyIcon } from "@/components/icons/copy";
@@ -59,6 +18,47 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { AnthropicLogo } from "@/registry/default/logos/anthropic";
+import { AppleLogo } from "@/registry/default/logos/apple";
+import { AWSLogo } from "@/registry/default/logos/aws";
+import { BetterAuthIcon } from "@/registry/default/logos/better-auth";
+import { ClaudeLogo } from "@/registry/default/logos/claude";
+import { CohereLogo } from "@/registry/default/logos/cohere";
+import { CrafterStationLogo } from "@/registry/default/logos/crafter-station";
+import { DeepSeekLogo } from "@/registry/default/logos/deepseek";
+import { DiscordLogo } from "@/registry/default/logos/discord";
+import { GeminiLogo } from "@/registry/default/logos/gemini";
+import { GitHubLogo } from "@/registry/default/logos/github";
+import { GitLabLogo } from "@/registry/default/logos/gitlab";
+import { GoogleLogo } from "@/registry/default/logos/google";
+import { GrokLogo } from "@/registry/default/logos/grok";
+import { GroqLogo } from "@/registry/default/logos/groq";
+import { HuggingFaceLogo } from "@/registry/default/logos/hugging-face";
+import { KeboLogo } from "@/registry/default/logos/kebo";
+import { KimiLogo } from "@/registry/default/logos/kimi";
+import { LinearLogo } from "@/registry/default/logos/linear";
+import { LovableLogo } from "@/registry/default/logos/lovable";
+import { MetaLogo } from "@/registry/default/logos/meta";
+import { MicrosoftLogo } from "@/registry/default/logos/microsoft";
+import { MistralLogo } from "@/registry/default/logos/mistral";
+import { MoonshotAILogo } from "@/registry/default/logos/moonshot-ai";
+import { NotionLogo } from "@/registry/default/logos/notion";
+import { OpenAILogo } from "@/registry/default/logos/openai";
+import { PerplexityLogo } from "@/registry/default/logos/perplexity";
+import { PolarIcon } from "@/registry/default/logos/polar";
+import { QwenLogo } from "@/registry/default/logos/qwen";
+import { ResendIcon } from "@/registry/default/logos/resend";
+import { SlackLogo } from "@/registry/default/logos/slack";
+import { SpotifyLogo } from "@/registry/default/logos/spotify";
+import { StripeIcon } from "@/registry/default/logos/stripe";
+import { SupabaseIcon } from "@/registry/default/logos/supabase";
+import { TwitchLogo } from "@/registry/default/logos/twitch";
+import { TwitterLogo } from "@/registry/default/logos/twitter";
+import { UpstashIcon } from "@/registry/default/logos/upstash";
+import { V0Logo } from "@/registry/default/logos/v0";
+import { VercelIcon } from "@/registry/default/logos/vercel";
+import { XAILogo } from "@/registry/default/logos/xai";
 
 interface Logo {
   id: string;
@@ -447,10 +447,7 @@ export default function TechLogosPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <InstallCommand
-                  url="@elements/logos"
-                  className="w-full max-w-md"
-                />
+                <InstallCommand url="@elements/logos" className="max-w-xs" />
               </div>
             </div>
           </div>

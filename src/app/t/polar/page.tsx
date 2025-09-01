@@ -1,12 +1,12 @@
 "use client";
 
-import { SponsorshipPage } from "@registry/default/elements/polar/sponsorship/sponsorship-page";
-
 import { ComponentPageTemplate } from "@/components/component-page-template";
 import { ServerIcon } from "@/components/icons/server";
 import { ShieldIcon } from "@/components/icons/shield";
 import { ZapIcon } from "@/components/icons/zap";
 import { PolarIcon } from "@/components/ui/logos/polar";
+
+import { SponsorshipPage } from "@/registry/default/elements/polar/sponsorship/sponsorship-page";
 
 export default function PolarPage() {
   const features = [

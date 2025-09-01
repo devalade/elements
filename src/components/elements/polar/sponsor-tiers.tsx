@@ -33,97 +33,78 @@ export function SponsorTiers({
 }: SponsorTiersProps) {
   return (
     <div className={className}>
-      <div className="space-y-8">
-        <div className="grid gap-4 place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      <div className="space-y-8 max-w-6xl mx-auto">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {tiers.map((tier) => (
             <button
               key={tier.name}
               type="button"
-              className={`relative flex h-full w-full flex-col justify-between border border-border p-6 text-sm hover:border-foreground/20 transition-all duration-200 group cursor-pointer ${
+              className={`relative flex h-full w-full flex-col justify-between rounded-lg border p-6 text-sm hover:border-primary/50 transition-all duration-200 group cursor-pointer ${
                 selectedTier === tier.name
-                  ? "bg-primary/5 border-primary"
+                  ? "bg-primary/5 border-primary ring-2 ring-primary/20"
                   : tier.isHighlight
-                    ? "bg-red-500/5 border-red-500/20"
-                    : "bg-card/30"
+                    ? "bg-gradient-to-br from-primary/5 to-blue-500/5 border-primary/30"
+                    : "bg-card hover:bg-card/80 border-border"
               }`}
               onClick={() => onTierSelect(tier.name)}
               aria-label={`Select ${tier.name} sponsorship tier`}
             >
-              {/* Corner decorations */}
-              <div className="absolute top-0 left-0 w-2 h-2 bg-border"></div>
-              <div className="absolute top-0 right-0 w-2 h-2 bg-border"></div>
-              <div className="absolute bottom-0 left-0 w-2 h-2 bg-border"></div>
-              <div className="absolute bottom-0 right-0 w-2 h-2 bg-border"></div>
-
               {tier.popular && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground border-0">
                   Most Popular
                 </Badge>
               )}
               {tier.isHighlight && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white flex items-center gap-1">
-                  Dream Tier
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-500 text-white border-0">
+                  Recommended
                 </Badge>
               )}
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center justify-center w-10 h-10 bg-muted group-hover:bg-muted/80 transition-colors">
-                    <svg
-                      className="size-5"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      aria-label="Heart icon"
-                      role="img"
-                    >
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                  </div>
-                  <Badge
-                    variant={tier.popular ? "default" : "secondary"}
-                    className="text-xs"
-                  >
-                    {tier.name}
-                  </Badge>
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold">{tier.name}</h3>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="text-2xl font-bold">
-                    <span className="text-base">
-                      ${tier.price}+{" "}
-                      <span className="text-xs font-normal text-muted-foreground">
-                        {tier.isOneTime ? "minimum/once" : "minimum/mo"}
-                      </span>
+                <div className="space-y-3 text-center">
+                  <div className="text-3xl font-bold">
+                    ${tier.price}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      +
                     </span>
+                    <div className="text-sm font-normal text-muted-foreground mt-1">
+                      {tier.isOneTime ? "minimum/once" : "minimum/mo"}
+                    </div>
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {tier.description}
                   </p>
                 </div>
 
-                <ul className="space-y-2 text-xs">
+                <ul className="space-y-3 text-sm">
                   {tier.perks.map((perk, index) => (
                     <li
                       key={`${tier.name}-perk-${index}`}
-                      className="flex items-start gap-2"
+                      className="flex items-start gap-3"
                     >
-                      <div className="size-1 bg-primary flex-shrink-0 mt-1.5" />
-                      {perk}
+                      <svg
+                        role="img"
+                        aria-label="Checkmark"
+                        className="size-4 text-primary mt-0.5 flex-shrink-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      <span>{perk}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div className="mt-4">
-                <div className="my-2 h-[1px] w-full bg-border"></div>
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline" className="text-xs">
-                    {tier.isOneTime ? "Donation" : "Sponsorship"}
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">
-                    {tier.isOneTime ? "One-time" : "Monthly"}
-                  </span>
-                </div>
               </div>
             </button>
           ))}
@@ -132,31 +113,19 @@ export function SponsorTiers({
         <div className="text-center space-y-4">
           <Button
             size="lg"
-            className="h-14 px-8 text-lg gap-2"
+            className="h-12 px-8 gap-2"
             disabled={!selectedTier || isPending}
             onClick={() => selectedTier && onSponsor(selectedTier)}
           >
-            <svg
-              className="size-5"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-label="Heart icon"
-              role="img"
-            >
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
             {isPending
               ? "Creating checkout..."
               : selectedTier
-                ? `Sponsor with ${selectedTier}`
+                ? `Continue with ${selectedTier}`
                 : "Select a tier"}
           </Button>
           <p className="text-sm text-muted-foreground">
             Need a custom tier?{" "}
-            <a
-              href="mailto:hello@yourdomain.com?subject=Custom Sponsorship"
-              className="underline hover:text-foreground"
-            >
+            <a href="#contact" className="underline hover:text-foreground">
               Contact us
             </a>
           </p>

@@ -9,6 +9,8 @@ import { shadcn } from "@clerk/themes";
 import { Analytics } from "@vercel/analytics/next";
 import { RootProvider } from "fumadocs-ui/provider";
 
+import { Toaster } from "@/components/ui/sonner";
+
 const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
@@ -57,6 +59,7 @@ export default function RootLayout({
             <RootProvider>{children}</RootProvider>
           </ThemeProvider>
           <Analytics />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
