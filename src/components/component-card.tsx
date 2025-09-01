@@ -40,7 +40,7 @@ export function ComponentCard({
 
   const CardContent = (
     <figure
-      className={`relative flex h-full w-full flex-col justify-between border border-border p-4 sm:p-6 text-sm backdrop-blur-sm hover:border-foreground/20 transition-all duration-200 group ${
+      className={`relative flex h-full w-full flex-col justify-between border border-border p-4 sm:p-6 text-sm hover:border-foreground/20 transition-all duration-200 group ${
         isEnabled
           ? brandColor
             ? "cursor-pointer"

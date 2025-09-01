@@ -39,7 +39,7 @@ export default function RootLayout({
       appearance={{
         baseTheme: shadcn,
         elements: {
-          modalBackdrop: "backdrop-blur-sm bg-black/50",
+          modalBackdrop: "bg-black/50",
           modalContent: "flex items-center justify-center !my-auto",
         },
       }}

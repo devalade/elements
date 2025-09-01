@@ -88,8 +88,8 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
       className={`relative transition-all duration-500 ease-out ${className}`}
     >
       {/* Gradient hairline frame */}
-      <div className="relative rounded-lg p-[1px] bg-gradient-to-br from-border/50 via-border/20 to-transparent shadow-lg backdrop-blur-sm transition-all duration-500">
-        <div className="relative rounded-lg border border-border/50 bg-card/30 backdrop-blur-sm overflow-hidden transition-all duration-300">
+      <div className="relative rounded-lg p-[1px] bg-gradient-to-br from-border/50 via-border/20 to-transparent shadow-lg transition-all duration-500">
+        <div className="relative rounded-lg border border-border/50 bg-card/30 overflow-hidden transition-all duration-300">
           {/* Corner decorations - matching ComponentCard style */}
           <div className="absolute top-0 left-0 w-2 h-2 bg-border"></div>
           <div className="absolute top-0 right-0 w-2 h-2 bg-border"></div>
@@ -170,7 +170,7 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
                         }
                         size="sm"
                         variant="outline"
-                        className="absolute top-3 right-3 h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 border-border/50 hover:border-foreground/20 bg-background/80 backdrop-blur-sm"
+                        className="absolute top-3 right-3 h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 border-border/50 hover:border-foreground/20 bg-background/80 "
                       >
                         {copied === "registry" ? (
                           <svg
@@ -211,7 +211,7 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
                         onClick={() => copyToClipboard(installCode, "install")}
                         size="sm"
                         variant="outline"
-                        className="absolute top-3 right-3 h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 border-border/50 hover:border-foreground/20 bg-background/80 backdrop-blur-sm"
+                        className="absolute top-3 right-3 h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 border-border/50 hover:border-foreground/20 bg-background/80 "
                       >
                         {copied === "install" ? (
                           <svg

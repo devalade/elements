@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { currentSponsors } from "@/lib/sponsors";
+
 import { ClerkLogo } from "@/components/clerk-logo";
 import { ComponentCard } from "@/components/component-card";
 import { ElementSuggestionForm } from "@/components/element-suggestion-form";
@@ -17,10 +19,9 @@ import { PixelatedHeartIcon } from "@/components/pixelated-heart-icon";
 import { QuickstartCard } from "@/components/quickstart-card";
 import { ScrambleText } from "@/components/scramble-text";
 import { ShadcnIcon } from "@/components/shadcn-icon";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
-import { CrafterStationLogo } from "@/components/ui/logos/crafter-station";
-import { KeboLogo } from "@/components/ui/logos/kebo";
 import { PolarIcon } from "@/components/ui/logos/polar";
 import { ResendIcon } from "@/components/ui/logos/resend";
 import { StripeIcon } from "@/components/ui/logos/stripe";
@@ -33,16 +34,6 @@ export default function Home() {
     const gallerySection = document.getElementById("gallery");
     if (gallerySection) {
       gallerySection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
-  const scrollToSuggest = () => {
-    const suggestSection = document.getElementById("suggest");
-    if (suggestSection) {
-      suggestSection.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -69,9 +60,10 @@ export default function Home() {
                 <br />
                 components
               </h1>
-              <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl">
-                Elements gives you production-ready auth, payments, AI and more
-                — built for Next.js, TypeScript, and the agentic era.
+              <p className="text-muted-foreground text-lg  leading-relaxed max-w-2xl">
+                Elements gives you production-ready auth, payments, AI and
+                more... <br /> built for Next.js, TypeScript, and the agentic
+                era.
               </p>
             </section>
 
@@ -259,41 +251,38 @@ export default function Home() {
 
             {/* Three Column Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3">
-              <a
-                href="https://crafterstation.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center border-t border-r md:border-r border-border border-dotted bg-card/30 backdrop-blur-sm hover:bg-accent/20 transition-all duration-300 group"
-              >
-                <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
-                  <CrafterStationLogo className="h-12 w-12 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="text-center space-y-1">
-                    <h4 className="text-2xl uppercase font-black font-dotted text-foreground group-hover:text-primary transition-colors">
-                      Crafter Station
-                    </h4>
-                    <p className="text-xs text-muted-foreground">
-                      crafterstation.com
-                    </p>
+              {currentSponsors.map((sponsor, index) => (
+                <a
+                  key={`${sponsor.name}-${sponsor.tier}`}
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center justify-center border-t ${
+                    index === 0
+                      ? "border-r md:border-r"
+                      : index === 1
+                        ? "border-l md:border-l-0 border-r md:border-r"
+                        : ""
+                  } border-border border-dotted bg-card/30 hover:bg-accent/20 transition-all duration-300 group`}
+                >
+                  <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
+                    <div className="opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                      {sponsor.logo}
+                    </div>
+                    <div className="text-center space-y-1">
+                      <h4 className="text-2xl uppercase font-black font-dotted text-foreground group-hover:text-primary transition-colors">
+                        {sponsor.name}
+                      </h4>
+                      <div className="space-y-1">
+                        <Badge variant="secondary" className="text-xs">
+                          {sponsor.tier}
+                        </Badge>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </a>
-              <a
-                href="https://kebo.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center border-t border-l md:border-l-0 border-r md:border-r border-border border-dotted bg-card/30 backdrop-blur-sm hover:bg-accent/20 transition-all duration-300 group"
-              >
-                <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
-                  <KeboLogo className="h-12 w-12 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="text-center space-y-1">
-                    <h4 className="text-2xl uppercase font-black font-dotted text-foreground group-hover:text-primary transition-colors">
-                      Kebo
-                    </h4>
-                    <p className="text-xs text-muted-foreground">kebo.app</p>
-                  </div>
-                </div>
-              </a>
-              <div className="flex items-center justify-center border-t border-l md:border-l-0 border-border border-dotted bg-card/30 backdrop-blur-sm">
+                </a>
+              ))}
+              <div className="flex items-center justify-center border-t border-l md:border-l-0 border-border border-dotted bg-card/30 ">
                 <div className="flex flex-col items-center justify-center min-h-[200px] px-6 py-12 space-y-4">
                   <PixelatedHeartIcon className="h-12 w-12 text-red-500 opacity-80" />
                   <div className="text-center space-y-2">
@@ -302,12 +291,12 @@ export default function Home() {
                     </h4>
                     <div className="space-y-3 text-xs text-muted-foreground">
                       <p>Need custom components for your company?</p>
-                      <a
-                        href="mailto:railly@crafterstation.com?subject=Custom Elements Inquiry"
-                        className="inline-flex items-center px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 text-xs font-medium"
+                      <Link
+                        href="/sponsor"
+                        className="inline-flex items-center px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 text-sm font-medium"
                       >
-                        Get Custom Elements
-                      </a>
+                        Become a Sponsor
+                      </Link>
                     </div>
                   </div>
                 </div>
