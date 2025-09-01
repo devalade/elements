@@ -73,8 +73,8 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
     };
   }, [api]);
 
-  const scrollToGallery = () => {
-    const gallerySection = document.getElementById("gallery");
+  const scrollToSuggest = () => {
+    const gallerySection = document.getElementById("suggest");
     if (gallerySection) {
       gallerySection.scrollIntoView({
         behavior: "smooth",
@@ -272,9 +272,9 @@ export function QuickstartCard({ className = "" }: QuickstartCardProps) {
                 size="sm"
                 variant="ghost"
                 className="text-xs font-medium hover:underline"
-                onClick={scrollToGallery}
+                onClick={scrollToSuggest}
               >
-                Explore Gallery
+                Suggest an Element
               </Button>
             </div>
           </div>

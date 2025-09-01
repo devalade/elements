@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -122,9 +124,34 @@
   body {
     @apply bg-background text-foreground;
   }
+}
 
-  /* Shiki themes override background */
-  .shiki {
-    background: transparent;
+/* Override fumadocs sidebar toggle position */
+@layer components {
+  /* Alternative approach using data attributes */
+  [data-collapsed="false"] {
+    margin: 0.5rem 0;
+    left: 0.5rem !important;
+    right: auto !important;
+    border: 1px solid var(--border);
+  }
+
+  [aria-label="Collapse Sidebar"] {
+    margin: 0;
+  }
+
+  /* Custom code block styling */
+  pre[data-theme] {
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: var(--muted) !important;
+  }
+
+  /* Custom code inline styling */
+  code:not(pre code) {
+    background: var(--muted);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
   }
 }

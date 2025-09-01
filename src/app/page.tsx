@@ -1,10 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
 import { ClerkLogo } from "@/components/clerk-logo";
 import { ComponentCard } from "@/components/component-card";
 import { ElementSuggestionForm } from "@/components/element-suggestion-form";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { ArrowRightIcon } from "@/components/icons/arrow-right";
+import { FileAltIcon } from "@/components/icons/file-alt";
 import { GroupIcon } from "@/components/icons/group";
 import { MoonIcon } from "@/components/icons/moon";
 import { TriggerIcon } from "@/components/icons/trigger";
@@ -50,7 +54,7 @@ export default function Home() {
       <Header />
       <div className="flex-1 w-full max-w-screen-xl border-border border-dotted border-x mx-auto">
         {/* Main Hero Section - Basement Style */}
-        <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16 items-center w-full min-h-[80vh] py-16 px-8 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16 items-center w-full min-h-[90vh] py-16 px-8 lg:px-16">
           <div className="lg:col-span-4 space-y-8">
             {/* Narrative Block */}
             <section className="space-y-6">
@@ -78,15 +82,17 @@ export default function Home() {
                 className="font-medium"
                 onClick={scrollToGallery}
               >
-                Explore Gallery →
+                Explore Gallery <ArrowRightIcon />
               </Button>
               <Button
                 size="lg"
                 variant="ghost"
                 className="font-medium hover:underline"
-                onClick={scrollToSuggest}
+                asChild
               >
-                Suggest an Element
+                <Link href="docs">
+                  View Docs <FileAltIcon />{" "}
+                </Link>
               </Button>
             </div>
           </div>
