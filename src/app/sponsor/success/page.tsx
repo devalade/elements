@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 function SponsorSuccessContent() {
   const searchParams = useSearchParams();
   const checkoutId = searchParams.get("checkout_id");
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
