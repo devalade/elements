@@ -83,11 +83,6 @@ export default function PolarPage() {
     },
   ];
 
-  const mockSponsorHandler = async (tierName: string) => {
-    console.log("Mock sponsor handler:", tierName);
-    alert(`Demo: Would initiate sponsorship for ${tierName} tier`);
-  };
-
   const polarComponents = {
     sponsorship: (
       <div className="w-full max-w-4xl mx-auto">
@@ -95,7 +90,6 @@ export default function PolarPage() {
           title="Support Elements"
           subtitle="Help us build the future of full-stack components"
           tiers={mockTiers}
-          onSponsor={mockSponsorHandler}
         />
       </div>
     ),
