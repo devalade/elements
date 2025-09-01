@@ -22,7 +22,7 @@ import {
 import { AnthropicLogo } from "@/registry/default/logos/anthropic";
 import { AppleLogo } from "@/registry/default/logos/apple";
 import { AWSLogo } from "@/registry/default/logos/aws";
-import { BetterAuthIcon } from "@/registry/default/logos/better-auth";
+import { BetterAuthLogo } from "@/registry/default/logos/better-auth";
 import { ClaudeLogo } from "@/registry/default/logos/claude";
 import { CohereLogo } from "@/registry/default/logos/cohere";
 import { CrafterStationLogo } from "@/registry/default/logos/crafter-station";
@@ -46,18 +46,18 @@ import { MoonshotAILogo } from "@/registry/default/logos/moonshot-ai";
 import { NotionLogo } from "@/registry/default/logos/notion";
 import { OpenAILogo } from "@/registry/default/logos/openai";
 import { PerplexityLogo } from "@/registry/default/logos/perplexity";
-import { PolarIcon } from "@/registry/default/logos/polar";
+import { PolarLogo } from "@/registry/default/logos/polar";
 import { QwenLogo } from "@/registry/default/logos/qwen";
-import { ResendIcon } from "@/registry/default/logos/resend";
+import { ResendLogo } from "@/registry/default/logos/resend";
 import { SlackLogo } from "@/registry/default/logos/slack";
 import { SpotifyLogo } from "@/registry/default/logos/spotify";
-import { StripeIcon } from "@/registry/default/logos/stripe";
-import { SupabaseIcon } from "@/registry/default/logos/supabase";
+import { StripeLogo } from "@/registry/default/logos/stripe";
+import { SupabaseLogo } from "@/registry/default/logos/supabase";
 import { TwitchLogo } from "@/registry/default/logos/twitch";
 import { TwitterLogo } from "@/registry/default/logos/twitter";
-import { UpstashIcon } from "@/registry/default/logos/upstash";
+import { UpstashLogo } from "@/registry/default/logos/upstash";
 import { V0Logo } from "@/registry/default/logos/v0";
-import { VercelIcon } from "@/registry/default/logos/vercel";
+import { VercelLogo } from "@/registry/default/logos/vercel";
 import { XAILogo } from "@/registry/default/logos/xai";
 
 interface Logo {
@@ -290,49 +290,49 @@ const logos: Logo[] = [
     id: "supabase",
     name: "supabase-logo",
     displayName: "Supabase",
-    component: SupabaseIcon,
+    component: SupabaseLogo,
     category: "Database",
   },
   {
     id: "stripe",
     name: "stripe-logo",
     displayName: "Stripe",
-    component: StripeIcon,
+    component: StripeLogo,
     category: "Payments",
   },
   {
     id: "resend",
     name: "resend-logo",
     displayName: "Resend",
-    component: ResendIcon,
+    component: ResendLogo,
     category: "Email",
   },
   {
     id: "better-auth",
     name: "better-auth-logo",
     displayName: "Better Auth",
-    component: BetterAuthIcon,
+    component: BetterAuthLogo,
     category: "Auth",
   },
   {
     id: "upstash",
     name: "upstash-logo",
     displayName: "Upstash",
-    component: UpstashIcon,
+    component: UpstashLogo,
     category: "Database",
   },
   {
     id: "vercel",
     name: "vercel-logo",
     displayName: "Vercel",
-    component: VercelIcon,
+    component: VercelLogo,
     category: "Cloud",
   },
   {
     id: "polar",
     name: "polar-logo",
     displayName: "Polar",
-    component: PolarIcon,
+    component: PolarLogo,
     category: "Monetization",
   },
   {

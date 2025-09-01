@@ -26,16 +26,41 @@ interface SponsorTier {
 interface SponsorshipPageProps {
   title?: string;
   subtitle?: string;
-  tiers: SponsorTier[];
   productIds?: Record<string, string>;
   className?: string;
   children?: React.ReactNode;
 }
 
+const mockTiers: SponsorTier[] = [
+  {
+    name: "Supporter",
+    price: 10,
+    description: "Help keep the project alive",
+    perks: ["Early access to updates", "Discord community access"],
+  },
+  {
+    name: "Sponsor",
+    price: 50,
+    description: "Help shape the project direction",
+    perks: ["Feature voting rights", "Priority support", "Logo in README"],
+    popular: true,
+  },
+  {
+    name: "Partner",
+    price: 200,
+    description: "Become a key partner",
+    perks: [
+      "Direct feature requests",
+      "Monthly 1:1 calls",
+      "Custom components",
+    ],
+    isHighlight: true,
+  },
+];
+
 export function SponsorshipPage({
   title = "Sponsor This Project",
   subtitle = "Support open source development",
-  tiers,
   productIds,
   className,
   children,
@@ -89,7 +114,7 @@ export function SponsorshipPage({
       {/* Sponsor Tiers */}
       <div id="sponsor-tiers" className="w-full px-4 py-8">
         <SponsorTiers
-          tiers={tiers}
+          tiers={mockTiers}
           onSponsor={handleSponsor}
           selectedTier={selectedTier}
           onTierSelect={setSelectedTier}

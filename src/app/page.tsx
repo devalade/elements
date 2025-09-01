@@ -22,6 +22,7 @@ import { ShadcnIcon } from "@/components/shadcn-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BetterAuthIcon } from "@/components/ui/logos/better-auth";
+import { GitHubLogo } from "@/components/ui/logos/github";
 import { PolarIcon } from "@/components/ui/logos/polar";
 import { ResendIcon } from "@/components/ui/logos/resend";
 import { StripeIcon } from "@/components/ui/logos/stripe";
@@ -82,8 +83,12 @@ export default function Home() {
                 className="font-medium hover:underline"
                 asChild
               >
-                <Link href="docs">
-                  View Docs <FileAltIcon />{" "}
+                <Link
+                  href="https://github.com/crafter-station/elements"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Star us on GitHub <GitHubLogo />{" "}
                 </Link>
               </Button>
             </div>
